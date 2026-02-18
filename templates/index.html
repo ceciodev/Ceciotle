@@ -1,7 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head><title>Test Flask</title></head>
-<body>
-<h1>Pagina caricata!</h1>
-</body>
-</html>
+{% if feedback %}
+    <div>
+        <p>Nome: {{ feedback[0]|default('') }}</p>
+        <p>Debutto: {{ feedback[1]|default('') }}</p>
+        <p>Regione: {{ feedback[2]|default('') }}</p>
+        <p>Gender: {{ feedback[3]|default('') }}</p>
+        <p>Genere: {{ feedback[4]|default('') }}</p>
+        <p>Componenti: {{ feedback[5]|default('') }}</p>
+    </div>
+{% endif %}
