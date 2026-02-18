@@ -22,8 +22,7 @@
     "debutto": 2022,
     "regione": "Puglia",
     "componenti": 1
-  },
-  {
+  },  {
     "nome": "TonyPitony",
     "gender": "M",
     "genere": "Pop",
@@ -324,7 +323,7 @@
     "gender": "M",
     "genere": "Cantautore/Pop",
     "debutto": 1976,
-    "regione": "Puglia",
+    "regione": "Basilicata",
     "componenti": 1
   },
   {
@@ -422,14 +421,6 @@
     "debutto": 2009,
     "regione": "Lazio",
     "componenti": 3
-  },
-  {
-    "nome": "Negramaro",
-    "gender": "M",
-    "genere": "Pop Rock",
-    "debutto": 2000,
-    "regione": "Puglia",
-    "componenti": 6
   },
   {
     "nome": "Giorgia",
@@ -781,6 +772,246 @@
     "genere": "Trap",
     "debutto": 2017,
     "regione": "Lombardia",
+    "componenti": 1
+  },
+  {
+    "nome": "Mondo Marcio",
+    "gender": "M",
+    "genere": "Hip Hop",
+    "debutto": 2003,
+    "regione": "Lombardia",
+    "componenti": 1
+  },
+  {
+    "nome": "Tony Effe",
+    "gender": "M",
+    "genere": "Trap",
+    "debutto": 2014,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "Sarah Toscano",
+    "gender": "F",
+    "genere": "Pop",
+    "debutto": 2023,
+    "regione": "Lombardia",
+    "componenti": 1
+  },
+  {
+    "nome": "Jake La Furia",
+    "gender": "M",
+    "genere": "Hip Hop",
+    "debutto": 1999,
+    "regione": "Lombardia",
+    "componenti": 1
+  },
+  {
+    "nome": "Paola & Chiara",
+    "gender": "F",
+    "genere": "Pop",
+    "debutto": 1996,
+    "regione": "Lombardia",
+    "componenti": 2
+  },
+  {
+    "nome": "Baby K",
+    "gender": "F",
+    "genere": "Pop/Rap",
+    "debutto": 2007,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "Mr. Rain",
+    "gender": "M",
+    "genere": "Pop/Rap",
+    "debutto": 2011,
+    "regione": "Lombardia",
+    "componenti": 1
+  },
+  {
+    "nome": "Gemitaiz",
+    "gender": "M",
+    "genere": "Hip Hop",
+    "debutto": 2003,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "Brunori Sas",
+    "gender": "M",
+    "genere": "Cantautore/Indie",
+    "debutto": 2009,
+    "regione": "Calabria",
+    "componenti": 1
+  },
+  {
+    "nome": "Fast Animals and Slow Kids",
+    "gender": "M",
+    "genere": "Rock/Indie",
+    "debutto": 2008,
+    "regione": "Umbria",
+    "componenti": 4
+  },
+  {
+    "nome": "Loredana Bertè",
+    "gender": "F",
+    "genere": "Rock/Pop",
+    "debutto": 1974,
+    "regione": "Calabria",
+    "componenti": 1
+  },
+  {
+    "nome": "Daniele Silvestri",
+    "gender": "M",
+    "genere": "Cantautore",
+    "debutto": 1994,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "Massimo Pericolo",
+    "gender": "M",
+    "genere": "Hip Hop",
+    "debutto": 2019,
+    "regione": "Lombardia",
+    "componenti": 1
+  },
+  {
+    "nome": "Lucio Dalla",
+    "gender": "M",
+    "genere": "Cantautore",
+    "debutto": 1964,
+    "regione": "Emilia Romagna",
+    "componenti": 1
+  },
+  {
+    "nome": "Francesco De Gregori",
+    "gender": "M",
+    "genere": "Cantautore",
+    "debutto": 1972,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "Antonello Venditti",
+    "gender": "M",
+    "genere": "Cantautore",
+    "debutto": 1972,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "Edoardo Bennato",
+    "gender": "M",
+    "genere": "Cantautore/Rock",
+    "debutto": 1973,
+    "regione": "Campania",
+    "componenti": 1
+  },
+  {
+    "nome": "Rino Gaetano",
+    "gender": "M",
+    "genere": "Cantautore",
+    "debutto": 1973,
+    "regione": "Calabria",
+    "componenti": 1
+  },
+  {
+    "nome": "Mia Martini",
+    "gender": "F",
+    "genere": "Cantautore/Pop",
+    "debutto": 1963,
+    "regione": "Calabria",
+    "componenti": 1
+  },
+  {
+    "nome": "Lucio Battisti",
+    "gender": "M",
+    "genere": "Cantautore/Pop",
+    "debutto": 1966,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "Fiorella Mannoia",
+    "gender": "F",
+    "genere": "Pop/Cantautore",
+    "debutto": 1968,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "Samuele Bersani",
+    "gender": "M",
+    "genere": "Cantautore",
+    "debutto": 1991,
+    "regione": "Emilia Romagna",
+    "componenti": 1
+  },
+  {
+    "nome": "Max Gazzè",
+    "gender": "M",
+    "genere": "Cantautore/Pop",
+    "debutto": 1996,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "Vinicio Capossela",
+    "gender": "M",
+    "genere": "Cantautore/Folk",
+    "debutto": 1990,
+    "regione": "Emilia Romagna",
+    "componenti": 1
+  },
+  {
+    "nome": "Roberto Vecchioni",
+    "gender": "M",
+    "genere": "Cantautore",
+    "debutto": 1968,
+    "regione": "Lombardia",
+    "componenti": 1
+  },
+  {
+    "nome": "Gino Paoli",
+    "gender": "M",
+    "genere": "Cantautore",
+    "debutto": 1959,
+    "regione": "Friuli Venezia Giulia",
+    "componenti": 1
+  },
+  {
+    "nome": "Francesco Guccini",
+    "gender": "M",
+    "genere": "Cantautore",
+    "debutto": 1967,
+    "regione": "Emilia Romagna",
+    "componenti": 1
+  },
+  {
+    "nome": "Morgan",
+    "gender": "M",
+    "genere": "Cantautore/Pop",
+    "debutto": 1991,
+    "regione": "Lombardia",
+    "componenti": 1
+  },
+  {
+    "nome": "Ivano Fossati",
+    "gender": "M",
+    "genere": "Cantautore",
+    "debutto": 1971,
+    "regione": "Liguria",
+    "componenti": 1
+  },
+  {
+    "nome": "Mannarino",
+    "gender": "M",
+    "genere": "Cantautore/Folk",
+    "debutto": 2009,
+    "regione": "Lazio",
     "componenti": 1
   }
 ]
