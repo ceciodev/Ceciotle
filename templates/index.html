@@ -59,7 +59,6 @@
             position: relative;
         }
 
-        /* Nuovo sistema di suggerimenti */
         #input-container { position: relative; }
 
         input[type="text"] {
@@ -110,6 +109,7 @@
             transition: 0.2s;
         }
 
+        button:hover { background-color: #0d3366; transform: scale(1.02); }
         button:disabled { background-color: #cccccc; cursor: not-allowed; }
 
         .soluzione-finale {
@@ -124,12 +124,25 @@
         @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
         .feedback-area { margin-top: 2rem; width: 100%; }
+        
         .feedback-card {
             background: rgba(255, 255, 255, 0.3);
             padding: 15px;
             border-radius: 15px;
             margin-bottom: 10px;
             border: 1px solid #1a4a8e;
+        }
+
+        /* Stile per il nome dell'artista nelle card della cronologia */
+        .feedback-card strong {
+            font-size: 1.3rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .feedback-card small {
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -153,7 +166,7 @@
                     <h3 style="color: #d9534f;">GAME OVER</h3>
                 {% endif %}
                 <p>L'artista era: <strong>{{ target.nome }}</strong></p>
-                <button onclick="window.location.href='/'">GIOCA ANCORA</button>
+                <button onclick="window.location.href='/restart'">RESTART</button>
             </div>
         {% else %}
             <form method="POST" id="game-form">
@@ -168,7 +181,7 @@
         <div class="feedback-area">
             {% for tentativo in cronologia %}
                 <div class="feedback-card">
-                    <strong>{{ tentativo.nome }}</strong><br>
+                    <strong>{{ tentativo.nome }}</strong>
                     <small>
                         {{ tentativo.feedback[1] }} | {{ tentativo.feedback[2] }} | 
                         {{ tentativo.feedback[3] }} | {{ tentativo.feedback[4] }} | 
@@ -180,7 +193,6 @@
     </div>
 
     <script>
-        // Richiesta: Nomi visibili solo dopo 2 lettere
         const artisti = {{ artisti|tojson }};
         const input = document.getElementById('scelta-artista');
         const suggestionsBox = document.getElementById('custom-suggestions');
@@ -215,7 +227,6 @@
                 }
             });
 
-            // Chiudi suggerimenti se clicchi fuori
             document.addEventListener('click', (e) => {
                 if (e.target !== input) suggestionsBox.style.display = 'none';
             });
