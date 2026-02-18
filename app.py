@@ -3,31 +3,35 @@ import json
 import random
 from flask import Flask, render_template, request, session
 
+# ------------------ Flask setup ------------------
 app = Flask(__name__)
-app.secret_key = "chiave_segretissima"  # necessaria per session
+app.secret_key = "chiave_segretissima"  # DEFINITA SUBITO DOPO LA CREAZIONE DELL'APP
 
 # ------------------ Caricamento dati ------------------
-
 def carica_artisti():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(base_dir, "Artisti.json")
     try:
         with open(file_path, "r", encoding="utf-8") as f:
-            return json.load(f)
+            dati = json.load(f)
+            if isinstance(dati, list):
+                return dati
+            return []
     except Exception:
         return []
 
 artisti = carica_artisti()
 
+# ------------------ Selezione artista ------------------
 def scegli_artista_del_giorno():
     if not artisti:
-        return None
+        # se la lista è vuota, crea un artista fittizio
+        return {"nome": "Artista Mancante", "debutto": "", "regione": "", "gender": "", "genere": "", "componenti": ""}
     if "artist" not in session:
         session["artist"] = random.choice(artisti)
     return session["artist"]
 
 # ------------------ Logica feedback ------------------
-
 def feedback_artista(utente, corretto):
     # Nome
     if utente.get("nome", "").lower() == corretto.get("nome", "").lower():
@@ -37,7 +41,7 @@ def feedback_artista(utente, corretto):
     else:
         nome_feedback = "Artista errato."
 
-    # Anno di debutto
+    # Debutto
     anno_feedback = ""
     try:
         delta = int(utente.get("debutto", 0)) - int(corretto.get("debutto", 0))
@@ -57,9 +61,12 @@ def feedback_artista(utente, corretto):
 
     # Gender
     gender_feedback = ""
-    if utente.get("gender", "").lower() == corretto.get("gender", "").lower():
-        gender_value = corretto.get("gender", "").lower()
-        gender_feedback = "♂" if gender_value == "m" else "♀" if gender_value == "f" else ""
+    gender_value = corretto.get("gender", "").lower()
+    if utente.get("gender", "").lower() == gender_value:
+        if gender_value == "m":
+            gender_feedback = "♂"
+        elif gender_value == "f":
+            gender_feedback = "♀"
 
     # Genere musicale
     genere_feedback = ""
@@ -67,7 +74,7 @@ def feedback_artista(utente, corretto):
         genere_corretto = corretto.get("genere", "")
         if genere_corretto.lower() in ["cantautore", "cantautore/pop"]:
             genere_feedback = "L'artista è un cantautore"
-        else:
+        elif genere_corretto:
             genere_feedback = f"La mia banda suona il {genere_corretto}"
 
     # Componenti
@@ -78,15 +85,14 @@ def feedback_artista(utente, corretto):
             componenti_feedback = f"Numero componenti corretto: {corretto['componenti']}"
         elif diff < 0:
             componenti_feedback = "Il gruppo ha più componenti."
-        else:
+        elif diff > 0:
             componenti_feedback = "Il gruppo ha meno componenti."
     except ValueError:
         pass
 
     return nome_feedback, anno_feedback, regione_feedback, gender_feedback, genere_feedback, componenti_feedback
 
-# ------------------ Route web ------------------
-
+# ------------------ Route ------------------
 @app.route("/", methods=["GET", "POST"])
 def index():
     artist = scegli_artista_del_giorno()
@@ -96,7 +102,7 @@ def index():
         nome_input = request.form.get("nome", "").strip()
         utente_candidato = next(
             (a for a in artisti if a.get("nome", "").lower() == nome_input.lower()),
-            {"nome": nome_input}
+            {"nome": nome_input, "debutto": "", "regione": "", "gender": "", "genere": "", "componenti": ""}
         )
         feedback = feedback_artista(utente_candidato, artist)
 
