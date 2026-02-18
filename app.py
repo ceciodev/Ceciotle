@@ -1,9 +1,10 @@
 import os
 import json
 import random
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 
 app = Flask(__name__)
+app.secret_key = "chiave_segretissima"  # serve per session
 
 # Load artists
 def carica_artisti():
@@ -16,13 +17,14 @@ def carica_artisti():
 
 artisti = carica_artisti()
 
-# Choose daily artist
 def scegli_artista_del_giorno():
     if not artisti:
         return None
-    return random.choice(artisti)
+    # Usa session per mantenerlo stabile durante la visita
+    if "artist" not in session:
+        session["artist"] = random.choice(artisti)
+    return session["artist"]
 
-# Feedback logic (name, debut, region, gender, genre, members)
 def feedback_artista(utente, corretto):
     nome_fb = "Esatto!" if utente.get("nome", "").lower() == corretto.get("nome", "").lower() else "Artista errato."
     anno_fb = corretto.get("debutto", "")
@@ -38,12 +40,8 @@ def index():
     feedback = None
 
     if request.method == "POST":
-        nome_input = request.form.get("nome", "")
+        nome_input = request.form.get("nome", "").strip()
         utente_candidato = next((a for a in artisti if a.get("nome", "").lower() == nome_input.lower()), {"nome": nome_input})
         feedback = feedback_artista(utente_candidato, artist)
 
     return render_template("index.html", feedback=feedback)
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
