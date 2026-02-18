@@ -3,103 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indovina l'Artista</title>
+    <title>CECIOTLE</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a4a8e;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #99cbff; /* L'azzurro che hai chiesto */
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            color: #333;
+            flex-direction: column;
+            color: #1a4a8e;
         }
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+
+        h1 {
+            font-size: 5rem; /* Font enorme */
+            margin: 0;
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        .game-container {
             width: 100%;
-            max-width: 450px;
+            max-width: 500px;
             text-align: center;
         }
-        h1 {
-            color: #1a4a8e;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-        select {
+
+        input[list] {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 1rem;
-            margin-bottom: 1rem;
+            padding: 15px;
+            border: 3px solid #1a4a8e;
+            border-radius: 15px;
+            font-size: 1.2rem;
             outline: none;
-            transition: border-color 0.3s;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.9);
         }
-        select:focus {
-            border-color: #ff5e5e;
-        }
+
         button {
+            margin-top: 15px;
             width: 100%;
-            padding: 12px;
-            background-color: #ff5e5e;
+            padding: 15px;
+            background-color: #1a4a8e;
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
+            border-radius: 15px;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: transform 0.2s;
         }
+
         button:hover {
-            background-color: #e04d4d;
+            transform: scale(1.02);
+            background-color: #0d3366;
         }
-        .feedback-box {
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background-color: #f9f9f9;
-            border-radius: 12px;
-            border-left: 5px solid #1a4a8e;
-            text-align: left;
+
+        .feedback-area {
+            margin-top: 2rem;
+            width: 100%;
         }
-        .feedback-box p {
-            margin: 8px 0;
-            line-height: 1.4;
-        }
-        .highlight {
-            color: #1a4a8e;
-            font-weight: bold;
+
+        .feedback-card {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(26, 74, 142, 0.2);
+            font-size: 1.1rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>🎵 Indovina l'Artista</h1>
+    <h1>CECIOTLE</h1>
+    <h2>lo spotle italiano di cui non sapevi di avere bisogno</h2>
 
+    <div class="game-container">
         <form method="POST">
-            <label for="nome" style="display:block; margin-bottom: 8px; font-weight: 500;">Chi è l'artista del giorno?</label>
-            <select name="nome" id="nome" required>
-                <option value="" disabled selected>-- Seleziona un nome --</option>
+            <input list="lista-artisti" name="nome" id="scelta-artista" placeholder="Inizia a scrivere il nome di un artista..." autocomplete="off" required>
+            
+            <datalist id="lista-artisti">
                 {% for artista in artisti %}
-                    <option value="{{ artista.nome }}">{{ artista.nome }}</option>
+                    <option value="{{ artista.nome }}">
                 {% endfor %}
-            </select>
-            <button type="submit">Prova</button>
+            </datalist>
+
+            <button type="submit">PROVA</button>
         </form>
 
         {% if feedback %}
-            <div class="feedback-box">
-                <p><strong>Risultato:</strong> <span class="highlight">{{ feedback[0] }}</span></p>
-                
-                {% if feedback[1] %}<p>📅 {{ feedback[1] }}</p>{% endif %}
-                {% if feedback[2] %}<p>📍 {{ feedback[2] }}</p>{% endif %}
-                {% if feedback[3] %}<p>👤 Gender: {{ feedback[3] }}</p>{% endif %}
-                {% if feedback[4] %}<p>🎸 {{ feedback[4] }}</p>{% endif %}
-                {% if feedback[5] %}<p>👥 {{ feedback[5] }}</p>{% endif %}
+            <div class="feedback-area">
+                <div class="feedback-card">
+                    <strong>{{ feedback[0] }}</strong>
+                </div>
+                {% if feedback[1] or feedback[2] or feedback[3] or feedback[4] or feedback[5] %}
+                <div class="feedback-card">
+                    {% if feedback[1] %}<div>📅 {{ feedback[1] }}</div>{% endif %}
+                    {% if feedback[2] %}<div>📍 {{ feedback[2] }}</div>{% endif %}
+                    {% if feedback[3] %}<div>👤 {{ feedback[3] }}</div>{% endif %}
+                    {% if feedback[4] %}<div>🎸 {{ feedback[4] }}</div>{% endif %}
+                    {% if feedback[5] %}<div>👥 {{ feedback[5] }}</div>{% endif %}
+                </div>
+                {% endif %}
             </div>
         {% endif %}
     </div>
