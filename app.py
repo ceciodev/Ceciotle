@@ -1,61 +1,57 @@
-import os
-import json
-import random
-from flask import Flask, render_template, request, session
+def feedback_artista(utente, corretto):
+    # Nome
+    u_nome = str(utente.get("nome", "")).lower()
+    c_nome = str(corretto.get("nome", "")).lower()
+    
+    if u_nome == c_nome:
+        nome_feedback = "Esatto!"
+    elif u_nome in c_nome or c_nome in u_nome:
+        nome_feedback = "Quasi, ci sei andato vicino!"
+    else:
+        nome_feedback = "Artista errato."
 
-app = Flask(__name__)
-# Usa una variabile d'ambiente per la sicurezza, o una stringa fissa
-app.secret_key = os.environ.get("SECRET_KEY", "chiave_segretissima_123")
-
-def carica_artisti():
-    # Cerca il file nella stessa cartella di questo script
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(base_dir, "Artisti.json")
+    # Debutto
+    anno_feedback = ""
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
-            dati = json.load(f)
-            return dati if isinstance(dati, list) else []
-    except Exception as e:
-        print(f"Errore caricamento file: {e}") # Apparirà nei log di Render
-        return []
+        u_deb = int(utente.get("debutto") or 0)
+        c_deb = int(corretto.get("debutto") or 0)
+        delta = u_deb - c_deb
+        if delta == 0 and nome_feedback == "Esatto!":
+            anno_feedback = f"Debutto: {c_deb}"
+        elif -10 <= delta < 0:
+            anno_feedback = "Ci sei quasi! Debutto più recente."
+        elif 0 < delta <= 10:
+            anno_feedback = "Ci sei quasi! Debutto meno recente."
+    except (ValueError, TypeError):
+        anno_feedback = "Anno non disponibile"
 
-artisti = carica_artisti()
+    # Regione
+    regione_feedback = ""
+    if str(utente.get("regione", "")).lower() == str(corretto.get("regione", "")).lower():
+        regione_feedback = f"Viene da: {corretto.get('regione', 'Sconosciuto')}"
 
-def scegli_artista_del_giorno():
-    if not artisti:
-        return {"nome": "Artista Mancante", "debutto": "0", "regione": "", "gender": "", "genere": "", "componenti": "0"}
-    
-    # SALVIAMO SOLO IL NOME NELLA SESSIONE
-    if "artist_name" not in session:
-        scelto = random.choice(artisti)
-        session["artist_name"] = scelto["nome"]
-        return scelto
-    
-    # Recuperiamo l'oggetto completo partendo dal nome salvato
-    nome_salvato = session["artist_name"]
-    for a in artisti:
-        if a["nome"] == nome_salvato:
-            return a
-    return artisti[0]
+    # Gender
+    gender_feedback = ""
+    g_val = str(corretto.get("gender", "")).lower()
+    if str(utente.get("gender", "")).lower() == g_val:
+        gender_feedback = "♂" if g_val == "m" else "♀" if g_val == "f" else "Gruppo/Altro"
 
-# ... (resta invariata la funzione feedback_artista)
+    # Genere musicale
+    genere_feedback = ""
+    if nome_feedback == "Esatto!":
+        genere_feedback = f"Genere: {corretto.get('genere', 'N/D')}"
 
-@app.route("/", methods=["GET", "POST"])
-def index():
-    artist = scegli_artista_del_giorno()
-    feedback = None
+    # Componenti
+    componenti_feedback = ""
+    try:
+        u_comp = int(utente.get("componenti") or 0)
+        c_comp = int(corretto.get("componenti") or 0)
+        diff = u_comp - c_comp
+        if diff == 0:
+            componenti_feedback = f"Componenti: {c_comp}"
+        else:
+            componenti_feedback = "Più componenti" if diff < 0 else "Meno componenti"
+    except (ValueError, TypeError):
+        componenti_feedback = "Dato componenti non valido"
 
-    if request.method == "POST":
-        nome_input = request.form.get("nome", "").strip()
-        utente_candidato = next(
-            (a for a in artisti if a.get("nome", "").lower() == nome_input.lower()),
-            {"nome": nome_input, "debutto": "0", "regione": "", "gender": "", "genere": "", "componenti": "0"}
-        )
-        feedback = feedback_artista(utente_candidato, artist)
-
-    return render_template("index.html", feedback=feedback)
-
-# AGGIUNGI QUESTO PER RENDER
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    return nome_feedback, anno_feedback, regione_feedback, gender_feedback, genere_feedback, componenti_feedback
