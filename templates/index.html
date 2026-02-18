@@ -2,114 +2,344 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Indovina l'artista del giorno</title>
-    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indovina l'Artista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: sans-serif; margin: 2em; }
-        input, button { font-size: 1em; margin: 0.5em 0; }
-        .feedback { margin-top: 1em; }
+        /* --- RESET E STILE BASE --- */
+        * { box-sizing: border_box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* --- CONTENITORE PRINCIPALE --- */
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 { margin-bottom: 1.5rem; color: #1e3c72; font-weight: 600; }
+
+        /* --- FORM DI INPUT --- */
+        .game-form { display: flex; gap: 10px; margin-bottom: 2rem; justify-content: center; }
+        
+        input[type="text"] {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            width: 70%;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus { border-color: #1e3c72; }
+
+        button {
+            padding: 12px 20px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s, background 0.3s;
+        }
+        button:hover { background-color: #ff5252; transform: translateY(-2px); }
+
+        /* --- SEZIONE FEEDBACK (RISULTATI) --- */
+        .feedback-container {
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Messaggio principale (Esatto / Errato) */
+        .main-status {
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .status-success { background-color: #28a745; } /* Verde */
+        .status-partial { background-color: #ffc107; color: #333; } /* Giallo */
+        .status-error { background-color: #dc3545; } /* Rosso */
+
+        /* Griglia degli indizi */
+        .clues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .clue-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .clue-icon { font-size: 1.8rem; margin-bottom: 5px; }
+        .clue-text { font-size: 0.9rem; font-weight: 500; color: #555; }
+        
+        /* Evidenzia se c'è testo */
+        .clue-active { border-color: #1e3c72; background-color: #e3f2fd; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-<h2>Indovina l'artista del giorno!</h2>
-<label for="nome">Nome artista:</label><br>
-<input type="text" id="nome" placeholder="Inserisci il nome"><br>
-<button id="prova-btn">Prova</button>
+    <div class="container">
+        <h1>🎵 Indovina l'Artista</h1>
+        
+        <form method="POST" class="game-form">
+            <input type="text" name="nome" placeholder="Inserisci il nome..." required autocomplete="off">
+            <button type="submit">Prova</button>
+        </form>
 
-<div class="feedback" id="feedback"></div>
+        {% if feedback %}
+        <div class="feedback-container">
+            
+            <div class="main-status 
+                {% if 'Esatto' in feedback[0] %} status-success 
+                {% elif 'Quasi' in feedback[0] %} status-partial 
+                {% else %} status-error {% endif %}">
+                {{ feedback[0] }}
+            </div>
 
-<py-script>
-import random
+            <div class="clues-grid">
+                
+                <div class="clue-card {% if feedback[1] %}clue-active{% endif %}">
+                    <div class="clue-icon">📅</div>
+                    <div class="clue-text">
+                        {{ feedback[1] if feedback[1] else "---" }}
+                    </div>
+                </div>
 
-# JSON degli artisti (puoi sostituirlo con il tuo Artisti.json completo)
-artisti = [
-    {"nome": "Laura Pausini", "debutto": 1993, "genere": "Pop", "regione": "Italia", "gender": "F"},
-    {"nome": "Vasco Rossi", "debutto": 1977, "genere": "Rock", "regione": "Italia", "gender": "M"},
-    {"nome": "Eros Ramazzotti", "debutto": 1984, "genere": "Pop", "regione": "Italia", "gender": "M"}
-]
+                <div class="clue-card {% if feedback[2] %}clue-active{% endif %}">
+                    <div class="clue-icon">🌍</div>
+                    <div class="clue-text">
+                        {{ feedback[2] if feedback[2] else "???" }}
+                    </div>
+                </div>
 
-# Seleziona artista del giorno
-artista_corrente = random.choice(artisti)
-tentativi = 0
-max_tentativi = 10
+                <div class="clue-card {% if feedback[3] %}clue-active{% endif %}">
+                    <div class="clue-icon">👤</div>
+                    <div class="clue-text">
+                        {{ feedback[3] if feedback[3] else "???" }}
+                    </div>
+                </div>
 
-def feedback_artista(utente, corretto):
-    # Nome
-    nome_feedback = ""
-    if utente.get("nome", "").lower() == corretto.get("nome", "").lower():
-        nome_feedback = "Esatto!"
-    elif utente.get("nome", "").lower() in corretto.get("nome", "").lower() \
-         or corretto.get("nome", "").lower() in utente.get("nome", "").lower():
-        nome_feedback = "Quasi, ci sei andato vicino!"
-    else:
-        nome_feedback = "Nessuna corrispondenza."
-    
-    # Anno debutto
-    anno_feedback = ""
-    if "debutto" in utente and "debutto" in corretto:
-        try:
-            delta = int(utente["debutto"]) - int(corretto["debutto"])
-            if delta == 0:
-                anno_feedback = "L'ANNO E' GIUSTO!"
-            elif -10 <= delta < 0:
-                anno_feedback = "CI SEI QUASI! UN PO' PIU' RECENTE!"
-            elif 0 < delta <= 10:
-                anno_feedback = "DAI, QUASI! E' UN PO' MENO RECENTE :/"
-        except ValueError:
-            pass
-    
-    # Regione
-    regione_feedback = ""
-    if utente.get("regione", "").lower() == corretto.get("regione", "").lower():
-        regione_feedback = "VIENE PROPRIO DA LI'"
-    
-    # Gender
-    gender_feedback = ""
-    if utente.get("gender", "").lower() == corretto.get("gender", "").lower():
-        gender_feedback = "GENERE CORRETTO"
-    
-    # Genere musicale
-    genere_feedback = ""
-    if utente.get("genere", "").lower() == corretto.get("genere", "").lower():
-        genere_feedback = "QUESTA SI CHE E' MUSICA"
-    
-    return nome_feedback, anno_feedback, regione_feedback, gender_feedback, genere_feedback
+                <div class="clue-card {% if feedback[4] %}clue-active{% endif %}">
+                    <div class="clue-icon">🎸</div>
+                    <div class="clue-text">
+                        {{ feedback[4] if feedback[4] else "???" }}
+                    </div>
+                </div>
 
-def gioca(*args, **kwargs):
-    global tentativi, artista_corrente
-    nome_input = Element("nome").value.strip()
-    feedback_div = Element("feedback")
-    
-    tentativi += 1
-    utente_candidato = None
-    for a in artisti:
-        if a.get("nome", "").lower() == nome_input.lower():
-            utente_candidato = a
-            break
-    if not utente_candidato:
-        utente_candidato = {"nome": nome_input}
-    
-    nome_fb, anno_fb, regione_fb, gender_fb, genere_fb = feedback_artista(utente_candidato, artista_corrente)
-    
-    html = f"<p><strong>Tentativo {tentativi}/{max_tentativi}</strong></p>"
-    html += f"<p>Nome: {nome_fb}</p>"
-    if anno_fb: html += f"<p>Debutto: {anno_fb}</p>"
-    if regione_fb: html += f"<p>Regione: {regione_fb}</p>"
-    if gender_fb: html += f"<p>Gender: {gender_fb}</p>"
-    if genere_fb: html += f"<p>Genere: {genere_fb}</p>"
-    
-    if nome_fb == "Esatto!":
-        html += "<p>RISPOSTA ESATTA! HAI VINTO!</p>"
-        tentativi = max_tentativi
-    elif tentativi >= max_tentativi:
-        html += f"<p>Hai esaurito i tentativi! L'artista corretto era: {artista_corrente['nome']}</p>"
-    
-    feedback_div.write(html)
+                <div class="clue-card {% if feedback[5] %}clue-active{% endif %}">
+                    <div class="clue-icon">👥</div>
+                    <div class="clue-text">
+                        {{ feedback[5] if feedback[5] else "---" }}
+                    </div>
+                </div>
 
-Element("prova-btn").element.addEventListener("click", gioca)
-</py-script>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indovina l'Artista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET E STILE BASE --- */
+        * { box-sizing: border_box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* --- CONTENITORE PRINCIPALE --- */
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 { margin-bottom: 1.5rem; color: #1e3c72; font-weight: 600; }
+
+        /* --- FORM DI INPUT --- */
+        .game-form { display: flex; gap: 10px; margin-bottom: 2rem; justify-content: center; }
+        
+        input[type="text"] {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            width: 70%;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus { border-color: #1e3c72; }
+
+        button {
+            padding: 12px 20px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s, background 0.3s;
+        }
+        button:hover { background-color: #ff5252; transform: translateY(-2px); }
+
+        /* --- SEZIONE FEEDBACK (RISULTATI) --- */
+        .feedback-container {
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Messaggio principale (Esatto / Errato) */
+        .main-status {
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .status-success { background-color: #28a745; } /* Verde */
+        .status-partial { background-color: #ffc107; color: #333; } /* Giallo */
+        .status-error { background-color: #dc3545; } /* Rosso */
+
+        /* Griglia degli indizi */
+        .clues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .clue-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .clue-icon { font-size: 1.8rem; margin-bottom: 5px; }
+        .clue-text { font-size: 0.9rem; font-weight: 500; color: #555; }
+        
+        /* Evidenzia se c'è testo */
+        .clue-active { border-color: #1e3c72; background-color: #e3f2fd; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🎵 Indovina l'Artista</h1>
+        
+        <form method="POST" class="game-form">
+            <input type="text" name="nome" placeholder="Inserisci il nome..." required autocomplete="off">
+            <button type="submit">Prova</button>
+        </form>
+
+        {% if feedback %}
+        <div class="feedback-container">
+            
+            <div class="main-status 
+                {% if 'Esatto' in feedback[0] %} status-success 
+                {% elif 'Quasi' in feedback[0] %} status-partial 
+                {% else %} status-error {% endif %}">
+                {{ feedback[0] }}
+            </div>
+
+            <div class="clues-grid">
+                
+                <div class="clue-card {% if feedback[1] %}clue-active{% endif %}">
+                    <div class="clue-icon">📅</div>
+                    <div class="clue-text">
+                        {{ feedback[1] if feedback[1] else "---" }}
+                    </div>
+                </div>
+
+                <div class="clue-card {% if feedback[2] %}clue-active{% endif %}">
+                    <div class="clue-icon">🌍</div>
+                    <div class="clue-text">
+                        {{ feedback[2] if feedback[2] else "???" }}
+                    </div>
+                </div>
+
+                <div class="clue-card {% if feedback[3] %}clue-active{% endif %}">
+                    <div class="clue-icon">👤</div>
+                    <div class="clue-text">
+                        {{ feedback[3] if feedback[3] else "???" }}
+                    </div>
+                </div>
+
+                <div class="clue-card {% if feedback[4] %}clue-active{% endif %}">
+                    <div class="clue-icon">🎸</div>
+                    <div class="clue-text">
+                        {{ feedback[4] if feedback[4] else "???" }}
+                    </div>
+                </div>
+
+                <div class="clue-card {% if feedback[5] %}clue-active{% endif %}">
+                    <div class="clue-icon">👥</div>
+                    <div class="clue-text">
+                        {{ feedback[5] if feedback[5] else "---" }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {% endif %}
+    </div>
 
 </body>
 </html>
