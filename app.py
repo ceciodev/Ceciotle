@@ -1,7 +1,8 @@
 import os
 import json
 import random
-from flask import Flask, render_template, request, session
+# Aggiunto redirect e url_for per gestire il riavvio
+from flask import Flask, render_template, request, session, redirect, url_for
 
 app = Flask(__name__)
 # Chiave segreta per gestire la sessione (tentativi e artista del giorno)
@@ -96,14 +97,12 @@ def index():
 
     if request.method == "POST" and session["tentativi"] < 10:
         nome_input = request.form.get("nome", "").strip()
-        # Cerchiamo l'artista inserito nella nostra lista
         u_cand = next((a for a in artisti if a["nome"].lower() == nome_input.lower()), None)
         
         if u_cand:
             session["tentativi"] += 1
             res = feedback_artista(u_cand, target)
             
-            # Aggiungiamo il tentativo in cima alla lista (per vederlo subito)
             session["cronologia"].insert(0, {"nome": u_cand["nome"], "feedback": res})
             session.modified = True
             
@@ -120,6 +119,12 @@ def index():
                            fine_giochi=fine_giochi,
                            vittoria=vittoria,
                            target=target if fine_giochi else None)
+
+# NUOVA ROTTA: Pulisce la sessione e riavvia il gioco da zero
+@app.route("/restart")
+def restart():
+    session.clear()
+    return redirect(url_for("index"))
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
