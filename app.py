@@ -4,8 +4,8 @@ import random
 from flask import Flask, render_template, request, session
 
 app = Flask(__name__)
-# Chiave segreta per gestire i tentativi nella sessione dell'utente
-app.secret_key = os.environ.get("SECRET_KEY", "chiave_segreta_spotle_2026")
+# Chiave segreta per gestire la sessione (tentativi e artista del giorno)
+app.secret_key = os.environ.get("SECRET_KEY", "spotle_italiano_key_2026")
 
 def carica_artisti():
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -23,50 +23,59 @@ def carica_artisti():
 artisti = carica_artisti()
 
 def feedback_artista(utente, corretto):
-    # Struttura feedback: [Nome, Anno, Regione, Gender, Genere, Comp]
+    """
+    Genera il feedback con emoji per ogni caratteristica.
+    Struttura: [Nome, Debutto, Regione, Gender, Genere, Membri]
+    """
     f = ["", "", "", "", "", ""] 
+    OK = "✅"
+    NO = "❌"
+    SU = "⬆️"
+    GIU = "⬇️"
     
     # 1. NOME
     u_n = str(utente.get("nome") or "").strip().lower()
     c_n = str(corretto.get("nome") or "").strip().lower()
-    if u_n == c_n: 
-        f[0] = "Corretto"
-    else: 
-        f[0] = "Errato"
+    f[0] = OK if u_n == c_n else NO
 
-    # 2. ANNO (DEBUTTO)
+    # 2. ANNO DI DEBUTTO
     try:
         u_a = int(str(utente.get("debutto") or 0))
         c_a = int(str(corretto.get("debutto") or 0))
-        if u_a == c_a: f[1] = f"Anno: {c_a} (OK)"
-        else: f[1] = f"Debutto: {'Dopo il' if u_a < c_a else 'Prima del'} {u_a}"
-    except: f[1] = "Anno non disponibile"
+        if u_a == c_a: 
+            f[1] = f"Debutto: {c_a} {OK}"
+        else:
+            freccia = SU if u_a < c_a else GIU
+            f[1] = f"Debutto: {u_a} {freccia}"
+    except: 
+        f[1] = f"Debutto {NO}"
 
     # 3. REGIONE
     u_r = str(utente.get("regione") or "").lower()
     c_r = str(corretto.get("regione") or "").lower()
-    if u_r == c_r: f[2] = f"Regione: {corretto.get('regione')} (OK)"
-    else: f[2] = "Regione Errata"
+    f[2] = f"Regione {OK}" if u_r == c_r else f"Regione {NO}"
 
     # 4. GENDER
     u_g = str(utente.get("gender") or "").upper()
     c_g = str(corretto.get("gender") or "").upper()
-    if u_g == c_g: f[3] = f"Gender: {c_g} (OK)"
-    else: f[3] = "Gender Errato"
+    f[3] = f"Gender {OK}" if u_g == c_g else f"Gender {NO}"
 
     # 5. GENERE MUSICALE
     u_gen = str(utente.get("genere") or "").lower()
     c_gen = str(corretto.get("genere") or "").lower()
-    if u_gen == c_gen: f[4] = f"Genere: {corretto.get('genere')} (OK)"
-    else: f[4] = "Genere Errato"
+    f[4] = f"Genere {OK}" if u_gen == c_gen else f"Genere {NO}"
 
     # 6. COMPONENTI
     try:
         u_c = int(str(utente.get("componenti") or 0))
         c_c = int(str(corretto.get("componenti") or 0))
-        if u_c == c_c: f[5] = f"Membri: {c_c} (OK)"
-        else: f[5] = f"{'Più di' if u_c < c_c else 'Meno di'} {u_c} membri"
-    except: f[5] = "Dato non disponibile"
+        if u_c == c_c: 
+            f[5] = f"Membri: {c_c} {OK}"
+        else:
+            freccia = SU if u_c < c_c else GIU
+            f[5] = f"Membri: {u_c} {freccia}"
+    except: 
+        f[5] = f"Membri {NO}"
 
     return f
 
@@ -75,11 +84,11 @@ def index():
     if not artisti:
         return "Errore: File Artisti.json non trovato o vuoto."
 
-    # Inizializzazione sessione di gioco
+    # Inizializzazione della sessione di gioco
     if "target_name" not in session:
         session["target_name"] = random.choice(artisti)["nome"]
         session["tentativi"] = 0
-        session["cronologia"] = [] # Per mostrare i tentativi precedenti
+        session["cronologia"] = []
 
     target = next((a for a in artisti if a["nome"] == session["target_name"]), artisti[0])
     vittoria = False
@@ -87,11 +96,14 @@ def index():
 
     if request.method == "POST" and session["tentativi"] < 10:
         nome_input = request.form.get("nome", "").strip()
+        # Cerchiamo l'artista inserito nella nostra lista
         u_cand = next((a for a in artisti if a["nome"].lower() == nome_input.lower()), None)
         
         if u_cand:
             session["tentativi"] += 1
             res = feedback_artista(u_cand, target)
+            
+            # Aggiungiamo il tentativo in cima alla lista (per vederlo subito)
             session["cronologia"].insert(0, {"nome": u_cand["nome"], "feedback": res})
             session.modified = True
             
