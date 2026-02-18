@@ -1,49 +1,42 @@
 import os
-from flask import Flask
+import json
+import random
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-# i tuoi endpoint qui
-
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
-import json
-import random
-
-
+# Caricamento artisti
 def carica_artisti():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(base_dir, "Artisti.json")
-
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             return json.load(f)
     except FileNotFoundError:
-        print(f"Errore: file '{file_path}' non trovato.")
         return []
     except json.JSONDecodeError:
-        print(f"Errore: file '{file_path}' non è un JSON valido.")
         return []
 
+artisti = carica_artisti()
 
-def scegli_artista_del_giorno(artisti):
+# Seleziona artista del giorno
+def scegli_artista_del_giorno():
     if not artisti:
         return None
     return random.choice(artisti)
 
-
+# Feedback artista
 def feedback_artista(utente, corretto):
     # Nome
     if utente.get("nome", "").lower() == corretto.get("nome", "").lower():
         nome_feedback = "Esatto!"
-    elif (utente.get("nome", "").lower() in corretto.get("nome", "").lower() or
-          corretto.get("nome", "").lower() in utente.get("nome", "").lower()):
+    elif utente.get("nome", "").lower() in corretto.get("nome", "").lower() or \
+         corretto.get("nome", "").lower() in utente.get("nome", "").lower():
         nome_feedback = "Quasi, ci sei andato vicino!"
     else:
         nome_feedback = "Artista errato."
 
-    # Anno di debutto
+    # Anno debutto
     anno_feedback = ""
     if "debutto" in utente and "debutto" in corretto:
         try:
@@ -62,7 +55,7 @@ def feedback_artista(utente, corretto):
     if utente.get("regione", "").lower() == corretto.get("regione", "").lower():
         regione_feedback = f"Viene da: {corretto.get('regione', '')}"
 
-    # Sesso (gender)
+    # Gender
     gender_feedback = ""
     if utente.get("gender", "").lower() == corretto.get("gender", "").lower():
         gender_value = corretto.get("gender", "").lower()
@@ -92,55 +85,38 @@ def feedback_artista(utente, corretto):
         except ValueError:
             pass
 
-    return nome_feedback, anno_feedback, regione_feedback, gender_feedback, genere_feedback, componenti_feedback
+    return {
+        "nome": nome_feedback,
+        "debutto": anno_feedback,
+        "regione": regione_feedback,
+        "gender": gender_feedback,
+        "genere": genere_feedback,
+        "componenti": componenti_feedback
+    }
 
-
-def gioca_a_indovina_artista(artista, artisti):
+# Endpoint per giocare
+@app.route("/gioca", methods=["POST"])
+def gioca():
+    data = request.json
+    artista = scegli_artista_del_giorno()
     if not artista:
-        print("Nessun artista disponibile per il gioco.")
-        return
+        return jsonify({"error": "Nessun artista disponibile"}), 404
 
-    print("Indovina l'artista!")
-    tentativi = 10
-    nome_artista = artista.get("nome")
+    # Trova artista inserito dall'utente nel JSON
+    utente_candidato = next(
+        (a for a in artisti if a.get("nome", "").lower() == data.get("nome", "").lower()),
+        {"nome": data.get("nome", "")}
+    )
 
-    for i in range(tentativi):
-        nome_input = input(f"Tentativo {i + 1}/{tentativi} - Nome: ").strip()
+    feedback = feedback_artista(utente_candidato, artista)
+    return jsonify(feedback)
 
-        utente_candidato = next(
-            (a for a in artisti if a.get("nome", "").lower() == nome_input.lower()),
-            {"nome": nome_input}
-        )
+# Endpoint base (puoi renderizzare una pagina HTML se vuoi)
+@app.route("/")
+def index():
+    return "Benvenuto a Indovina l'Artista!"
 
-        nome_fb, anno_fb, regione_fb, gender_fb, genere_fb, componenti_fb = feedback_artista(
-            utente_candidato, artista
-        )
-
-        print(f"Nome: {nome_fb}")
-        if anno_fb:
-            print(f"Debutto: {anno_fb}")
-        if regione_fb:
-            print(f"Regione: {regione_fb}")
-        if gender_fb:
-            print(f"Sesso: {gender_fb}")
-        if genere_fb:
-            print(f"Genere: {genere_fb}")
-        if componenti_fb:
-            print(f"Componenti: {componenti_fb}")
-
-        if nome_fb == "Esatto!":
-            print("RISPOSTA ESATTA! HAI VINTO!")
-            return
-
-    print(f"Hai esaurito i tentativi! L'artista corretto era: {nome_artista}")
-
-
-def main():
-    artisti = carica_artisti()
-    artista = scegli_artista_del_giorno(artisti)
-    gioca_a_indovina_artista(artista, artisti)
-
-
+# Flask server su Render
 if __name__ == "__main__":
-    main()
-
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
