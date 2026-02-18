@@ -1,29 +1,108 @@
-<h1>Indovina l'artista</h1>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indovina l'Artista</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a4a8e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+        h1 {
+            color: #1a4a8e;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        select:focus {
+            border-color: #ff5e5e;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff5e5e;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #e04d4d;
+        }
+        .feedback-box {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 12px;
+            border-left: 5px solid #1a4a8e;
+            text-align: left;
+        }
+        .feedback-box p {
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+        .highlight {
+            color: #1a4a8e;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
 
-<form method="POST">
-    <label for="nome">Seleziona un artista:</label>
-    <select name="nome" id="nome" required>
-        <option value="" disabled selected>-- Scegli un artista --</option>
-        {% for artista in artisti %}
-            {# Usiamo artista.nome perché in Python sono dizionari caricati da JSON #}
-            <option value="{{ artista.nome }}">
-                {{ artista.nome }}
-            </option>
-        {% endfor %}
-    </select>
-    <button type="submit">Prova</button>
-</form>
+    <div class="container">
+        <h1>🎵 Indovina l'Artista</h1>
 
-{% if feedback %}
-    <div style="margin-top:20px; border: 1px solid #ccc; padding: 15px; border-radius: 8px;">
-        <h3>Risultato:</h3>
-        <p><strong>Feedback:</strong> {{ feedback[0] }}</p>
-        
-        {# Mostriamo gli altri campi solo se contengono testo #}
-        {% if feedback[1] %}<p><strong>Debutto:</strong> {{ feedback[1] }}</p>{% endif %}
-        {% if feedback[2] %}<p><strong>Regione:</strong> {{ feedback[2] }}</p>{% endif %}
-        {% if feedback[3] %}<p><strong>Gender:</strong> {{ feedback[3] }}</p>{% endif %}
-        {% if feedback[4] %}<p><strong>Genere:</strong> {{ feedback[4] }}</p>{% endif %}
-        {% if feedback[5] %}<p><strong>Componenti:</strong> {{ feedback[5] }}</p>{% endif %}
+        <form method="POST">
+            <label for="nome" style="display:block; margin-bottom: 8px; font-weight: 500;">Chi è l'artista del giorno?</label>
+            <select name="nome" id="nome" required>
+                <option value="" disabled selected>-- Seleziona un nome --</option>
+                {% for artista in artisti %}
+                    <option value="{{ artista.nome }}">{{ artista.nome }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Prova</button>
+        </form>
+
+        {% if feedback %}
+            <div class="feedback-box">
+                <p><strong>Risultato:</strong> <span class="highlight">{{ feedback[0] }}</span></p>
+                
+                {% if feedback[1] %}<p>📅 {{ feedback[1] }}</p>{% endif %}
+                {% if feedback[2] %}<p>📍 {{ feedback[2] }}</p>{% endif %}
+                {% if feedback[3] %}<p>👤 Gender: {{ feedback[3] }}</p>{% endif %}
+                {% if feedback[4] %}<p>🎸 {{ feedback[4] }}</p>{% endif %}
+                {% if feedback[5] %}<p>👥 {{ feedback[5] }}</p>{% endif %}
+            </div>
+        {% endif %}
     </div>
-{% endif %}
+
+</body>
+</html>
