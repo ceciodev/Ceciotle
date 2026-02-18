@@ -1,173 +1,61 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indovina l'Artista</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        /* --- RESET E STILE BASE --- */
-        * { box-sizing: border_box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+import os
+import json
+import random
+from flask import Flask, render_template, request, session
 
-        /* --- CONTENITORE PRINCIPALE --- */
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            width: 100%;
-            max-width: 600px;
-            text-align: center;
-        }
+app = Flask(__name__)
+# Usa una variabile d'ambiente per la sicurezza, o una stringa fissa
+app.secret_key = os.environ.get("SECRET_KEY", "chiave_segretissima_123")
 
-        h1 { margin-bottom: 1.5rem; color: #1e3c72; font-weight: 600; }
+def carica_artisti():
+    # Cerca il file nella stessa cartella di questo script
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, "Artisti.json")
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            dati = json.load(f)
+            return dati if isinstance(dati, list) else []
+    except Exception as e:
+        print(f"Errore caricamento file: {e}") # Apparirà nei log di Render
+        return []
 
-        /* --- FORM DI INPUT --- */
-        .game-form { display: flex; gap: 10px; margin-bottom: 2rem; justify-content: center; }
-        
-        input[type="text"] {
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 1rem;
-            width: 70%;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        input[type="text"]:focus { border-color: #1e3c72; }
+artisti = carica_artisti()
 
-        button {
-            padding: 12px 20px;
-            background-color: #ff6b6b;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            cursor: pointer;
-            font-weight: 600;
-            transition: transform 0.2s, background 0.3s;
-        }
-        button:hover { background-color: #ff5252; transform: translateY(-2px); }
+def scegli_artista_del_giorno():
+    if not artisti:
+        return {"nome": "Artista Mancante", "debutto": "0", "regione": "", "gender": "", "genere": "", "componenti": "0"}
+    
+    # SALVIAMO SOLO IL NOME NELLA SESSIONE
+    if "artist_name" not in session:
+        scelto = random.choice(artisti)
+        session["artist_name"] = scelto["nome"]
+        return scelto
+    
+    # Recuperiamo l'oggetto completo partendo dal nome salvato
+    nome_salvato = session["artist_name"]
+    for a in artisti:
+        if a["nome"] == nome_salvato:
+            return a
+    return artisti[0]
 
-        /* --- SEZIONE FEEDBACK (RISULTATI) --- */
-        .feedback-container {
-            margin-top: 20px;
-            animation: fadeIn 0.5s ease-in-out;
-        }
+# ... (resta invariata la funzione feedback_artista)
 
-        /* Messaggio principale (Esatto / Errato) */
-        .main-status {
-            font-size: 1.5rem;
-            font-weight: bold;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            color: white;
-        }
-        .status-success { background-color: #28a745; } /* Verde */
-        .status-partial { background-color: #ffc107; color: #333; } /* Giallo */
-        .status-error { background-color: #dc3545; } /* Rosso */
+@app.route("/", methods=["GET", "POST"])
+def index():
+    artist = scegli_artista_del_giorno()
+    feedback = None
 
-        /* Griglia degli indizi */
-        .clues-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 15px;
-        }
+    if request.method == "POST":
+        nome_input = request.form.get("nome", "").strip()
+        utente_candidato = next(
+            (a for a in artisti if a.get("nome", "").lower() == nome_input.lower()),
+            {"nome": nome_input, "debutto": "0", "regione": "", "gender": "", "genere": "", "componenti": "0"}
+        )
+        feedback = feedback_artista(utente_candidato, artist)
 
-        .clue-card {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid #e9ecef;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
+    return render_template("index.html", feedback=feedback)
 
-        .clue-icon { font-size: 1.8rem; margin-bottom: 5px; }
-        .clue-text { font-size: 0.9rem; font-weight: 500; color: #555; }
-        
-        /* Evidenzia se c'è testo */
-        .clue-active { border-color: #1e3c72; background-color: #e3f2fd; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <h1>🎵 Indovina l'Artista</h1>
-        
-        <form method="POST" class="game-form">
-            <input type="text" name="nome" placeholder="Inserisci il nome..." required autocomplete="off">
-            <button type="submit">Prova</button>
-        </form>
-
-        {% if feedback %}
-        <div class="feedback-container">
-            
-            <div class="main-status 
-                {% if 'Esatto' in feedback[0] %} status-success 
-                {% elif 'Quasi' in feedback[0] %} status-partial 
-                {% else %} status-error {% endif %}">
-                {{ feedback[0] }}
-            </div>
-
-            <div class="clues-grid">
-                
-                <div class="clue-card {% if feedback[1] %}clue-active{% endif %}">
-                    <div class="clue-icon">📅</div>
-                    <div class="clue-text">
-                        {{ feedback[1] if feedback[1] else "---" }}
-                    </div>
-                </div>
-
-                <div class="clue-card {% if feedback[2] %}clue-active{% endif %}">
-                    <div class="clue-icon">🌍</div>
-                    <div class="clue-text">
-                        {{ feedback[2] if feedback[2] else "???" }}
-                    </div>
-                </div>
-
-                <div class="clue-card {% if feedback[3] %}clue-active{% endif %}">
-                    <div class="clue-icon">👤</div>
-                    <div class="clue-text">
-                        {{ feedback[3] if feedback[3] else "???" }}
-                    </div>
-                </div>
-
-                <div class="clue-card {% if feedback[4] %}clue-active{% endif %}">
-                    <div class="clue-icon">🎸</div>
-                    <div class="clue-text">
-                        {{ feedback[4] if feedback[4] else "???" }}
-                    </div>
-                </div>
-
-                <div class="clue-card {% if feedback[5] %}clue-active{% endif %}">
-                    <div class="clue-icon">👥</div>
-                    <div class="clue-text">
-                        {{ feedback[5] if feedback[5] else "---" }}
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        {% endif %}
-    </div>
-
-</body>
-</html>
+# AGGIUNGI QUESTO PER RENDER
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
