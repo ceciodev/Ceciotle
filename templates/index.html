@@ -1,25 +1,7 @@
 <!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <title>Indovina l'artista</title>
-</head>
+<html>
+<head><title>Test Flask</title></head>
 <body>
-    <h1>Indovina l'artista!</h1>
-    <form method="POST">
-        <input type="text" name="nome" placeholder="Inserisci il nome" required>
-        <button type="submit">Prova</button>
-    </form>
-
-    {% if feedback %}
-        <div>
-            <p>Nome: {{ feedback[0] }}</p>
-            <p>Debutto: {{ feedback[1] }}</p>
-            <p>Regione: {{ feedback[2] }}</p>
-            <p>Gender: {{ feedback[3] }}</p>
-            <p>Genere: {{ feedback[4] }}</p>
-            <p>Componenti: {{ feedback[5] }}</p>
-        </div>
-    {% endif %}
+<h1>Pagina caricata!</h1>
 </body>
 </html>
