@@ -1,195 +1,97 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CECIOTLE</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-blue: #1a4a8e;
-            --bg-light-blue: #99cbff;
-            --banner-yellow: #ecd273;
-            --white-glass: rgba(255, 255, 255, 0.5);
-        }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-light-blue); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; color: var(--primary-blue); overflow-x: hidden; }
-        .blur-content { filter: blur(8px); pointer-events: none; }
+import os
+import json
+import random
+from flask import Flask, render_template, request, session, redirect, url_for
+
+app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY", "ceciotle_2026_key")
+
+def carica_artisti():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, "Artisti.json")
+    try:
+        if os.path.exists(file_path):
+            with open(file_path, "r", encoding="utf-8") as f:
+                dati = json.load(f)
+                return dati if isinstance(dati, list) else []
+        return []
+    except Exception as e:
+        print(f"Errore caricamento JSON: {e}")
+        return []
+
+ARTISTI_LISTA = carica_artisti()
+
+def feedback_artista(utente, corretto):
+    # Struttura feedback potenziata: [Esito, Emoji/Segno, Valore_Scelto]
+    res = {}
+    
+    # Gender
+    res['gender'] = ["CORRETTO" if utente["gender"] == corretto["gender"] else "ERRATO", 
+                     "✅" if utente["gender"] == corretto["gender"] else "❌", 
+                     "Uomo" if utente["gender"] == 'M' else "Donna" if utente["gender"] == 'F' else "Band"]
+    
+    # Genere Musicale
+    res['genere'] = ["CORRETTO" if utente["genere"].lower() == corretto["genere"].lower() else "ERRATO",
+                     "✅" if utente["genere"].lower() == corretto["genere"].lower() else "❌",
+                     utente["genere"]]
+    
+    # Debutto
+    u_a, c_a = int(utente.get("debutto", 0)), int(corretto.get("debutto", 0))
+    segno_a = "✅" if u_a == c_a else ("⬆️" if u_a < c_a else "⬇️")
+    res['debutto'] = ["CORRETTO" if u_a == c_a else "ERRATO", segno_a, utente["debutto"]]
+    
+    # Regione
+    res['regione'] = ["CORRETTO" if utente["regione"].lower() == corretto["regione"].lower() else "ERRATO",
+                      "✅" if utente["regione"].lower() == corretto["regione"].lower() else "❌",
+                      utente["regione"]]
+    
+    # Componenti
+    u_c, c_c = int(utente.get("componenti", 0)), int(corretto.get("componenti", 0))
+    segno_c = "✅" if u_c == c_c else ("⬆️" if u_c < c_c else "⬇️")
+    res['componenti'] = ["CORRETTO" if u_c == c_c else "ERRATO", segno_c, utente["componenti"]]
+    
+    return res
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    if not ARTISTI_LISTA: return "Errore JSON", 500
+    
+    if "target_name" not in session:
+        session["target_name"] = random.choice(ARTISTI_LISTA)["nome"]
+        session["tentativi"] = 0
+        session["cronologia"] = []
+
+    target = next((a for a in ARTISTI_LISTA if a["nome"] == session["target_name"]), ARTISTI_LISTA[0])
+    vittoria = False
+    fine_giochi = False
+
+    if request.method == "POST" and session["tentativi"] < 10:
+        nome_input = request.form.get("nome", "").strip()
+        u_cand = next((a for a in ARTISTI_LISTA if a["nome"].lower() == nome_input.lower()), None)
         
-        /* Sidebar */
-        .menu-btn { position: fixed; top: 20px; right: 20px; font-size: 30px; cursor: pointer; z-index: 1500; background: var(--primary-blue); color: white; padding: 10px; border-radius: 12px; line-height: 1; }
-        .sidebar { position: fixed; top: 0; right: -300px; width: 250px; height: 100%; background: var(--primary-blue); color: white; transition: 0.3s ease; z-index: 2001; padding: 60px 20px; box-shadow: -5px 0 25px rgba(0,0,0,0.3); }
-        .sidebar.open { right: 0; }
-        .sidebar a { color: white; text-decoration: none; display: block; margin: 20px 0; font-weight: bold; }
+        if u_cand:
+            session["tentativi"] += 1
+            res = feedback_artista(u_cand, target)
+            session["cronologia"].insert(0, {
+                "nome": u_cand["nome"],
+                "feedback": res
+            })
+            session.modified = True
+            
+            if u_cand["nome"].lower() == target["nome"].lower():
+                vittoria = True
+                fine_giochi = True
+            elif session["tentativi"] >= 10:
+                fine_giochi = True
 
-        /* Banner */
-        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: transparent; display: none; justify-content: center; align-items: center; z-index: 3000; }
-        .rules-banner { background-color: var(--banner-yellow); padding: 40px; border-radius: 25px; text-align: center; max-width: 450px; border: 4px solid var(--primary-blue); box-shadow: 0 10px 30px rgba(26,74,142,0.2); }
+    return render_template("index.html", artisti=ARTISTI_LISTA, tentativi=session.get("tentativi", 0), 
+                           cronologia=session.get("cronologia", []), fine_giochi=fine_giochi, 
+                           vittoria=vittoria, target=target)
 
-        h1 { font-size: 4rem; margin: 20px 0 0; font-weight: 900; text-transform: uppercase; }
-        h2 { font-size: 1rem; margin-bottom: 2rem; font-style: italic; }
-        .game-container { width: 90%; max-width: 600px; text-align: center; }
+@app.route("/restart")
+def restart():
+    session.clear()
+    return redirect(url_for("index"))
 
-        /* Design Elegante Autocomplete */
-        .search-wrapper { position: relative; width: 100%; }
-        .autocomplete-results {
-            position: absolute;
-            top: 100%; left: 0; right: 0;
-            background: white;
-            border: 2px solid var(--primary-blue);
-            border-top: none;
-            border-radius: 0 0 15px 15px;
-            z-index: 1000;
-            max-height: 250px;
-            overflow-y: auto;
-            display: none;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .autocomplete-entry {
-            padding: 15px;
-            cursor: pointer;
-            text-align: left;
-            font-weight: bold;
-            border-bottom: 1px solid #eee;
-            transition: background 0.2s;
-        }
-        .autocomplete-entry:hover { background: var(--bg-light-blue); }
-        .autocomplete-entry:last-child { border-radius: 0 0 13px 13px; border-bottom: none; }
-
-        .feedback-card { background: var(--white-glass); padding: 20px; border-radius: 20px; margin-bottom: 15px; border: 2px solid var(--primary-blue); }
-        .btn-main { background: var(--primary-blue); color: white; padding: 15px; border-radius: 15px; width: 100%; font-size: 1.2rem; cursor: pointer; border: none; font-weight: bold; }
-        .footer-credits { position: fixed; bottom: 8px; font-size: 9px; color: white; opacity: 0.8; }
-    </style>
-</head>
-<body>
-
-    <div class="menu-btn" onclick="toggleSidebar()">☰</div>
-
-    <nav id="sidebar" class="sidebar">
-        <h2>MENU</h2>
-        <hr>
-        <a href="/restart">🔄 Nuova Partita</a>
-        <a href="#" onclick="showRules()">📖 Regolamento</a>
-        <p style="font-size: 10px; margin-top: 40px;">GitHub: @ceciodev</p>
-    </nav>
-
-    <div id="overlay">
-        <div class="rules-banner">
-            <h3>🎵 BENVENUTI! 🎵</h3>
-            <p>Indovina l'artista in 10 tentativi.</p>
-            <p>✅ Corretto | ❌ Sbagliato<br>⬆️ / ⬇️ Anno di debutto</p>
-            <button class="btn-main" onclick="closeRules()">HO CAPITO! :3</button>
-        </div>
-    </div>
-
-    <main id="main-content" class="game-container">
-        <h1>CECIOTLE</h1>
-        <h2>Lo Spotle italiano</h2>
-
-        {% if fine_giochi %}
-            <div class="feedback-card" style="background: white;">
-                <h3>{{ 'HAI VINTO🏆!' if vittoria else 'GAME OVER' }}</h3>
-                <p>L'artista era: <strong>{{ target.nome }}</strong></p>
-                <button class="btn-main" onclick="window.location.href='/restart'">GIOCA ANCORA</button>
-            </div>
-        {% else %}
-            <form method="POST" id="game-form">
-                <div class="search-wrapper">
-                    <input type="text" name="nome" id="scelta-artista" placeholder="Scrivi il nome..." autocomplete="off" required
-                           style="width:100%; padding:15px; border-radius:15px; border:3px solid var(--primary-blue); font-size:1.2rem; box-sizing: border-box;">
-                    <div id="results-box" class="autocomplete-results"></div>
-                </div>
-                <button type="submit" class="btn-main" style="margin-top:10px;">PROVA</button>
-            </form>
-        {% endif %}
-
-        <div style="margin-top: 30px;">
-            {% for t in cronologia %}
-            <div class="feedback-card">
-                <strong>{{ t.nome }}</strong>
-                <div>
-                    <span>{% if t.gender == 'M' %}♂️{% elif t.gender == 'F' %}♀️{% else %}⚧{% endif %} {{ '✅' if t.feedback[1] == 'CORRETTO' else '❌' }}</span>
-                    <span>🎸 {{ '✅' if t.feedback[2] == 'CORRETTO' else '❌' }}</span>
-                    <span>📅 {{ t.debutto }} {{ '✅' if t.feedback[3] == 'CORRETTO' else t.feedback[3] }}</span>
-                    <span>📍 {{ '✅' if t.feedback[4] == 'CORRETTO' else '❌' }}</span>
-                    <span>👥 {{ t.componenti }} {{ '✅' if t.feedback[5] == 'CORRETTO' else t.feedback[5] }}</span>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </main>
-
-    <footer class="footer-credits">Github: @ceciodev powered by render.com</footer>
-
-    <script>
-        // Gestione Banner
-        function showRules() {
-            document.getElementById('overlay').style.display = 'flex';
-            document.getElementById('main-content').classList.add('blur-content');
-        }
-
-        function closeRules() {
-            document.getElementById('overlay').style.display = 'none';
-            document.getElementById('main-content').classList.remove('blur-content');
-            localStorage.setItem('rulesAccepted', 'true');
-        }
-
-        window.onload = function() {
-            if (!localStorage.getItem('rulesAccepted')) {
-                showRules();
-            }
-        };
-
-        // Gestione Sidebar
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
-        }
-
-        // AUTOCOMPLETE ELEGANTE
-        const artisti = [{% for a in artisti %}"{{ a.nome }}",{% endfor %}];
-        const input = document.getElementById('scelta-artista');
-        const resultsBox = document.getElementById('results-box');
-
-        if (input) {
-            input.addEventListener('input', function() {
-                const val = this.value.toLowerCase();
-                resultsBox.innerHTML = '';
-                if (val.length < 2) {
-                    resultsBox.style.display = 'none';
-                    return;
-                }
-
-                const matches = artisti.filter(nome => nome.toLowerCase().includes(val));
-                if (matches.length > 0) {
-                    matches.forEach(nome => {
-                        const div = document.createElement('div');
-                        div.classList.add('autocomplete-entry');
-                        div.textContent = nome;
-                        div.onclick = function() {
-                            input.value = nome;
-                            resultsBox.style.display = 'none';
-                            document.getElementById('game-form').submit();
-                        };
-                        resultsBox.appendChild(div);
-                    });
-                    resultsBox.style.display = 'block';
-                } else {
-                    resultsBox.style.display = 'none';
-                }
-            });
-        }
-
-        // Chiudi menu se clicchi fuori
-        document.addEventListener('click', function(e) {
-            const sb = document.getElementById('sidebar');
-            const btn = document.querySelector('.menu-btn');
-            if (sb.classList.contains('open') && !sb.contains(e.target) && !btn.contains(e.target)) {
-                sb.classList.remove('open');
-            }
-            if (input && e.target !== input) {
-                resultsBox.style.display = 'none';
-            }
-        });
-    </script>
-</body>
-</html>
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
