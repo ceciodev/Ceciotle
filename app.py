@@ -25,27 +25,33 @@ ARTISTI_LISTA = carica_artisti()
 def feedback_artista(utente, corretto):
     res = {}
     
-    # Gender 
-    res['gender'] = ["CORRETTO" if utente["gender"] == corretto["gender"] else "ERRATO", 
-                     "✅" if utente["gender"] == corretto["gender"] else "❌", 
-                     "Uomo" if utente["gender"] == 'M' else "Donna" if utente["gender"] == 'F' else "Band"]
+    # Sesso (ex Gender) - Qui mappiamo i valori per la visualizzazione
+    res['gender'] = [
+        "CORRETTO" if utente["gender"] == corretto["gender"] else "ERRATO", 
+        "✅" if utente["gender"] == corretto["gender"] else "❌", 
+        "Uomo" if utente["gender"] == 'M' else "Donna" if utente["gender"] == 'F' else "Band"
+    ]
     
     # Genere Musicale
-    res['genere'] = ["CORRETTO" if utente["genere"].lower() == corretto["genere"].lower() else "ERRATO",
-                     "✅" if utente["genere"].lower() == corretto["genere"].lower() else "❌",
-                     utente["genere"]]
+    res['genere'] = [
+        "CORRETTO" if utente["genere"].lower() == corretto["genere"].lower() else "ERRATO",
+        "✅" if utente["genere"].lower() == corretto["genere"].lower() else "❌",
+        utente["genere"]
+    ]
     
-    # Debutto
+    # Debutto (Anno)
     u_a, c_a = int(utente.get("debutto", 0)), int(corretto.get("debutto", 0))
     segno_a = "✅" if u_a == c_a else ("⬆️" if u_a < c_a else "⬇️")
     res['debutto'] = ["CORRETTO" if u_a == c_a else "ERRATO", segno_a, utente["debutto"]]
     
     # Regione
-    res['regione'] = ["CORRETTO" if utente["regione"].lower() == corretto["regione"].lower() else "ERRATO",
-                      "✅" if utente["regione"].lower() == corretto["regione"].lower() else "❌",
-                      utente["regione"]]
+    res['regione'] = [
+        "CORRETTO" if utente["regione"].lower() == corretto["regione"].lower() else "ERRATO",
+        "✅" if utente["regione"].lower() == corretto["regione"].lower() else "❌",
+        utente["regione"]
+    ]
     
-    # Componenti
+    # Membri (ex Componenti)
     u_c, c_c = int(utente.get("componenti", 0)), int(corretto.get("componenti", 0))
     segno_c = "✅" if u_c == c_c else ("⬆️" if u_c < c_c else "⬇️")
     res['componenti'] = ["CORRETTO" if u_c == c_c else "ERRATO", segno_c, utente["componenti"]]
