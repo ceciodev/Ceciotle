@@ -23,10 +23,9 @@ def carica_artisti():
 ARTISTI_LISTA = carica_artisti()
 
 def feedback_artista(utente, corretto):
-    # Nuova struttura: restituiamo un dizionario con [Stato, Emoji, Valore inserito]
     res = {}
     
-    # Gender (con trasformazione testo per "Uomo", "Donna", "Band")
+    # Gender 
     res['gender'] = ["CORRETTO" if utente["gender"] == corretto["gender"] else "ERRATO", 
                      "✅" if utente["gender"] == corretto["gender"] else "❌", 
                      "Uomo" if utente["gender"] == 'M' else "Donna" if utente["gender"] == 'F' else "Band"]
@@ -74,8 +73,6 @@ def index():
         if u_cand:
             session["tentativi"] += 1
             res = feedback_artista(u_cand, target)
-            
-            # Inseriamo nella cronologia solo il nome e il dizionario "res" formattato
             session["cronologia"].insert(0, {
                 "nome": u_cand["nome"],
                 "feedback": res
