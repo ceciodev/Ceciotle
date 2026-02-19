@@ -27,4 +27,160 @@
         .rules-banner { background-color: var(--banner-yellow); padding: 40px; border-radius: 25px; text-align: center; max-width: 450px; border: 4px solid var(--primary-blue); box-shadow: 0 10px 30px rgba(26,74,142,0.2); }
 
         h1 { font-size: 3.5rem; margin: 20px 0 0; font-weight: 900; text-transform: uppercase; }
-        .
+        .counter { font-size: 1.5rem; font-weight: 900; background: var(--primary-blue); color: white; padding: 5px 20px; border-radius: 50px; margin-bottom: 10px; }
+        
+        .game-container { width: 95%; max-width: 650px; text-align: center; padding-bottom: 50px; }
+
+        .search-wrapper { position: relative; width: 100%; }
+        .autocomplete-results {
+            position: absolute; top: 100%; left: 0; right: 0; background: white; border: 2px solid var(--primary-blue); border-top: none;
+            border-radius: 0 0 15px 15px; z-index: 1000; max-height: 250px; overflow-y: auto; display: none; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .autocomplete-entry { padding: 15px; cursor: pointer; text-align: left; font-weight: bold; border-bottom: 1px solid #eee; }
+        .autocomplete-entry:hover { background: var(--bg-light-blue); }
+
+        .feedback-card { background: var(--white-glass); padding: 15px; border-radius: 20px; margin-bottom: 15px; border: 2px solid var(--primary-blue); }
+        .feedback-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; margin-top: 10px; }
+        
+        .stat-box { 
+            background: rgba(255,255,255,0.6); padding: 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 700;
+            display: flex; flex-direction: column; align-items: center; border: 1px solid rgba(26, 74, 142, 0.2);
+        }
+        .stat-box.correct { border-color: var(--correct); color: var(--correct); }
+        .stat-box.wrong { border-color: var(--wrong); color: var(--wrong); }
+        .stat-val { font-size: 0.7rem; opacity: 0.8; margin-top: 2px; text-transform: uppercase; }
+
+        .btn-main { background: var(--primary-blue); color: white; padding: 15px; border-radius: 15px; width: 100%; font-size: 1.2rem; cursor: pointer; border: none; font-weight: bold; }
+        .footer-credits { position: fixed; bottom: 8px; font-size: 9px; color: white; opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+    <div class="menu-btn" onclick="toggleSidebar()">☰</div>
+
+    <nav id="sidebar" class="sidebar">
+        <h2>MENU</h2>
+        <hr>
+        <a href="/restart">🔄 Nuova Partita</a>
+        <a href="#" onclick="showRules()">📖 Regolamento</a>
+        <p style="font-size: 10px; margin-top: 40px;">GitHub: @ceciodev</p>
+    </nav>
+
+    <div id="overlay">
+        <div class="rules-banner">
+            <h3>🎵 BENVENUTI! 🎵</h3>
+            <p>Indovina l'artista in 10 tentativi.</p>
+            <p>✅ Corretto | ❌ Sbagliato<br>⬆️ Anno più recente | ⬇️ Anno più vecchio</p>
+            <button class="btn-main" onclick="closeRules()">HO CAPITO! :3</button>
+        </div>
+    </div>
+
+    <main id="main-content" class="game-container">
+        <h1>CECIOTLE</h1>
+        
+        <div class="counter">{{ tentativi }}/10</div>
+
+        {% if fine_giochi %}
+            <div class="feedback-card" style="background: white;">
+                <h3 style="font-size: 2rem; color: {{ 'var(--correct)' if vittoria else 'var(--wrong)' }};">
+                    {{ 'HAI VINTO🏆!' if vittoria else 'GAME OVER' }}
+                </h3>
+                <p>L'artista era: <strong style="font-size: 1.5rem;">{{ target.nome }}</strong></p>
+                <button class="btn-main" onclick="window.location.href='/restart'">GIOCA ANCORA</button>
+            </div>
+        {% else %}
+            <form method="POST" id="game-form">
+                <div class="search-wrapper">
+                    <input type="text" name="nome" id="scelta-artista" placeholder="Chi è l'artista?" autocomplete="off" required
+                           style="width:100%; padding:18px; border-radius:18px; border:3px solid var(--primary-blue); font-size:1.2rem; box-sizing: border-box;">
+                    <div id="results-box" class="autocomplete-results"></div>
+                </div>
+                <button type="submit" class="btn-main" style="margin-top:10px;">PROVA</button>
+            </form>
+        {% endif %}
+
+        <div style="margin-top: 30px;">
+            {% for t in cronologia %}
+            <div class="feedback-card">
+                <strong style="font-size: 1.3rem;">{{ t.nome }}</strong>
+                <div class="feedback-grid">
+                    <div class="stat-box {{ 'correct' if t.feedback.gender[0] == 'CORRETTO' else 'wrong' }}">
+                        <span>{{ t.feedback.gender[1] }} SESSO</span>
+                        <span class="stat-val">{{ t.feedback.gender[2] }}</span>
+                    </div>
+                    <div class="stat-box {{ 'correct' if t.feedback.genere[0] == 'CORRETTO' else 'wrong' }}">
+                        <span>{{ t.feedback.genere[1] }} GENERE</span>
+                        <span class="stat-val">{{ t.feedback.genere[2] }}</span>
+                    </div>
+                    <div class="stat-box {{ 'correct' if t.feedback.debutto[0] == 'CORRETTO' else 'wrong' }}">
+                        <span>{{ t.feedback.debutto[1] }} ANNO</span>
+                        <span class="stat-val">{{ t.feedback.debutto[2] }}</span>
+                    </div>
+                    <div class="stat-box {{ 'correct' if t.feedback.regione[0] == 'CORRETTO' else 'wrong' }}">
+                        <span>{{ t.feedback.regione[1] }} REGIONE</span>
+                        <span class="stat-val">{{ t.feedback.regione[2] }}</span>
+                    </div>
+                    <div class="stat-box {{ 'correct' if t.feedback.componenti[0] == 'CORRETTO' else 'wrong' }}">
+                        <span>{{ t.feedback.componenti[1] }} MEMBRI</span>
+                        <span class="stat-val">{{ t.feedback.componenti[2] }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer class="footer-credits">Github: @ceciodev powered by render.com</footer>
+
+    <script>
+        function showRules() {
+            document.getElementById('overlay').style.display = 'flex';
+            document.getElementById('main-content').classList.add('blur-content');
+        }
+        function closeRules() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('main-content').classList.remove('blur-content');
+            localStorage.setItem('rulesAccepted', 'true');
+        }
+        window.onload = function() {
+            if (!localStorage.getItem('rulesAccepted')) showRules();
+        };
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        const artisti = [{% for a in artisti %}"{{ a.nome }}",{% endfor %}];
+        const input = document.getElementById('scelta-artista');
+        const resultsBox = document.getElementById('results-box');
+
+        if (input) {
+            input.addEventListener('input', function() {
+                const val = this.value.toLowerCase();
+                resultsBox.innerHTML = '';
+                if (val.length < 2) { resultsBox.style.display = 'none'; return; }
+                const matches = artisti.filter(nome => nome.toLowerCase().includes(val)).slice(0, 6);
+                if (matches.length > 0) {
+                    matches.forEach(nome => {
+                        const div = document.createElement('div');
+                        div.classList.add('autocomplete-entry');
+                        div.textContent = nome;
+                        div.onclick = function() {
+                            input.value = nome;
+                            resultsBox.style.display = 'none';
+                            document.getElementById('game-form').submit();
+                        };
+                        resultsBox.appendChild(div);
+                    });
+                    resultsBox.style.display = 'block';
+                } else { resultsBox.style.display = 'none'; }
+            });
+        }
+        document.addEventListener('click', function(e) {
+            const sb = document.getElementById('sidebar');
+            const btn = document.querySelector('.menu-btn');
+            if (sb.classList.contains('open') && !sb.contains(e.target) && !btn.contains(e.target)) sb.classList.remove('open');
+            if (input && e.target !== input) resultsBox.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
