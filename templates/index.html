@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CECIOTLE</title>
-    
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
-    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,106 +13,25 @@
             --banner-yellow: #ecd273;
             --white-glass: rgba(255, 255, 255, 0.5);
         }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-light-blue);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            flex-direction: column;
-            color: var(--primary-blue);
-            overflow-x: hidden;
-        }
-
-        .blur-content { 
-            filter: blur(8px); 
-            pointer-events: none; 
-            user-select: none;
-        }
-
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-light-blue); margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; color: var(--primary-blue); overflow-x: hidden; }
+        .blur-content { filter: blur(8px); pointer-events: none; }
+        
         /* Sidebar */
-        .menu-btn {
-            position: fixed;
-            top: 20px; right: 20px;
-            font-size: 30px;
-            cursor: pointer;
-            z-index: 1500;
-            background: var(--primary-blue);
-            color: white;
-            padding: 10px;
-            border-radius: 12px;
-            line-height: 1;
-        }
-
-        .sidebar {
-            position: fixed;
-            top: 0; right: -300px;
-            width: 250px; height: 100%;
-            background: var(--primary-blue);
-            color: white;
-            transition: 0.3s ease;
-            z-index: 2001;
-            padding: 60px 20px;
-            box-shadow: -5px 0 25px rgba(0,0,0,0.3);
-        }
+        .menu-btn { position: fixed; top: 20px; right: 20px; font-size: 30px; cursor: pointer; z-index: 1500; background: var(--primary-blue); color: white; padding: 10px; border-radius: 12px; line-height: 1; }
+        .sidebar { position: fixed; top: 0; right: -300px; width: 250px; height: 100%; background: var(--primary-blue); color: white; transition: 0.3s ease; z-index: 2001; padding: 60px 20px; box-shadow: -5px 0 25px rgba(0,0,0,0.3); }
         .sidebar.open { right: 0; }
         .sidebar a { color: white; text-decoration: none; display: block; margin: 20px 0; font-weight: bold; }
 
         /* Banner */
-        #overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: transparent; 
-            display: none; 
-            justify-content: center; align-items: center; 
-            z-index: 3000;
-        }
-        .rules-banner {
-            background-color: var(--banner-yellow);
-            padding: 40px; border-radius: 25px; text-align: center;
-            max-width: 450px; border: 4px solid var(--primary-blue);
-            box-shadow: 0 10px 30px rgba(26, 74, 142, 0.2); 
-        }
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: transparent; display: none; justify-content: center; align-items: center; z-index: 3000; }
+        .rules-banner { background-color: var(--banner-yellow); padding: 40px; border-radius: 25px; text-align: center; max-width: 450px; border: 4px solid var(--primary-blue); box-shadow: 0 10px 30px rgba(26,74,142,0.2); }
 
-        h1 { font-size: 5rem; margin: 0; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; text-align: center; }
-        h2 { font-size: 1rem; font-weight: 400; margin-bottom: 2rem; font-style: italic; text-align: center; }
-
+        h1 { font-size: 4rem; margin: 20px 0 0; font-weight: 900; text-transform: uppercase; }
+        h2 { font-size: 1rem; margin-bottom: 2rem; font-style: italic; }
         .game-container { width: 90%; max-width: 600px; text-align: center; }
-        
-        .feedback-card { 
-            background: var(--white-glass); 
-            padding: 20px; 
-            border-radius: 20px; 
-            margin-bottom: 15px; 
-            border: 2px solid var(--primary-blue); 
-        }
-
-        .feedback-card strong { font-size: 1.8rem; display: block; margin-bottom: 8px; }
-        .feedback-card span { 
-            font-size: 1rem; 
-            font-weight: 600; 
-            display: inline-block;
-            margin: 5px;
-            background: rgba(255,255,255,0.3);
-            padding: 5px 10px;
-            border-radius: 8px;
-        }
-
-        .btn-main { 
-            background: var(--primary-blue); 
-            color: white; 
-            padding: 15px; 
-            border-radius: 15px; 
-            width: 100%; 
-            font-size: 1.2rem; 
-            cursor: pointer;
-            border: none;
-            font-weight: bold;
-        }
-
-        .footer-credits { position: fixed; bottom: 8px; font-size: 9px; color: white; width: 100%; text-align: center; opacity: 0.8; }
+        .feedback-card { background: var(--white-glass); padding: 20px; border-radius: 20px; margin-bottom: 15px; border: 2px solid var(--primary-blue); }
+        .btn-main { background: var(--primary-blue); color: white; padding: 15px; border-radius: 15px; width: 100%; font-size: 1.2rem; cursor: pointer; border: none; font-weight: bold; }
+        .footer-credits { position: fixed; bottom: 8px; font-size: 9px; color: white; opacity: 0.8; }
     </style>
 </head>
 <body>
@@ -126,55 +43,56 @@
         <hr>
         <a href="/restart">🔄 Nuova Partita</a>
         <a href="#" onclick="showRules()">📖 Regolamento</a>
-        <div style="margin-top: 50px; font-size: 11px; opacity: 0.7;">
-            <p>GitHub: @ceciodev</p>
-        </div>
+        <p style="font-size: 10px; margin-top: 40px;">GitHub: @ceciodev</p>
     </nav>
 
     <div id="overlay">
         <div class="rules-banner">
-            <h3>🎵 BENVENUTI SU CECIOTLE! 🎵</h3>
-            <p>Indovina l'artista misterioso in 10 tentativi.</p>
-            <p>✅ = Corretto | ❌ = Sbagliato<br>⬆️ / ⬇️ = Indovina l'anno di debutto</p>
+            <h3>🎵 BENVENUTI! 🎵</h3>
+            <p>Indovina l'artista in 10 tentativi.</p>
+            <p>✅ Corretto | ❌ Sbagliato<br>⬆️ / ⬇️ Anno di debutto</p>
             <button class="btn-main" onclick="closeRules()">HO CAPITO! :3</button>
         </div>
     </div>
 
-    <main id="main-content">
+    <main id="main-content" class="game-container">
         <h1>CECIOTLE</h1>
-        <h2>Lo Spotle italiano di cui non sapevi di avere bisogno</h2>
+        <h2>Lo Spotle italiano</h2>
 
-        <div class="game-container">
-            {% if fine_giochi %}
-                <div class="feedback-card" style="background: white;">
-                    <h3 style="color: {{ 'green' if vittoria else '#d9534f' }}; font-size: 2.5rem;">
-                        {{ 'HAI VINTO🏆!' if vittoria else 'GAME OVER' }}
-                    </h3>
-                    <p>L'artista era: <strong>{{ target.nome }}</strong></p>
-                    <button class="btn-main" onclick="window.location.href='/restart'">GIOCA ANCORA</button>
-                </div>
-            {% else %}
-                <form method="POST">
-                    <input type="text" name="nome" id="scelta-artista" placeholder="Chi é l'artista misterioso?" autocomplete="off" required
-                           style="width:100%; padding:15px; border-radius:15px; border:3px solid var(--primary-blue); font-size:1.2rem; box-sizing: border-box;">
-                    <button type="submit" class="btn-main" style="margin-top:10px;">PROVA</button>
-                </form>
-            {% endif %}
-
-            <div style="margin-top: 30px;">
-                {% for t in cronologia %}
-                <div class="feedback-card">
-                    <strong>{{ t.nome }}</strong>
-                    <div>
-                        <span>{% if t.gender == 'M' %}♂️{% elif t.gender == 'F' %}♀️{% else %}⚧{% endif %} {{ '✅' if t.feedback[1] == 'CORRETTO' else '❌' }}</span>
-                        <span>🎸 {{ t.genere }} {{ '✅' if t.feedback[2] == 'CORRETTO' else '❌' }}</span>
-                        <span>📅 {{ t.debutto }} {{ '✅' if t.feedback[3] == 'CORRETTO' else ' ' + t.feedback[3] }}</span>
-                        <span>📍 {{ t.regione }} {{ '✅' if t.feedback[4] == 'CORRETTO' else '❌' }}</span>
-                        <span>👥 {{ t.componenti }} {{ '✅' if t.feedback[5] == 'CORRETTO' else ' ' + t.feedback[5] }}</span>
-                    </div>
-                </div>
-                {% endfor %}
+        {% if fine_giochi %}
+            <div class="feedback-card" style="background: white;">
+                <h3>{{ 'HAI VINTO🏆!' if vittoria else 'GAME OVER' }}</h3>
+                <p>L'artista era: <strong>{{ target.nome }}</strong></p>
+                <button class="btn-main" onclick="window.location.href='/restart'">GIOCA ANCORA</button>
             </div>
+        {% else %}
+            <form method="POST">
+                <input type="text" name="nome" list="lista-artisti" placeholder="Scrivi il nome..." autocomplete="off" required
+                       style="width:100%; padding:15px; border-radius:15px; border:3px solid var(--primary-blue); font-size:1.2rem; box-sizing: border-box;">
+                
+                <datalist id="lista-artisti">
+                    {% for artista in artisti %}
+                        <option value="{{ artista.nome }}">
+                    {% endfor %}
+                </datalist>
+
+                <button type="submit" class="btn-main" style="margin-top:10px;">PROVA</button>
+            </form>
+        {% endif %}
+
+        <div style="margin-top: 30px;">
+            {% for t in cronologia %}
+            <div class="feedback-card">
+                <strong>{{ t.nome }}</strong>
+                <div>
+                    <span>{% if t.gender == 'M' %}♂️{% elif t.gender == 'F' %}♀️{% else %}⚧{% endif %} {{ '✅' if t.feedback[1] == 'CORRETTO' else '❌' }}</span>
+                    <span>🎸 {{ '✅' if t.feedback[2] == 'CORRETTO' else '❌' }}</span>
+                    <span>📅 {{ t.debutto }} {{ '✅' if t.feedback[3] == 'CORRETTO' else t.feedback[3] }}</span>
+                    <span>📍 {{ '✅' if t.feedback[4] == 'CORRETTO' else '❌' }}</span>
+                    <span>👥 {{ t.componenti }} {{ '✅' if t.feedback[5] == 'CORRETTO' else t.feedback[5] }}</span>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </main>
 
@@ -193,10 +111,9 @@
         }
 
         window.onload = function() {
+            // Se vuoi forzare il banner per test, commenta l'IF
             if (!localStorage.getItem('rulesAccepted')) {
                 showRules();
-            } else {
-                document.getElementById('main-content').classList.remove('blur-content');
             }
         };
 
@@ -204,10 +121,10 @@
             document.getElementById('sidebar').classList.toggle('open');
         }
 
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function(e) {
             const sb = document.getElementById('sidebar');
             const btn = document.querySelector('.menu-btn');
-            if (sb.classList.contains('open') && !sb.contains(event.target) && !btn.contains(event.target)) {
+            if (sb.classList.contains('open') && !sb.contains(e.target) && !btn.contains(e.target)) {
                 sb.classList.remove('open');
             }
         });
