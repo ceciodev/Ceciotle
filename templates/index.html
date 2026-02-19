@@ -62,7 +62,7 @@
         <h2>MENU</h2>
         <hr>
         <a href="/restart">🔄 Nuova Partita</a>
-        <a href="#" onclick="showRules()">📖 Regolamento</a>
+        <a href="#" onclick="showRules(); toggleSidebar();">📖 Regolamento</a>
         <p style="font-size: 10px; margin-top: 40px;">GitHub: @ceciodev</p>
     </nav>
 
@@ -133,22 +133,32 @@
     <footer class="footer-credits">Github: @ceciodev powered by render.com</footer>
 
     <script>
+        // Gestione Regolamento
         function showRules() {
             document.getElementById('overlay').style.display = 'flex';
             document.getElementById('main-content').classList.add('blur-content');
         }
+
         function closeRules() {
             document.getElementById('overlay').style.display = 'none';
             document.getElementById('main-content').classList.remove('blur-content');
-            localStorage.setItem('rulesAccepted', 'true');
-        }
-        window.onload = function() {
-            if (!localStorage.getItem('rulesAccepted')) showRules();
-        };
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('open');
+            localStorage.setItem('ceciotle_rules_v1', 'true');
         }
 
+        // Forza il banner solo all'apertura se non accettato
+        window.onload = function() {
+            if (!localStorage.getItem('ceciotle_rules_v1')) {
+                showRules();
+            }
+        };
+
+        // Gestione Sidebar
+        function toggleSidebar() {
+            const sb = document.getElementById('sidebar');
+            sb.classList.toggle('open');
+        }
+
+        // Autocomplete logica
         const artisti = [{% for a in artisti %}"{{ a.nome }}",{% endfor %}];
         const input = document.getElementById('scelta-artista');
         const resultsBox = document.getElementById('results-box');
@@ -175,11 +185,17 @@
                 } else { resultsBox.style.display = 'none'; }
             });
         }
+
+        // Cliccare fuori per chiudere sidebar o autocomplete
         document.addEventListener('click', function(e) {
             const sb = document.getElementById('sidebar');
             const btn = document.querySelector('.menu-btn');
-            if (sb.classList.contains('open') && !sb.contains(e.target) && !btn.contains(e.target)) sb.classList.remove('open');
-            if (input && e.target !== input) resultsBox.style.display = 'none';
+            if (sb && sb.classList.contains('open') && !sb.contains(e.target) && !btn.contains(e.target)) {
+                sb.classList.remove('open');
+            }
+            if (input && e.target !== input) {
+                resultsBox.style.display = 'none';
+            }
         });
     </script>
 </body>
