@@ -905,7 +905,7 @@
   {
     "nome": "Edoardo Bennato",
     "gender": "M",
-    "genere": "Cantautore/Rock",
+    "genere": "Cantautore",
     "debutto": 1973,
     "regione": "Campania",
     "componenti": 1
@@ -921,7 +921,7 @@
   {
     "nome": "Mia Martini",
     "gender": "F",
-    "genere": "Cantautore/Pop",
+    "genere": "Cantautore",
     "debutto": 1963,
     "regione": "Calabria",
     "componenti": 1
@@ -929,7 +929,7 @@
   {
     "nome": "Lucio Battisti",
     "gender": "M",
-    "genere": "Cantautore/Pop",
+    "genere": "Cantautore",
     "debutto": 1966,
     "regione": "Lazio",
     "componenti": 1
@@ -937,7 +937,7 @@
   {
     "nome": "Fiorella Mannoia",
     "gender": "F",
-    "genere": "Pop/Cantautore",
+    "genere": "Pop",
     "debutto": 1968,
     "regione": "Lazio",
     "componenti": 1
@@ -993,7 +993,7 @@
   {
     "nome": "Morgan",
     "gender": "M",
-    "genere": "Cantautore/Pop",
+    "genere": "Cantautore",
     "debutto": 1991,
     "regione": "Lombardia",
     "componenti": 1
@@ -1009,9 +1009,154 @@
   {
     "nome": "Mannarino",
     "gender": "M",
-    "genere": "Cantautore/Folk",
+    "genere": "Cantautore",
     "debutto": 2009,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "Calcutta",
+    "gender": "M",
+    "genere": "Indie Pop",
+    "debutto": 2012,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "Lucio Corsi",
+    "gender": "M",
+    "genere": "Indie/Rock",
+    "debutto": 2014,
+    "regione": "Toscana",
+    "componenti": 1
+  },
+  {
+    "nome": "Lorenzo Fragola",
+    "gender": "M",
+    "genere": "Pop",
+    "debutto": 2014,
+    "regione": "Sicilia",
+    "componenti": 1
+  },
+  {
+    "nome": "Baustelle",
+    "gender": "M/F",
+    "genere": "Indie",
+    "debutto": 2000,
+    "regione": "Toscana",
+    "componenti": 3
+  },
+  {
+    "nome": "Prozac+",
+    "gender": "M/F",
+    "genere": "Rock",
+    "debutto": 1995,
+    "regione": "Friuli Venezia Giulia",
+    "componenti": 3
+  },
+  {
+    "nome": "Club Dogo",
+    "gender": "M",
+    "genere": "Hip Hop",
+    "debutto": 2003,
+    "regione": "Lombardia",
+    "componenti": 3
+  },
+  {
+    "nome": "Carl Brave",
+    "gender": "M",
+    "genere": "Indie",
+    "debutto": 2017,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "Franco126",
+    "gender": "M",
+    "genere": "Indie",
+    "debutto": 2017,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "Gianni Celeste",
+    "gender": "M",
+    "genere": "Neomelodico",
+    "debutto": 1985,
+    "regione": "Sicilia",
+    "componenti": 1
+  },
+  {
+    "nome": "Paky",
+    "gender": "M",
+    "genere": "Trap/Hip Hop",
+    "debutto": 2019,
+    "regione": "Campania",
+    "componenti": 1
+  },
+  {
+    "nome": "Niko Pandetta",
+    "gender": "M",
+    "genere": "Neomelodico/Trap",
+    "debutto": 2016,
+    "regione": "Sicilia",
+    "componenti": 1
+  },
+  {
+    "nome": "Raf",
+    "gender": "M",
+    "genere": "Pop",
+    "debutto": 1983,
+    "regione": "Puglia",
+    "componenti": 1
+  },
+  {
+    "nome": "FSK Satellite",
+    "gender": "M",
+    "genere": "Trap",
+    "debutto": 2017,
+    "regione": "Basilicata",
+    "componenti": 3
+  },
+  {
+    "nome": "Dark Polo Gang",
+    "gender": "M",
+    "genere": "Trap",
+    "debutto": 2014,
+    "regione": "Lazio",
+    "componenti": 3
+  },
+  {
+    "nome": "Fedez",
+    "gender": "M",
+    "genere": "Pop/Hip Hop",
+    "debutto": 2006,
+    "regione": "Lombardia",
+    "componenti": 1
+  },
+  {
+    "nome": "Caparezza",
+    "gender": "M",
+    "genere": "Hip Hop",
+    "debutto": 1997,
+    "regione": "Puglia",
+    "componenti": 1
+  },
+  {
+    "nome": "Andrea Bocelli",
+    "gender": "M",
+    "genere": "Pop lirico",
+    "debutto": 1992,
+    "regione": "Toscana",
+    "componenti": 1
+  },
+  {
+    "nome": "Eros Ramazzotti",
+    "gender": "M",
+    "genere": "Pop",
+    "debutto": 1981,
     "regione": "Lazio",
     "componenti": 1
   }
 ]
+
