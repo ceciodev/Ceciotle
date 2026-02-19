@@ -19,13 +19,8 @@ def carica_artisti():
         print(f"Errore caricamento JSON: {e}")
         return []
 
-# Rimuovo la variabile globale e carico gli artisti direttamente nelle funzioni per evitare blocchi al boot di Gunicorn
-def get_artisti():
-    artisti = carica_artisti()
-    if not artisti:
-        # Fallback di emergenza se il JSON manca su Render per non far caricare all'infinito
-        return [{"nome": "Errore", "gender": "N/A", "genere": "N/A", "debutto": 0, "regione": "N/A", "componenti": 0}]
-    return artisti
+# Carichiamo la lista una volta sola all'avvio
+ARTISTI_LISTA = carica_artisti()
 
 def feedback_artista(utente, corretto):
     f = ["ERRATO"] * 6
@@ -45,23 +40,21 @@ def feedback_artista(utente, corretto):
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    artisti = get_artisti()
-    
-    if artisti[0]["nome"] == "Errore": 
-        return "Errore JSON: Assicurati che il file Artisti.json sia nella stessa cartella di app.py", 500
+    if not ARTISTI_LISTA:
+        return "Errore: File Artisti.json non trovato o vuoto.", 500
 
     if "target_name" not in session:
-        session["target_name"] = random.choice(artisti)["nome"]
+        session["target_name"] = random.choice(ARTISTI_LISTA)["nome"]
         session["tentativi"] = 0
         session["cronologia"] = []
 
-    target = next((a for a in artisti if a["nome"] == session["target_name"]), artisti[0])
+    target = next((a for a in ARTISTI_LISTA if a["nome"] == session["target_name"]), ARTISTI_LISTA[0])
     vittoria = False
     fine_giochi = False
 
     if request.method == "POST" and session["tentativi"] < 10:
         nome_input = request.form.get("nome", "").strip()
-        u_cand = next((a for a in artisti if a["nome"].lower() == nome_input.lower()), None)
+        u_cand = next((a for a in ARTISTI_LISTA if a["nome"].lower() == nome_input.lower()), None)
         
         if u_cand:
             session["tentativi"] += 1
@@ -80,7 +73,7 @@ def index():
             elif session["tentativi"] >= 10:
                 fine_giochi = True
 
-    return render_template("index.html", artisti=artisti, tentativi=session.get("tentativi", 0), 
+    return render_template("index.html", artisti=ARTISTI_LISTA, tentativi=session.get("tentativi", 0), 
                            cronologia=session.get("cronologia", []), fine_giochi=fine_giochi, 
                            vittoria=vittoria, target=target)
 
@@ -90,6 +83,4 @@ def restart():
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    # Threaded=True aiuta a non far bloccare il server locale se fai troppe richieste veloci
-    app.run(host="0.0.0.0", port=port, threaded=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
