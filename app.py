@@ -19,23 +19,25 @@ def carica_artisti():
         print(f"Errore caricamento JSON: {e}")
         return []
 
-artisti = carica_artisti()
+# Rimuovo la variabile globale e carico gli artisti direttamente nelle funzioni per evitare blocchi al boot di Gunicorn
+def get_artisti():
+    artisti = carica_artisti()
+    if not artisti:
+        # Fallback di emergenza se il JSON manca su Render per non far caricare all'infinito
+        return [{"nome": "Errore", "gender": "N/A", "genere": "N/A", "debutto": 0, "regione": "N/A", "componenti": 0}]
+    return artisti
 
 def feedback_artista(utente, corretto):
-    # Struttura feedback: [0:Nome, 1:Gender, 2:Genere, 3:Debutto, 4:Regione, 5:Componenti]
     f = ["ERRATO"] * 6
     if utente["nome"].lower() == corretto["nome"].lower(): f[0] = "CORRETTO"
     if utente["gender"] == corretto["gender"]: f[1] = "CORRETTO"
     if utente["genere"].lower() == corretto["genere"].lower(): f[2] = "CORRETTO"
     
-    # Debutto
     u_a, c_a = int(utente.get("debutto", 0)), int(corretto.get("debutto", 0))
     f[3] = "CORRETTO" if u_a == c_a else ("⬆️" if u_a < c_a else "⬇️")
     
-    # Regione
     if utente["regione"].lower() == corretto["regione"].lower(): f[4] = "CORRETTO"
     
-    # Componenti
     u_c, c_c = int(utente.get("componenti", 0)), int(corretto.get("componenti", 0))
     f[5] = "CORRETTO" if u_c == c_c else ("⬆️" if u_c < c_c else "⬇️")
     
@@ -43,7 +45,11 @@ def feedback_artista(utente, corretto):
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    if not artisti: return "Errore JSON"
+    artisti = get_artisti()
+    
+    if artisti[0]["nome"] == "Errore": 
+        return "Errore JSON: Assicurati che il file Artisti.json sia nella stessa cartella di app.py", 500
+
     if "target_name" not in session:
         session["target_name"] = random.choice(artisti)["nome"]
         session["tentativi"] = 0
@@ -56,6 +62,7 @@ def index():
     if request.method == "POST" and session["tentativi"] < 10:
         nome_input = request.form.get("nome", "").strip()
         u_cand = next((a for a in artisti if a["nome"].lower() == nome_input.lower()), None)
+        
         if u_cand:
             session["tentativi"] += 1
             res = feedback_artista(u_cand, target)
@@ -66,14 +73,15 @@ def index():
                 "feedback": res
             })
             session.modified = True
+            
             if u_cand["nome"].lower() == target["nome"].lower():
                 vittoria = True
                 fine_giochi = True
             elif session["tentativi"] >= 10:
                 fine_giochi = True
 
-    return render_template("index.html", artisti=artisti, tentativi=session["tentativi"], 
-                           cronologia=session["cronologia"], fine_giochi=fine_giochi, 
+    return render_template("index.html", artisti=artisti, tentativi=session.get("tentativi", 0), 
+                           cronologia=session.get("cronologia", []), fine_giochi=fine_giochi, 
                            vittoria=vittoria, target=target)
 
 @app.route("/restart")
@@ -82,4 +90,6 @@ def restart():
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+    port = int(os.environ.get("PORT", 10000))
+    # Threaded=True aiuta a non far bloccare il server locale se fai troppe richieste veloci
+    app.run(host="0.0.0.0", port=port, threaded=True)
