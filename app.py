@@ -1,11 +1,9 @@
 import os
 import json
 import random
-# Aggiunto redirect e url_for per gestire il riavvio
 from flask import Flask, render_template, request, session, redirect, url_for
 
 app = Flask(__name__)
-# Chiave segreta per gestire la sessione (tentativi e artista del giorno)
 app.secret_key = os.environ.get("SECRET_KEY", "spotle_italiano_key_2026")
 
 def carica_artisti():
@@ -25,58 +23,43 @@ artisti = carica_artisti()
 
 def feedback_artista(utente, corretto):
     """
-    Genera il feedback con emoji per ogni caratteristica.
-    Struttura: [Nome, Debutto, Regione, Gender, Genere, Membri]
+    Genera il feedback per ogni caratteristica.
+    Restituisce una lista di stati (CORRETTO/ERRATO o frecce per numeri).
     """
-    f = ["", "", "", "", "", ""] 
-    OK = "✅"
-    NO = "❌"
-    SU = "⬆️"
-    GIU = "⬇️"
+    # Struttura feedback: [0:Nome, 1:Gender, 2:GenereMusicale, 3:Debutto, 4:Regione, 5:Componenti]
+    f = ["ERRATO"] * 6 
     
     # 1. NOME
-    u_n = str(utente.get("nome") or "").strip().lower()
-    c_n = str(corretto.get("nome") or "").strip().lower()
-    f[0] = OK if u_n == c_n else NO
+    if utente["nome"].lower() == corretto["nome"].lower():
+        f[0] = "CORRETTO"
 
-    # 2. ANNO DI DEBUTTO
-    try:
-        u_a = int(str(utente.get("debutto") or 0))
-        c_a = int(str(corretto.get("debutto") or 0))
-        if u_a == c_a: 
-            f[1] = f"Debutto: {c_a} {OK}"
-        else:
-            freccia = SU if u_a < c_a else GIU
-            f[1] = f"Debutto: {u_a} {freccia}"
-    except: 
-        f[1] = f"Debutto {NO}"
+    # 2. GENDER
+    if utente["gender"] == corretto["gender"]:
+        f[1] = "CORRETTO"
 
-    # 3. REGIONE
-    u_r = str(utente.get("regione") or "").lower()
-    c_r = str(corretto.get("regione") or "").lower()
-    f[2] = f"Regione {OK}" if u_r == c_r else f"Regione {NO}"
+    # 3. GENERE MUSICALE
+    if utente["genere"].lower() == corretto["genere"].lower():
+        f[2] = "CORRETTO"
 
-    # 4. GENDER
-    u_g = str(utente.get("gender") or "").upper()
-    c_g = str(corretto.get("gender") or "").upper()
-    f[3] = f"Gender {OK}" if u_g == c_g else f"Gender {NO}"
+    # 4. ANNO DI DEBUTTO (Con frecce)
+    u_a = int(utente.get("debutto", 0))
+    c_a = int(corretto.get("debutto", 0))
+    if u_a == c_a:
+        f[3] = "CORRETTO"
+    else:
+        f[3] = "⬆️" if u_a < c_a else "⬇️"
 
-    # 5. GENERE MUSICALE
-    u_gen = str(utente.get("genere") or "").lower()
-    c_gen = str(corretto.get("genere") or "").lower()
-    f[4] = f"Genere {OK}" if u_gen == c_gen else f"Genere {NO}"
+    # 5. REGIONE
+    if utente["regione"].lower() == corretto["regione"].lower():
+        f[4] = "CORRETTO"
 
-    # 6. COMPONENTI
-    try:
-        u_c = int(str(utente.get("componenti") or 0))
-        c_c = int(str(corretto.get("componenti") or 0))
-        if u_c == c_c: 
-            f[5] = f"Membri: {c_c} {OK}"
-        else:
-            freccia = SU if u_c < c_c else GIU
-            f[5] = f"Membri: {u_c} {freccia}"
-    except: 
-        f[5] = f"Membri {NO}"
+    # 6. COMPONENTI (Con frecce)
+    u_c = int(utente.get("componenti", 0))
+    c_c = int(corretto.get("componenti", 0))
+    if u_c == c_c:
+        f[5] = "CORRETTO"
+    else:
+        f[5] = "⬆️" if u_c < c_c else "⬇️"
 
     return f
 
@@ -85,7 +68,6 @@ def index():
     if not artisti:
         return "Errore: File Artisti.json non trovato o vuoto."
 
-    # Inizializzazione della sessione di gioco
     if "target_name" not in session:
         session["target_name"] = random.choice(artisti)["nome"]
         session["tentativi"] = 0
@@ -103,10 +85,19 @@ def index():
             session["tentativi"] += 1
             res = feedback_artista(u_cand, target)
             
-            session["cronologia"].insert(0, {"nome": u_cand["nome"], "feedback": res})
+            # Salviamo i dati reali dell'artista scelto insieme agli stati del feedback
+            session["cronologia"].insert(0, {
+                "nome": u_cand["nome"],
+                "gender": u_cand["gender"],
+                "genere": u_cand["genere"],
+                "debutto": u_cand["debutto"],
+                "regione": u_cand["regione"],
+                "componenti": u_cand["componenti"],
+                "feedback": res
+            })
             session.modified = True
             
-            if u_cand["nome"] == target["nome"]:
+            if u_cand["nome"].lower() == target["nome"].lower():
                 vittoria = True
                 fine_giochi = True
             elif session["tentativi"] >= 10:
@@ -118,9 +109,8 @@ def index():
                            cronologia=session["cronologia"],
                            fine_giochi=fine_giochi,
                            vittoria=vittoria,
-                           target=target if fine_giochi else None)
+                           target=target)
 
-# NUOVA ROTTA: Pulisce la sessione e riavvia il gioco da zero
 @app.route("/restart")
 def restart():
     session.clear()
