@@ -23,20 +23,35 @@ def carica_artisti():
 ARTISTI_LISTA = carica_artisti()
 
 def feedback_artista(utente, corretto):
-    f = ["ERRATO"] * 6
-    if utente["nome"].lower() == corretto["nome"].lower(): f[0] = "CORRETTO"
-    if utente["gender"] == corretto["gender"]: f[1] = "CORRETTO"
-    if utente["genere"].lower() == corretto["genere"].lower(): f[2] = "CORRETTO"
+    # Nuova struttura: restituiamo un dizionario con [Stato, Emoji, Valore inserito]
+    res = {}
     
+    # Gender (con trasformazione testo per "Uomo", "Donna", "Band")
+    res['gender'] = ["CORRETTO" if utente["gender"] == corretto["gender"] else "ERRATO", 
+                     "✅" if utente["gender"] == corretto["gender"] else "❌", 
+                     "Uomo" if utente["gender"] == 'M' else "Donna" if utente["gender"] == 'F' else "Band"]
+    
+    # Genere Musicale
+    res['genere'] = ["CORRETTO" if utente["genere"].lower() == corretto["genere"].lower() else "ERRATO",
+                     "✅" if utente["genere"].lower() == corretto["genere"].lower() else "❌",
+                     utente["genere"]]
+    
+    # Debutto
     u_a, c_a = int(utente.get("debutto", 0)), int(corretto.get("debutto", 0))
-    f[3] = "CORRETTO" if u_a == c_a else ("⬆️" if u_a < c_a else "⬇️")
+    segno_a = "✅" if u_a == c_a else ("⬆️" if u_a < c_a else "⬇️")
+    res['debutto'] = ["CORRETTO" if u_a == c_a else "ERRATO", segno_a, utente["debutto"]]
     
-    if utente["regione"].lower() == corretto["regione"].lower(): f[4] = "CORRETTO"
+    # Regione
+    res['regione'] = ["CORRETTO" if utente["regione"].lower() == corretto["regione"].lower() else "ERRATO",
+                      "✅" if utente["regione"].lower() == corretto["regione"].lower() else "❌",
+                      utente["regione"]]
     
+    # Componenti
     u_c, c_c = int(utente.get("componenti", 0)), int(corretto.get("componenti", 0))
-    f[5] = "CORRETTO" if u_c == c_c else ("⬆️" if u_c < c_c else "⬇️")
+    segno_c = "✅" if u_c == c_c else ("⬆️" if u_c < c_c else "⬇️")
+    res['componenti'] = ["CORRETTO" if u_c == c_c else "ERRATO", segno_c, utente["componenti"]]
     
-    return f
+    return res
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -59,10 +74,10 @@ def index():
         if u_cand:
             session["tentativi"] += 1
             res = feedback_artista(u_cand, target)
+            
+            # Inseriamo nella cronologia solo il nome e il dizionario "res" formattato
             session["cronologia"].insert(0, {
-                "nome": u_cand["nome"], "gender": u_cand["gender"],
-                "genere": u_cand["genere"], "debutto": u_cand["debutto"],
-                "regione": u_cand["regione"], "componenti": u_cand["componenti"],
+                "nome": u_cand["nome"],
                 "feedback": res
             })
             session.modified = True
