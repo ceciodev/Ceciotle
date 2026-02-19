@@ -26,9 +26,14 @@
             overflow-x: hidden;
         }
 
-        .blur-content { filter: blur(8px); pointer-events: none; transition: 0.3s; }
+        /* Il blur viene applicato solo quando l'overlay è attivo */
+        .blur-content { 
+            filter: blur(8px); 
+            pointer-events: none; 
+            user-select: none;
+        }
 
-        /* Icona Sidebar (Hamburger) */
+        /* Sidebar */
         .menu-btn {
             position: fixed;
             top: 20px; right: 20px;
@@ -40,52 +45,38 @@
             padding: 10px;
             border-radius: 12px;
             line-height: 1;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
         }
-        .menu-btn:hover { transform: scale(1.1); }
 
-        /* Sidebar */
         .sidebar {
             position: fixed;
             top: 0; right: -300px;
             width: 250px; height: 100%;
             background: var(--primary-blue);
             color: white;
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: 0.3s ease;
             z-index: 2001;
             padding: 60px 20px;
             box-shadow: -5px 0 25px rgba(0,0,0,0.3);
         }
         .sidebar.open { right: 0; }
-        .sidebar h2 { font-weight: 900; letter-spacing: 1px; }
-        .sidebar a { 
-            color: white; 
-            text-decoration: none; 
-            display: block; 
-            margin: 20px 0; 
-            font-weight: bold; 
-            padding: 10px;
-            border-radius: 8px;
-            transition: background 0.2s;
-        }
-        .sidebar a:hover { background: rgba(255,255,255,0.1); }
+        .sidebar a { color: white; text-decoration: none; display: block; margin: 20px 0; font-weight: bold; }
 
-        /* Banner Regolamento */
+        /* Banner */
         #overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            display: none; justify-content: center; align-items: center; z-index: 3000;
+            background: rgba(0, 0, 0, 0.5);
+            display: none; /* Gestito da JS */
+            justify-content: center; align-items: center; 
+            z-index: 3000;
         }
         .rules-banner {
             background-color: var(--banner-yellow);
             padding: 40px; border-radius: 25px; text-align: center;
             max-width: 450px; border: 4px solid var(--primary-blue);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        h1 { font-size: 5rem; margin: 0; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; }
-        h2 { font-size: 1rem; font-weight: 400; margin-bottom: 2rem; font-style: italic; }
+        h1 { font-size: 5rem; margin: 0; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; text-align: center; }
+        h2 { font-size: 1rem; font-weight: 400; margin-bottom: 2rem; font-style: italic; text-align: center; }
 
         .game-container { width: 90%; max-width: 600px; text-align: center; }
         
@@ -94,10 +85,134 @@
             padding: 20px; 
             border-radius: 20px; 
             margin-bottom: 15px; 
-            border: 2px solid var(--primary-blue);
-            animation: fadeIn 0.5s ease-out;
+            border: 2px solid var(--primary-blue); 
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .feedback-card strong { font-size: 1.8rem; display: block; margin-bottom: 8px; }
-        .feedback-card div { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+        .feedback-card span { 
+            font-size: 1rem; 
+            font-weight: 600; 
+            display: inline-block;
+            margin: 5px;
+            background: rgba(255,255,255,0.3);
+            padding: 5px 10px;
+            border-radius: 8px;
+        }
+
+        .btn-main { 
+            background: var(--primary-blue); 
+            color: white; 
+            padding: 15px; 
+            border-radius: 15px; 
+            width: 100%; 
+            font-size: 1.2rem; 
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+        }
+
+        .footer-credits { position: fixed; bottom: 8px; font-size: 9px; color: white; width: 100%; text-align: center; opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+    <div class="menu-btn" onclick="toggleSidebar()">☰</div>
+
+    <nav id="sidebar" class="sidebar">
+        <h2>MENU</h2>
+        <hr>
+        <a href="/restart">🔄 Nuova Partita</a>
+        <a href="#" onclick="showRules()">📖 Regolamento</a>
+        <div style="margin-top: 50px; font-size: 11px; opacity: 0.7;">
+            <p>GitHub: @ceciodev</p>
+        </div>
+    </nav>
+
+    <div id="overlay">
+        <div class="rules-banner">
+            <h3>🎵 BENVENUTI SU CECIOTLE! 🎵</h3>
+            <p>Indovina l'artista misterioso in 10 tentativi.</p>
+            <p>✅ = Corretto | ❌ = Sbagliato<br>⬆️ / ⬇️ = Indovina l'anno di debutto</p>
+            <button class="btn-main" onclick="closeRules()">HO CAPITO! :3</button>
+        </div>
+    </div>
+
+    <main id="main-content">
+        <h1>CECIOTLE</h1>
+        <h2>Lo Spotle italiano di cui non sapevi di avere bisogno</h2>
+
+        <div class="game-container">
+            {% if fine_giochi %}
+                <div class="feedback-card" style="background: white;">
+                    <h3 style="color: {{ 'green' if vittoria else '#d9534f' }}; font-size: 2.5rem;">
+                        {{ 'HAI VINTO🏆!' if vittoria else 'GAME OVER' }}
+                    </h3>
+                    <p>L'artista era: <strong>{{ target.nome }}</strong></p>
+                    <button class="btn-main" onclick="window.location.href='/restart'">GIOCA ANCORA</button>
+                </div>
+            {% else %}
+                <form method="POST">
+                    <input type="text" name="nome" id="scelta-artista" placeholder="Chi é l'artista misterioso?" autocomplete="off" required
+                           style="width:100%; padding:15px; border-radius:15px; border:3px solid var(--primary-blue); font-size:1.2rem; box-sizing: border-box;">
+                    <button type="submit" class="btn-main" style="margin-top:10px;">PROVA</button>
+                </form>
+            {% endif %}
+
+            <div style="margin-top: 30px;">
+                {% for t in cronologia %}
+                <div class="feedback-card">
+                    <strong>{{ t.nome }}</strong>
+                    <div>
+                        <span>{% if t.gender == 'M' %}♂️{% elif t.gender == 'F' %}♀️{% else %}⚧{% endif %} {{ '✅' if t.feedback[1] == 'CORRETTO' else '❌' }}</span>
+                        <span>🎸 {{ t.genere }} {{ '✅' if t.feedback[2] == 'CORRETTO' else '❌' }}</span>
+                        <span>📅 {{ t.debutto }} {{ '✅' if t.feedback[3] == 'CORRETTO' else ' ' + t.feedback[3] }}</span>
+                        <span>📍 {{ t.regione }} {{ '✅' if t.feedback[4] == 'CORRETTO' else '❌' }}</span>
+                        <span>👥 {{ t.componenti }} {{ '✅' if t.feedback[5] == 'CORRETTO' else ' ' + t.feedback[5] }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-credits">Github: @ceciodev powered by render.com</footer>
+
+    <script>
+        // Gestione Banner
+        function showRules() {
+            document.getElementById('overlay').style.display = 'flex';
+            document.getElementById('main-content').classList.add('blur-content');
+        }
+
+        function closeRules() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('main-content').classList.remove('blur-content');
+            localStorage.setItem('rulesAccepted', 'true');
+        }
+
+        // Controllo all'avvio
+        window.onload = function() {
+            if (!localStorage.getItem('rulesAccepted')) {
+                showRules();
+            } else {
+                // Assicura che se le regole sono accettate, il blur non ci sia
+                document.getElementById('main-content').classList.remove('blur-content');
+            }
+        };
+
+        // Gestione Sidebar
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        // Chiudi sidebar se clicchi fuori
+        document.addEventListener('click', function(event) {
+            const sb = document.getElementById('sidebar');
+            const btn = document.querySelector('.menu-btn');
+            if (sb.classList.contains('open') && !sb.contains(event.target) && !btn.contains(event.target)) {
+                sb.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
