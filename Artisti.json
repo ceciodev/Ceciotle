@@ -1157,6 +1157,255 @@
     "debutto": 1981,
     "regione": "Lazio",
     "componenti": 1
+  },
+  {
+    "nome": "Luciano Pavarotti",
+    "gender": "M",
+    "genere": "Pop lirico",
+    "debutto": 1961,
+    "regione": "Emilia Romagna",
+    "componenti": 1
+  },
+  {
+    "nome": "Gabry Ponte",
+    "gender": "M",
+    "genere": "Dance/Elettronica",
+    "debutto": 1993,
+    "regione": "Piemonte",
+    "componenti": 1
+  },
+  {
+    "nome": "Gigi D'Agostino",
+    "gender": "M",
+    "genere": "Dance/Elettronica",
+    "debutto": 1986,
+    "regione": "Piemonte",
+    "componenti": 1
+  },
+  {
+    "nome": "Raffaella Carrà",
+    "gender": "F",
+    "genere": "Pop",
+    "debutto": 1970,
+    "regione": "Emilia Romagna",
+    "componenti": 1
+  },
+  {
+    "nome": "Donatella Rettore",
+    "gender": "F",
+    "genere": "Pop/Rock",
+    "debutto": 1973,
+    "regione": "Veneto",
+    "componenti": 1
+  },
+  {
+    "nome": "Giusy Ferreri",
+    "gender": "F",
+    "genere": "Pop",
+    "debutto": 2008,
+    "regione": "Sicilia",
+    "componenti": 1
+  },
+  {
+    "nome": "Caterina Caselli",
+    "gender": "F",
+    "genere": "Pop",
+    "debutto": 1964,
+    "regione": "Emilia Romagna",
+    "componenti": 1
+  },
+  {
+    "nome": "Anna Tatangelo",
+    "gender": "F",
+    "genere": "Pop",
+    "debutto": 2002,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "MYSS KETA",
+    "gender": "F",
+    "genere": "Pop/Elettronica",
+    "debutto": 2013,
+    "regione": "Lombardia",
+    "componenti": 1
+  },
+  {
+    "nome": "Serena Brancale",
+    "gender": "F",
+    "genere": "Jazz/Soul",
+    "debutto": 2011,
+    "regione": "Puglia",
+    "componenti": 1
+  },
+  {
+    "nome": "DJ Francesco",
+    "gender": "M",
+    "genere": "Pop",
+    "debutto": 2003,
+    "regione": "Lombardia",
+    "componenti": 1
+  },
+  {
+    "nome": "Adriano Celentano",
+    "gender": "M",
+    "genere": "Pop/Rock",
+    "debutto": 1957,
+    "regione": "Lombardia",
+    "componenti": 1
+  },
+  {
+    "nome": "Biagio Antonacci",
+    "gender": "M",
+    "genere": "Pop",
+    "debutto": 1988,
+    "regione": "Lombardia",
+    "componenti": 1
+  },
+  {
+    "nome": "Stadio",
+    "gender": "M",
+    "genere": "Pop Rock",
+    "debutto": 1977,
+    "regione": "Emilia Romagna",
+    "componenti": 4
+  },
+  {
+    "nome": "Al Bano",
+    "gender": "M",
+    "genere": "Pop",
+    "debutto": 1965,
+    "regione": "Puglia",
+    "componenti": 1
+  },
+  {
+    "nome": "Romina Power",
+    "gender": "F",
+    "genere": "Pop",
+    "debutto": 1969,
+    "regione": "Stati Uniti",
+    "componenti": 1
+  },
+  {
+    "nome": "Ricchi e Poveri",
+    "gender": "M/F",
+    "genere": "Pop",
+    "debutto": 1967,
+    "regione": "Liguria",
+    "componenti": 2
+  },
+  {
+    "nome": "Cugini di Campagna",
+    "gender": "M",
+    "genere": "Pop",
+    "debutto": 1970,
+    "regione": "Lazio",
+    "componenti": 4
+  },
+  {
+    "nome": "Nino D'Angelo",
+    "gender": "M",
+    "genere": "Neomelodico/Pop",
+    "debutto": 1976,
+    "regione": "Campania",
+    "componenti": 1
+  },
+  {
+    "nome": "Pupo",
+    "gender": "M",
+    "genere": "Pop",
+    "debutto": 1975,
+    "regione": "Toscana",
+    "componenti": 1
+  },
+  {
+    "nome": "I Nomadi",
+    "gender": "M",
+    "genere": "Pop Rock",
+    "debutto": 1963,
+    "regione": "Emilia Romagna",
+    "componenti": 6
+  },
+  {
+    "nome": "Massimo Ranieri",
+    "gender": "M",
+    "genere": "Pop/Cantautore",
+    "debutto": 1964,
+    "regione": "Campania",
+    "componenti": 1
+  },
+  {
+    "nome": "Luca Carboni",
+    "gender": "M",
+    "genere": "Pop/Cantautore",
+    "debutto": 1983,
+    "regione": "Emilia Romagna",
+    "componenti": 1
+  },
+  {
+    "nome": "Giorgio Gaber",
+    "gender": "M",
+    "genere": "Cantautore/Teatro",
+    "debutto": 1958,
+    "regione": "Lombardia",
+    "componenti": 1
+  },
+  {
+    "nome": "Benji & Fede",
+    "gender": "M",
+    "genere": "Pop",
+    "debutto": 2010,
+    "regione": "Emilia Romagna",
+    "componenti": 2
+  },
+  {
+    "nome": "Emis Killa",
+    "gender": "M",
+    "genere": "Hip Hop",
+    "debutto": 2007,
+    "regione": "Lombardia",
+    "componenti": 1
+  },
+  {
+    "nome": "Gazzelle",
+    "gender": "M",
+    "genere": "Indie Pop",
+    "debutto": 2016,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "Nitro",
+    "gender": "M",
+    "genere": "Hip Hop",
+    "debutto": 2010,
+    "regione": "Veneto",
+    "componenti": 1
+  },
+  {
+    "nome": "Izi",
+    "gender": "M",
+    "genere": "Hip Hop/Trap",
+    "debutto": 2016,
+    "regione": "Liguria",
+    "componenti": 1
+  },
+  {
+    "nome": "thasup",
+    "gender": "M",
+    "genere": "Hip Hop/Trap",
+    "debutto": 2017,
+    "regione": "Lazio",
+    "componenti": 1
+  },
+  {
+    "nome": "Michele Bravi",
+    "gender": "M",
+    "genere": "Pop",
+    "debutto": 2013,
+    "regione": "Umbria",
+    "componenti": 1
   }
 ]
+
 
