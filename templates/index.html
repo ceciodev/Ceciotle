@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CECIOTLE</title>
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
     <style>
@@ -29,7 +29,6 @@
             overflow-x: hidden;
         }
 
-        /* Il blur viene applicato solo quando l'overlay è attivo */
         .blur-content { 
             filter: blur(8px); 
             pointer-events: none; 
@@ -67,7 +66,6 @@
         /* Banner */
         #overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            /* Sfondo trasparente invece che nero, così si vede l'azzurro sfocato del gioco */
             background: transparent; 
             display: none; 
             justify-content: center; align-items: center; 
@@ -77,7 +75,7 @@
             background-color: var(--banner-yellow);
             padding: 40px; border-radius: 25px; text-align: center;
             max-width: 450px; border: 4px solid var(--primary-blue);
-            box-shadow: 0 10px 30px rgba(26, 74, 142, 0.2); /* Ombra bluastra per integrarsi meglio */
+            box-shadow: 0 10px 30px rgba(26, 74, 142, 0.2); 
         }
 
         h1 { font-size: 5rem; margin: 0; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; text-align: center; }
@@ -183,7 +181,6 @@
     <footer class="footer-credits">Github: @ceciodev powered by render.com</footer>
 
     <script>
-        // Gestione Banner
         function showRules() {
             document.getElementById('overlay').style.display = 'flex';
             document.getElementById('main-content').classList.add('blur-content');
@@ -195,22 +192,18 @@
             localStorage.setItem('rulesAccepted', 'true');
         }
 
-        // Controllo all'avvio
         window.onload = function() {
             if (!localStorage.getItem('rulesAccepted')) {
                 showRules();
             } else {
-                // Assicura che se le regole sono accettate, il blur non ci sia
                 document.getElementById('main-content').classList.remove('blur-content');
             }
         };
 
-        // Gestione Sidebar
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('open');
         }
 
-        // Chiudi sidebar se clicchi fuori
         document.addEventListener('click', function(event) {
             const sb = document.getElementById('sidebar');
             const btn = document.querySelector('.menu-btn');
