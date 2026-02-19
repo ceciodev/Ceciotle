@@ -105,7 +105,7 @@
                 <strong style="font-size: 1.3rem;">{{ t.nome }}</strong>
                 <div class="feedback-grid">
                     <div class="stat-box {{ 'correct' if t.feedback.gender[0] == 'CORRETTO' else 'wrong' }}">
-                        <span>{{ t.feedback.gender[1] }} GENDER</span>
+                        <span>{{ t.feedback.gender[1] }} SESSO</span>
                         <span class="stat-val">{{ t.feedback.gender[2] }}</span>
                     </div>
                     <div class="stat-box {{ 'correct' if t.feedback.genere[0] == 'CORRETTO' else 'wrong' }}">
@@ -121,7 +121,7 @@
                         <span class="stat-val">{{ t.feedback.regione[2] }}</span>
                     </div>
                     <div class="stat-box {{ 'correct' if t.feedback.componenti[0] == 'CORRETTO' else 'wrong' }}">
-                        <span>{{ t.feedback.componenti[1] }} COMP.</span>
+                        <span>{{ t.feedback.componenti[1] }} MEMBRI</span>
                         <span class="stat-val">{{ t.feedback.componenti[2] }}</span>
                     </div>
                 </div>
