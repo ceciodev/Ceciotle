@@ -23,7 +23,7 @@
         .sidebar.open { right: 0; }
         .sidebar a { color: white; text-decoration: none; display: block; margin: 20px 0; font-weight: bold; }
 
-        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: transparent; display: none; justify-content: center; align-items: center; z-index: 3000; }
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; justify-content: center; align-items: center; z-index: 3000; }
         .rules-banner { background-color: var(--banner-yellow); padding: 40px; border-radius: 25px; text-align: center; max-width: 450px; border: 4px solid var(--primary-blue); box-shadow: 0 10px 30px rgba(26,74,142,0.2); }
 
         h1 { font-size: 3.5rem; margin: 20px 0 0; font-weight: 900; text-transform: uppercase; }
@@ -36,7 +36,7 @@
             position: absolute; top: 100%; left: 0; right: 0; background: white; border: 2px solid var(--primary-blue); border-top: none;
             border-radius: 0 0 15px 15px; z-index: 1000; max-height: 250px; overflow-y: auto; display: none; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .autocomplete-entry { padding: 15px; cursor: pointer; text-align: left; font-weight: bold; border-bottom: 1px solid #eee; }
+        .autocomplete-entry { padding: 15px; cursor: pointer; text-align: left; font-weight: bold; border-bottom: 1px solid #eee; color: #333; }
         .autocomplete-entry:hover { background: var(--bg-light-blue); }
 
         .feedback-card { background: var(--white-glass); padding: 15px; border-radius: 20px; margin-bottom: 15px; border: 2px solid var(--primary-blue); }
@@ -46,9 +46,9 @@
             background: rgba(255,255,255,0.6); padding: 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 700;
             display: flex; flex-direction: column; align-items: center; border: 1px solid rgba(26, 74, 142, 0.2);
         }
-        .stat-box.correct { border-color: var(--correct); color: var(--correct); }
-        .stat-box.wrong { border-color: var(--wrong); color: var(--wrong); }
-        .stat-val { font-size: 0.7rem; opacity: 0.8; margin-top: 2px; text-transform: uppercase; }
+        .stat-box.correct { border-color: var(--correct); color: var(--correct); background: #e8f5e9; }
+        .stat-box.wrong { border-color: var(--wrong); color: var(--wrong); background: #ffebee; }
+        .stat-val { font-size: 0.7rem; opacity: 0.8; margin-top: 2px; text-transform: uppercase; color: #333; }
 
         .btn-main { background: var(--primary-blue); color: white; padding: 15px; border-radius: 15px; width: 100%; font-size: 1.2rem; cursor: pointer; border: none; font-weight: bold; }
         .footer-credits { position: fixed; bottom: 8px; font-size: 9px; color: white; opacity: 0.8; }
@@ -145,30 +145,32 @@
             localStorage.setItem('ceciotle_rules_v1', 'true');
         }
 
-        // Forza il banner solo all'apertura se non accettato
         window.onload = function() {
             if (!localStorage.getItem('ceciotle_rules_v1')) {
                 showRules();
             }
         };
 
-        // Gestione Sidebar
         function toggleSidebar() {
             const sb = document.getElementById('sidebar');
             sb.classList.toggle('open');
         }
 
-        // Autocomplete logica
-        const artisti = [{% for a in artisti %}"{{ a.nome }}",{% endfor %}];
+        // --- CORREZIONE CRUCIALE QUI ---
+        // Usiamo tojson per passare la lista in modo sicuro a JS
+        const artisti = {{ artisti|map(attribute='nome')|list|tojson }};
+        
         const input = document.getElementById('scelta-artista');
         const resultsBox = document.getElementById('results-box');
 
         if (input) {
             input.addEventListener('input', function() {
-                const val = this.value.toLowerCase();
+                const val = this.value.toLowerCase().trim();
                 resultsBox.innerHTML = '';
                 if (val.length < 2) { resultsBox.style.display = 'none'; return; }
+                
                 const matches = artisti.filter(nome => nome.toLowerCase().includes(val)).slice(0, 6);
+                
                 if (matches.length > 0) {
                     matches.forEach(nome => {
                         const div = document.createElement('div');
@@ -182,11 +184,12 @@
                         resultsBox.appendChild(div);
                     });
                     resultsBox.style.display = 'block';
-                } else { resultsBox.style.display = 'none'; }
+                } else { 
+                    resultsBox.style.display = 'none'; 
+                }
             });
         }
 
-        // Cliccare fuori per chiudere sidebar o autocomplete
         document.addEventListener('click', function(e) {
             const sb = document.getElementById('sidebar');
             const btn = document.querySelector('.menu-btn');
