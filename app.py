@@ -31,7 +31,7 @@ def feedback_artista(utente, corretto):
     res['gender'] = [
         "CORRETTO" if utente["gender"] == corretto["gender"] else "ERRATO", 
         "✅" if utente["gender"] == corretto["gender"] else "❌", 
-        "Uomo" if utente["gender"] == 'M' else "Donna" if utente["gender"] == 'F' else "Band"
+        "Uomo" if utente["gender"] == 'M' else "Donna" if utente["gender"] == 'F' else "Misto"
     ]
     
     # Genere Musicale
@@ -107,3 +107,4 @@ def restart():
 if __name__ == "__main__":
     # Avvio dell'app sulla porta corretta per il deploy
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+
