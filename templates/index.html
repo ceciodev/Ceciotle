@@ -83,7 +83,7 @@
         {% if fine_giochi %}
             <div class="feedback-card" style="background: white;">
                 <h3 style="font-size: 2rem; color: {{ 'var(--correct)' if vittoria else 'var(--wrong)' }};">
-                    {{ 'HAI VINTO🏆!' if vittoria else 'GAME OVER' }}
+                    {{ 'HAI VINTO!🏆' if vittoria else 'GAME OVER' }}
                 </h3>
                 <p>L'artista era: <strong style="font-size: 1.5rem;">{{ target.nome }}</strong></p>
                 <button class="btn-main" onclick="window.location.href='/restart'">GIOCA ANCORA</button>
@@ -95,7 +95,7 @@
                            style="width:100%; padding:18px; border-radius:18px; border:3px solid var(--primary-blue); font-size:1.2rem; box-sizing: border-box;">
                     <div id="results-box" class="autocomplete-results"></div>
                 </div>
-                <button type="submit" class="btn-main" style="margin-top:10px;">PROVA</button>
+                <button type="submit" class="btn-main" style="margin-top:10px;">VAI</button>
             </form>
         {% endif %}
 
@@ -203,3 +203,4 @@
     </script>
 </body>
 </html>
+
