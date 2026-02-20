@@ -1,1411 +1,1402 @@
 [
-  {
-    "nome": "Pyrex",
-    "gender": "M",
-    "genere": "Trap",
-    "debutto": 2016,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Geolier",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 2018,
-    "regione": "Campania",
-    "componenti": 1
-  },
-  {
-    "nome": "Kid Yugi",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 2022,
-    "regione": "Puglia",
-    "componenti": 1
-  },  {
-    "nome": "TonyPitony",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2025,
-    "regione": "Sicilia",
-    "componenti": 1
-  },
-  {
-    "nome": "Annalisa",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 2010,
-    "regione": "Liguria",
-    "componenti": 1
-  },
-  {
-    "nome": "Emma",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 2010,
-    "regione": "Toscana",
-    "componenti": 1
-  },
-  {
-    "nome": "Olly",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2016,
-    "regione": "Liguria",
-    "componenti": 1
-  },
-  {
-    "nome": "VillaBanks",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 2019,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Achille Lauro",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2012,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Ernia",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 2010,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Eddie Brock",
-    "gender": "M",
-    "genere": "Indie",
-    "debutto": 2018,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Ultimo",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 2014,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Coez",
-    "gender": "M",
-    "genere": "Indie",
-    "debutto": 2013,
-    "regione": "Campania",
-    "componenti": 1
-  },
-  {
-    "nome": "Bresh",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 2012,
-    "regione": "Liguria",
-    "componenti": 1
-  },
-  {
-    "nome": "Artie 5ive",
-    "gender": "M",
-    "genere": "Trap",
-    "debutto": 2020,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Cesare Cremonini",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2002,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Sfera Ebbasta",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 2011,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Luchè",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 1997,
-    "regione": "Campania",
-    "componenti": 1
-  },
-  {
-    "nome": "Capo Plaza",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 2013,
-    "regione": "Campania",
-    "componenti": 1
-  },
-  {
-    "nome": "Pinguini Tattici Nucleari",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2010,
-    "regione": "Lombardia",
-    "componenti": 6
-  },
-  {
-    "nome": "Blanco",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2020,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Federica Carta",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 2017,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Francesca Michielin",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 2011,
-    "regione": "Veneto",
-    "componenti": 1
-  },
-  {
-    "nome": "Marco Mengoni",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2009,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Gianluca Grignani",
-    "gender": "M",
-    "genere": "Pop/Rock",
-    "debutto": 1994,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Ermal Meta",
-    "gender": "M",
-    "genere": "Pop/Rock",
-    "debutto": 2016,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Diodato",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2014,
-    "regione": "Puglia",
-    "componenti": 1
-  },
-  {
-    "nome": "Mahmood",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2018,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Carmen Consoli",
-    "gender": "F",
-    "genere": "Pop/Rock",
-    "debutto": 1995,
-    "regione": "Sicilia",
-    "componenti": 1
-  },
-  {
-    "nome": "Colapesce & Dimartino",
-    "gender": "M",
-    "genere": "Indie/Pop",
-    "debutto": 2015,
-    "regione": "Sicilia",
-    "componenti": 2
-  },
-  {
-    "nome": "Tananai",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2015,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Fulminacci",
-    "gender": "M",
-    "genere": "Indie/Pop",
-    "debutto": 2019,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Coma_Cose",
-    "gender": "M",
-    "genere": "Indie Pop",
-    "debutto": 2017,
-    "regione": "Lombardia",
-    "componenti": 2
-  },
-  {
-    "nome": "Fabrizio De André",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1961,
-    "regione": "Liguria",
-    "componenti": 1
-  },
-  {
-    "nome": "Franco Battiato",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1967,
-    "regione": "Sicilia",
-    "componenti": 1
-  },
-  {
-    "nome": "Mina",
-    "gender": "F",
-    "genere": "Cantautore/Pop",
-    "debutto": 1958,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Milva",
-    "gender": "F",
-    "genere": "Cantautore/Pop",
-    "debutto": 1959,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Luigi Tenco",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1959,
-    "regione": "Liguria",
-    "componenti": 1
-  },
-  {
-    "nome": "Franco Califano",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1964,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Pino Daniele",
-    "gender": "M",
-    "genere": "Cantautore/Pop",
-    "debutto": 1977,
-    "regione": "Campania",
-    "componenti": 1
-  },
-  {
-    "nome": "Mango",
-    "gender": "M",
-    "genere": "Cantautore/Pop",
-    "debutto": 1976,
-    "regione": "Basilicata",
-    "componenti": 1
-  },
-  {
-    "nome": "Maneskin",
-    "gender": "M/F",
-    "genere": "Rock",
-    "debutto": 2017,
-    "regione": "Lazio",
-    "componenti": 4
-  },
-  {
-    "nome": "Lazza",
-    "gender": "M",
-    "genere": "Hip Hop/Trap",
-    "debutto": 2012,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Laura Pausini",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 1993,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Tiziano Ferro",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2001,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Vasco Rossi",
-    "gender": "M",
-    "genere": "Rock",
-    "debutto": 1977,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Ligabue",
-    "gender": "M",
-    "genere": "Rock",
-    "debutto": 1987,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Marracash",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 2004,
-    "regione": "Sicilia",
-    "componenti": 1
-  },
-  {
-    "nome": "Elodie",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 2015,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Madame",
-    "gender": "F",
-    "genere": "Urban/Pop",
-    "debutto": 2018,
-    "regione": "Veneto",
-    "componenti": 1
-  },
-  {
-    "nome": "Fabri Fibra",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 1994,
-    "regione": "Marche",
-    "componenti": 1
-  },
-  {
-    "nome": "Jovanotti",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 1987,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Thegiornalisti",
-    "gender": "M",
-    "genere": "Indie Pop",
-    "debutto": 2009,
-    "regione": "Lazio",
-    "componenti": 3
-  },
-  {
-    "nome": "Giorgia",
-    "gender": "F",
-    "genere": "Pop/Soul",
-    "debutto": 1993,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Subsonica",
-    "gender": "M",
-    "genere": "Elettronica/Rock",
-    "debutto": 1996,
-    "regione": "Piemonte",
-    "componenti": 5
-  },
-  {
-    "nome": "Zucchero",
-    "gender": "M",
-    "genere": "Blues/Rock",
-    "debutto": 1970,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Anna Pepe",
-    "gender": "F",
-    "genere": "Trap",
-    "debutto": 2020,
-    "regione": "Liguria",
-    "componenti": 1
-  },
-  {
-    "nome": "Pooh",
-    "gender": "M",
-    "genere": "Pop Rock",
-    "debutto": 1966,
-    "regione": "Emilia Romagna",
-    "componenti": 4
-  },
-  {
-    "nome": "Renato Zero",
-    "gender": "M",
-    "genere": "Pop/Cantautore",
-    "debutto": 1967,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Rose Villain",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 2016,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Gue Pequeno",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 1997,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Elettra Lamborghini",
-    "gender": "F",
-    "genere": "Pop/Latino",
-    "debutto": 2017,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Nek",
-    "gender": "M",
-    "genere": "Pop/Rock",
-    "debutto": 1991,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Irama",
-    "gender": "M",
-    "genere": "Pop/Urban",
-    "debutto": 2015,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Lo Stato Sociale",
-    "gender": "M",
-    "genere": "Indie Pop",
-    "debutto": 2009,
-    "regione": "Emilia Romagna",
-    "componenti": 5
-  },
-  {
-    "nome": "Noemi",
-    "gender": "F",
-    "genere": "Pop/Soul",
-    "debutto": 2009,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Salmo",
-    "gender": "M",
-    "genere": "Hip Hop/Hardcore",
-    "debutto": 2011,
-    "regione": "Sardegna",
-    "componenti": 1
-  },
-  {
-    "nome": "Claudio Baglioni",
-    "gender": "M",
-    "genere": "Pop/Cantautore",
-    "debutto": 1968,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Malika Ayane",
-    "gender": "F",
-    "genere": "Pop/Jazz",
-    "debutto": 2008,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Eiffel 65",
-    "gender": "M",
-    "genere": "Eurodance",
-    "debutto": 1998,
-    "regione": "Piemonte",
-    "componenti": 3
-  },
-  {
-    "nome": "Gianna Nannini",
-    "gender": "F",
-    "genere": "Rock",
-    "debutto": 1976,
-    "regione": "Toscana",
-    "componenti": 1
-  },
-  {
-    "nome": "Tedua",
-    "gender": "M",
-    "genere": "Hip Hop/Drill",
-    "debutto": 2015,
-    "regione": "Liguria",
-    "componenti": 1
-  },
-  {
-    "nome": "Gaia",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 2016,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Levante",
-    "gender": "F",
-    "genere": "Indie Pop",
-    "debutto": 2013,
-    "regione": "Sicilia",
-    "componenti": 1
-  },
-  {
-    "nome": "Modà",
-    "gender": "M",
-    "genere": "Pop Rock",
-    "debutto": 2002,
-    "regione": "Lombardia",
-    "componenti": 5
-  },
-  {
-    "nome": "Rkomi",
-    "gender": "M",
-    "genere": "Pop/Hip Hop",
-    "debutto": 2014,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "BigMama",
-    "gender": "F",
-    "genere": "Hip Hop/Urban",
-    "debutto": 2019,
-    "regione": "Campania",
-    "componenti": 1
-  },
-  {
-    "nome": "Litfiba",
-    "gender": "M",
-    "genere": "Rock",
-    "debutto": 1980,
-    "regione": "Toscana",
-    "componenti": 2
-  },
-  {
-    "nome": "Angelina Mango",
-    "gender": "F",
-    "genere": "Pop/Urban",
-    "debutto": 2020,
-    "regione": "Basilicata",
-    "componenti": 1
-  },
-  {
-    "nome": "Noyz Narcos",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 1996,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Clara",
-    "gender": "F",
-    "genere": "Pop/Urban",
-    "debutto": 2020,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Negramaro",
-    "gender": "M",
-    "genere": "Pop Rock",
-    "debutto": 2000,
-    "regione": "Puglia",
-    "componenti": 6
-  },
-  {
-    "nome": "The Kolors",
-    "gender": "M",
-    "genere": "Funk/Pop",
-    "debutto": 2010,
-    "regione": "Campania",
-    "componenti": 3
-  },
-  {
-    "nome": "Dargen D'Amico",
-    "gender": "M",
-    "genere": "Pop/Rap",
-    "debutto": 2006,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Arisa",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 2008,
-    "regione": "Liguria",
-    "componenti": 1
-  },
-  {
-    "nome": "Max Pezzali",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 1991,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "883",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 1991,
-    "regione": "Lombardia",
-    "componenti": 2
-  },
-  {
-    "nome": "Boomdabash",
-    "gender": "M",
-    "genere": "Reggae/Pop",
-    "debutto": 2002,
-    "regione": "Puglia",
-    "componenti": 4
-  },
-  {
-    "nome": "Alessandra Amoroso",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 2009,
-    "regione": "Puglia",
-    "componenti": 1
-  },
-  {
-    "nome": "Sangiovanni",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2020,
-    "regione": "Veneto",
-    "componenti": 1
-  },
-  {
-    "nome": "Santi Francesi",
-    "gender": "M",
-    "genere": "Electro/Pop",
-    "debutto": 2019,
-    "regione": "Piemonte",
-    "componenti": 2
-  },
-  {
-    "nome": "Gigi D'Alessio",
-    "gender": "M",
-    "genere": "Pop/Neomelodico",
-    "debutto": 1992,
-    "regione": "Campania",
-    "componenti": 1
-  },
-  {
-    "nome": "Anna Oxa",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 1978,
-    "regione": "Puglia",
-    "componenti": 1
-  },
-  {
-    "nome": "Rovere",
-    "gender": "M",
-    "genere": "Indie Pop",
-    "debutto": 2016,
-    "regione": "Emilia Romagna",
-    "componenti": 3
-  },
-  {
-    "nome": "Piero Pelù",
-    "gender": "M",
-    "genere": "Rock",
-    "debutto": 1980,
-    "regione": "Toscana",
-    "componenti": 1
-  },
-  {
-    "nome": "Ornella Vanoni",
-    "gender": "F",
-    "genere": "Pop/Jazz",
-    "debutto": 1956,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Shiva",
-    "gender": "M",
-    "genere": "Trap",
-    "debutto": 2017,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Mondo Marcio",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 2003,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Tony Effe",
-    "gender": "M",
-    "genere": "Trap",
-    "debutto": 2014,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Sarah Toscano",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 2023,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Jake La Furia",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 1999,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Paola & Chiara",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 1996,
-    "regione": "Lombardia",
-    "componenti": 2
-  },
-  {
-    "nome": "Baby K",
-    "gender": "F",
-    "genere": "Pop/Rap",
-    "debutto": 2007,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Mr. Rain",
-    "gender": "M",
-    "genere": "Pop/Rap",
-    "debutto": 2011,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Gemitaiz",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 2003,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Brunori Sas",
-    "gender": "M",
-    "genere": "Cantautore/Indie",
-    "debutto": 2009,
-    "regione": "Calabria",
-    "componenti": 1
-  },
-  {
-    "nome": "Fast Animals and Slow Kids",
-    "gender": "M",
-    "genere": "Rock/Indie",
-    "debutto": 2008,
-    "regione": "Umbria",
-    "componenti": 4
-  },
-  {
-    "nome": "Loredana Bertè",
-    "gender": "F",
-    "genere": "Rock/Pop",
-    "debutto": 1974,
-    "regione": "Calabria",
-    "componenti": 1
-  },
-  {
-    "nome": "Daniele Silvestri",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1994,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Massimo Pericolo",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 2019,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Lucio Dalla",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1964,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Francesco De Gregori",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1972,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Antonello Venditti",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1972,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Edoardo Bennato",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1973,
-    "regione": "Campania",
-    "componenti": 1
-  },
-  {
-    "nome": "Rino Gaetano",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1973,
-    "regione": "Calabria",
-    "componenti": 1
-  },
-  {
-    "nome": "Mia Martini",
-    "gender": "F",
-    "genere": "Cantautore",
-    "debutto": 1963,
-    "regione": "Calabria",
-    "componenti": 1
-  },
-  {
-    "nome": "Lucio Battisti",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1966,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Fiorella Mannoia",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 1968,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Samuele Bersani",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1991,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Max Gazzè",
-    "gender": "M",
-    "genere": "Cantautore/Pop",
-    "debutto": 1996,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Vinicio Capossela",
-    "gender": "M",
-    "genere": "Cantautore/Folk",
-    "debutto": 1990,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Roberto Vecchioni",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1968,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Gino Paoli",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1959,
-    "regione": "Friuli Venezia Giulia",
-    "componenti": 1
-  },
-  {
-    "nome": "Francesco Guccini",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1967,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Morgan",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1991,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Ivano Fossati",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 1971,
-    "regione": "Liguria",
-    "componenti": 1
-  },
-  {
-    "nome": "Mannarino",
-    "gender": "M",
-    "genere": "Cantautore",
-    "debutto": 2009,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Calcutta",
-    "gender": "M",
-    "genere": "Indie Pop",
-    "debutto": 2012,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Lucio Corsi",
-    "gender": "M",
-    "genere": "Indie/Rock",
-    "debutto": 2014,
-    "regione": "Toscana",
-    "componenti": 1
-  },
-  {
-    "nome": "Lorenzo Fragola",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2014,
-    "regione": "Sicilia",
-    "componenti": 1
-  },
-  {
-    "nome": "Baustelle",
-    "gender": "M/F",
-    "genere": "Indie",
-    "debutto": 2000,
-    "regione": "Toscana",
-    "componenti": 3
-  },
-  {
-    "nome": "Prozac+",
-    "gender": "M/F",
-    "genere": "Rock",
-    "debutto": 1995,
-    "regione": "Friuli Venezia Giulia",
-    "componenti": 3
-  },
-  {
-    "nome": "Club Dogo",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 2003,
-    "regione": "Lombardia",
-    "componenti": 3
-  },
-  {
-    "nome": "Carl Brave",
-    "gender": "M",
-    "genere": "Indie",
-    "debutto": 2017,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Franco126",
-    "gender": "M",
-    "genere": "Indie",
-    "debutto": 2017,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Gianni Celeste",
-    "gender": "M",
-    "genere": "Neomelodico",
-    "debutto": 1985,
-    "regione": "Sicilia",
-    "componenti": 1
-  },
-  {
-    "nome": "Paky",
-    "gender": "M",
-    "genere": "Trap/Hip Hop",
-    "debutto": 2019,
-    "regione": "Campania",
-    "componenti": 1
-  },
-  {
-    "nome": "Niko Pandetta",
-    "gender": "M",
-    "genere": "Neomelodico/Trap",
-    "debutto": 2016,
-    "regione": "Sicilia",
-    "componenti": 1
-  },
-  {
-    "nome": "Raf",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 1983,
-    "regione": "Puglia",
-    "componenti": 1
-  },
-  {
-    "nome": "FSK Satellite",
-    "gender": "M",
-    "genere": "Trap",
-    "debutto": 2017,
-    "regione": "Basilicata",
-    "componenti": 3
-  },
-  {
-    "nome": "Dark Polo Gang",
-    "gender": "M",
-    "genere": "Trap",
-    "debutto": 2014,
-    "regione": "Lazio",
-    "componenti": 3
-  },
-  {
-    "nome": "Fedez",
-    "gender": "M",
-    "genere": "Pop/Hip Hop",
-    "debutto": 2006,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Caparezza",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 1997,
-    "regione": "Puglia",
-    "componenti": 1
-  },
-  {
-    "nome": "Andrea Bocelli",
-    "gender": "M",
-    "genere": "Pop lirico",
-    "debutto": 1992,
-    "regione": "Toscana",
-    "componenti": 1
-  },
-  {
-    "nome": "Eros Ramazzotti",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 1981,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Luciano Pavarotti",
-    "gender": "M",
-    "genere": "Pop lirico",
-    "debutto": 1961,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Gabry Ponte",
-    "gender": "M",
-    "genere": "Dance/Elettronica",
-    "debutto": 1993,
-    "regione": "Piemonte",
-    "componenti": 1
-  },
-  {
-    "nome": "Gigi D'Agostino",
-    "gender": "M",
-    "genere": "Dance/Elettronica",
-    "debutto": 1986,
-    "regione": "Piemonte",
-    "componenti": 1
-  },
-  {
-    "nome": "Raffaella Carrà",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 1970,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Donatella Rettore",
-    "gender": "F",
-    "genere": "Pop/Rock",
-    "debutto": 1973,
-    "regione": "Veneto",
-    "componenti": 1
-  },
-  {
-    "nome": "Giusy Ferreri",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 2008,
-    "regione": "Sicilia",
-    "componenti": 1
-  },
-  {
-    "nome": "Caterina Caselli",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 1964,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Anna Tatangelo",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 2002,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "MYSS KETA",
-    "gender": "F",
-    "genere": "Pop/Elettronica",
-    "debutto": 2013,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Serena Brancale",
-    "gender": "F",
-    "genere": "Jazz/Soul",
-    "debutto": 2011,
-    "regione": "Puglia",
-    "componenti": 1
-  },
-  {
-    "nome": "DJ Francesco",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2003,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Adriano Celentano",
-    "gender": "M",
-    "genere": "Pop/Rock",
-    "debutto": 1957,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Biagio Antonacci",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 1988,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Stadio",
-    "gender": "M",
-    "genere": "Pop Rock",
-    "debutto": 1977,
-    "regione": "Emilia Romagna",
-    "componenti": 4
-  },
-  {
-    "nome": "Al Bano",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 1965,
-    "regione": "Puglia",
-    "componenti": 1
-  },
-  {
-    "nome": "Romina Power",
-    "gender": "F",
-    "genere": "Pop",
-    "debutto": 1969,
-    "regione": "Stati Uniti",
-    "componenti": 1
-  },
-  {
-    "nome": "Ricchi e Poveri",
-    "gender": "M/F",
-    "genere": "Pop",
-    "debutto": 1967,
-    "regione": "Liguria",
-    "componenti": 2
-  },
-  {
-    "nome": "Cugini di Campagna",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 1970,
-    "regione": "Lazio",
-    "componenti": 4
-  },
-  {
-    "nome": "Nino D'Angelo",
-    "gender": "M",
-    "genere": "Neomelodico/Pop",
-    "debutto": 1976,
-    "regione": "Campania",
-    "componenti": 1
-  },
-  {
-    "nome": "Pupo",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 1975,
-    "regione": "Toscana",
-    "componenti": 1
-  },
-  {
-    "nome": "I Nomadi",
-    "gender": "M",
-    "genere": "Pop Rock",
-    "debutto": 1963,
-    "regione": "Emilia Romagna",
-    "componenti": 6
-  },
-  {
-    "nome": "Massimo Ranieri",
-    "gender": "M",
-    "genere": "Pop/Cantautore",
-    "debutto": 1964,
-    "regione": "Campania",
-    "componenti": 1
-  },
-  {
-    "nome": "Luca Carboni",
-    "gender": "M",
-    "genere": "Pop/Cantautore",
-    "debutto": 1983,
-    "regione": "Emilia Romagna",
-    "componenti": 1
-  },
-  {
-    "nome": "Giorgio Gaber",
-    "gender": "M",
-    "genere": "Cantautore/Teatro",
-    "debutto": 1958,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Benji & Fede",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2010,
-    "regione": "Emilia Romagna",
-    "componenti": 2
-  },
-  {
-    "nome": "Emis Killa",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 2007,
-    "regione": "Lombardia",
-    "componenti": 1
-  },
-  {
-    "nome": "Gazzelle",
-    "gender": "M",
-    "genere": "Indie Pop",
-    "debutto": 2016,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Nitro",
-    "gender": "M",
-    "genere": "Hip Hop",
-    "debutto": 2010,
-    "regione": "Veneto",
-    "componenti": 1
-  },
-  {
-    "nome": "Izi",
-    "gender": "M",
-    "genere": "Hip Hop/Trap",
-    "debutto": 2016,
-    "regione": "Liguria",
-    "componenti": 1
-  },
-  {
-    "nome": "thasup",
-    "gender": "M",
-    "genere": "Hip Hop/Trap",
-    "debutto": 2017,
-    "regione": "Lazio",
-    "componenti": 1
-  },
-  {
-    "nome": "Michele Bravi",
-    "gender": "M",
-    "genere": "Pop",
-    "debutto": 2013,
-    "regione": "Umbria",
-    "componenti": 1
-  }
+    {
+        "nome": "Pyrex",
+        "gender": "M",
+        "genere": "Trap",
+        "debutto": 2016,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Geolier",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2018,
+        "regione": "Campania",
+        "componenti": 1
+    },
+    {
+        "nome": "Kid Yugi",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2022,
+        "regione": "Puglia",
+        "componenti": 1
+    },
+    {
+        "nome": "TonyPitony",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2025,
+        "regione": "Sicilia",
+        "componenti": 1
+    },
+    {
+        "nome": "Annalisa",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2010,
+        "regione": "Liguria",
+        "componenti": 1
+    },
+    {
+        "nome": "Emma",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2010,
+        "regione": "Toscana",
+        "componenti": 1
+    },
+    {
+        "nome": "Olly",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2016,
+        "regione": "Liguria",
+        "componenti": 1
+    },
+    {
+        "nome": "VillaBanks",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2019,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Achille Lauro",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2012,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Ernia",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2010,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Eddie Brock",
+        "gender": "M",
+        "genere": "Indie",
+        "debutto": 2018,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Ultimo",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2014,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Coez",
+        "gender": "M",
+        "genere": "Indie",
+        "debutto": 2013,
+        "regione": "Campania",
+        "componenti": 1
+    },
+    {
+        "nome": "Bresh",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2012,
+        "regione": "Liguria",
+        "componenti": 1
+    },
+    {
+        "nome": "Artie 5ive",
+        "gender": "M",
+        "genere": "Trap",
+        "debutto": 2020,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Cesare Cremonini",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2002,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Sfera Ebbasta",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2011,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Luchè",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 1997,
+        "regione": "Campania",
+        "componenti": 1
+    },
+    {
+        "nome": "Capo Plaza",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2013,
+        "regione": "Campania",
+        "componenti": 1
+    },
+    {
+        "nome": "Pinguini Tattici Nucleari",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2010,
+        "regione": "Lombardia",
+        "componenti": 6
+    },
+    {
+        "nome": "Blanco",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2020,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Federica Carta",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2017,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Francesca Michielin",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2011,
+        "regione": "Veneto",
+        "componenti": 1
+    },
+    {
+        "nome": "Marco Mengoni",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2009,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Gianluca Grignani",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1994,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Ermal Meta",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2016,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Diodato",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2014,
+        "regione": "Puglia",
+        "componenti": 1
+    },
+    {
+        "nome": "Mahmood",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2018,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Carmen Consoli",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 1995,
+        "regione": "Sicilia",
+        "componenti": 1
+    },
+    {
+        "nome": "Colapesce & Dimartino",
+        "gender": "M",
+        "genere": "Indie",
+        "debutto": 2015,
+        "regione": "Sicilia",
+        "componenti": 2
+    },
+    {
+        "nome": "Tananai",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2015,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Fulminacci",
+        "gender": "M",
+        "genere": "Indie",
+        "debutto": 2019,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Coma_Cose",
+        "gender": "M",
+        "genere": "Indie",
+        "debutto": 2017,
+        "regione": "Lombardia",
+        "componenti": 2
+    },
+    {
+        "nome": "Fabrizio De André",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1961,
+        "regione": "Liguria",
+        "componenti": 1
+    },
+    {
+        "nome": "Franco Battiato",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1967,
+        "regione": "Sicilia",
+        "componenti": 1
+    },
+    {
+        "nome": "Mina",
+        "gender": "F",
+        "genere": "Cantautore",
+        "debutto": 1958,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Milva",
+        "gender": "F",
+        "genere": "Cantautore",
+        "debutto": 1959,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Luigi Tenco",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1959,
+        "regione": "Liguria",
+        "componenti": 1
+    },
+    {
+        "nome": "Franco Califano",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1964,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Pino Daniele",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1977,
+        "regione": "Campania",
+        "componenti": 1
+    },
+    {
+        "nome": "Mango",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1976,
+        "regione": "Basilicata",
+        "componenti": 1
+    },
+    {
+        "nome": "Maneskin",
+        "gender": "M/F",
+        "genere": "Rock",
+        "debutto": 2017,
+        "regione": "Lazio",
+        "componenti": 4
+    },
+    {
+        "nome": "Lazza",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2012,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Laura Pausini",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 1993,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Tiziano Ferro",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2001,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Vasco Rossi",
+        "gender": "M",
+        "genere": "Rock",
+        "debutto": 1977,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Ligabue",
+        "gender": "M",
+        "genere": "Rock",
+        "debutto": 1987,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Marracash",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2004,
+        "regione": "Sicilia",
+        "componenti": 1
+    },
+    {
+        "nome": "Elodie",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2015,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Madame",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2018,
+        "regione": "Veneto",
+        "componenti": 1
+    },
+    {
+        "nome": "Fabri Fibra",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 1994,
+        "regione": "Marche",
+        "componenti": 1
+    },
+    {
+        "nome": "Jovanotti",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1987,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Thegiornalisti",
+        "gender": "M",
+        "genere": "Indie",
+        "debutto": 2009,
+        "regione": "Lazio",
+        "componenti": 3
+    },
+    {
+        "nome": "Giorgia",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 1993,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Subsonica",
+        "gender": "M",
+        "genere": "Rock",
+        "debutto": 1996,
+        "regione": "Piemonte",
+        "componenti": 5
+    },
+    {
+        "nome": "Zucchero",
+        "gender": "M",
+        "genere": "Blues",
+        "debutto": 1970,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Anna Pepe",
+        "gender": "F",
+        "genere": "Trap",
+        "debutto": 2020,
+        "regione": "Liguria",
+        "componenti": 1
+    },
+    {
+        "nome": "Pooh",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1966,
+        "regione": "Emilia Romagna",
+        "componenti": 4
+    },
+    {
+        "nome": "Renato Zero",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1967,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Rose Villain",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2016,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Gue Pequeno",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 1997,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Elettra Lamborghini",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2017,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Nek",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1991,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Irama",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2015,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Lo Stato Sociale",
+        "gender": "M",
+        "genere": "Indie",
+        "debutto": 2009,
+        "regione": "Emilia Romagna",
+        "componenti": 5
+    },
+    {
+        "nome": "Noemi",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2009,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Salmo",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2011,
+        "regione": "Sardegna",
+        "componenti": 1
+    },
+    {
+        "nome": "Claudio Baglioni",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1968,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Malika Ayane",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2008,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Eiffel 65",
+        "gender": "M",
+        "genere": "Elettronica",
+        "debutto": 1998,
+        "regione": "Piemonte",
+        "componenti": 3
+    },
+    {
+        "nome": "Gianna Nannini",
+        "gender": "F",
+        "genere": "Rock",
+        "debutto": 1976,
+        "regione": "Toscana",
+        "componenti": 1
+    },
+    {
+        "nome": "Tedua",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2015,
+        "regione": "Liguria",
+        "componenti": 1
+    },
+    {
+        "nome": "Gaia",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2016,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Levante",
+        "gender": "F",
+        "genere": "Indie",
+        "debutto": 2013,
+        "regione": "Sicilia",
+        "componenti": 1
+    },
+    {
+        "nome": "Modà",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2002,
+        "regione": "Lombardia",
+        "componenti": 5
+    },
+    {
+        "nome": "Rkomi",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2014,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "BigMama",
+        "gender": "F",
+        "genere": "Hip Hop",
+        "debutto": 2019,
+        "regione": "Campania",
+        "componenti": 1
+    },
+    {
+        "nome": "Litfiba",
+        "gender": "M",
+        "genere": "Rock",
+        "debutto": 1980,
+        "regione": "Toscana",
+        "componenti": 2
+    },
+    {
+        "nome": "Angelina Mango",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2020,
+        "regione": "Basilicata",
+        "componenti": 1
+    },
+    {
+        "nome": "Noyz Narcos",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 1996,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Negramaro",
+        "gender": "M",
+        "genere": "Pop Rock",
+        "debutto": 2000,
+        "regione": "Puglia",
+        "componenti": 6
+    },
+    {
+        "nome": "The Kolors",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2010,
+        "regione": "Campania",
+        "componenti": 3
+    },
+    {
+        "nome": "Dargen D'Amico",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2006,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Arisa",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2008,
+        "regione": "Liguria",
+        "componenti": 1
+    },
+    {
+        "nome": "Max Pezzali",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1991,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "883",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1991,
+        "regione": "Lombardia",
+        "componenti": 2
+    },
+    {
+        "nome": "Boomdabash",
+        "gender": "M",
+        "genere": "Reggae",
+        "debutto": 2002,
+        "regione": "Puglia",
+        "componenti": 4
+    },
+    {
+        "nome": "Alessandra Amoroso",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2009,
+        "regione": "Puglia",
+        "componenti": 1
+    },
+    {
+        "nome": "Sangiovanni",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2020,
+        "regione": "Veneto",
+        "componenti": 1
+    },
+    {
+        "nome": "Santi Francesi",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2019,
+        "regione": "Piemonte",
+        "componenti": 2
+    },
+    {
+        "nome": "Gigi D'Alessio",
+        "gender": "M",
+        "genere": "Neomelodico",
+        "debutto": 1992,
+        "regione": "Campania",
+        "componenti": 1
+    },
+    {
+        "nome": "Anna Oxa",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 1978,
+        "regione": "Puglia",
+        "componenti": 1
+    },
+    {
+        "nome": "Rovere",
+        "gender": "M",
+        "genere": "Indie",
+        "debutto": 2016,
+        "regione": "Emilia Romagna",
+        "componenti": 3
+    },
+    {
+        "nome": "Piero Pelù",
+        "gender": "M",
+        "genere": "Rock",
+        "debutto": 1980,
+        "regione": "Toscana",
+        "componenti": 1
+    },
+    {
+        "nome": "Ornella Vanoni",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 1956,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Shiva",
+        "gender": "M",
+        "genere": "Trap",
+        "debutto": 2017,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Mondo Marcio",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2003,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Tony Effe",
+        "gender": "M",
+        "genere": "Trap",
+        "debutto": 2014,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Sarah Toscano",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2023,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Jake La Furia",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 1999,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Paola & Chiara",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 1996,
+        "regione": "Lombardia",
+        "componenti": 2
+    },
+    {
+        "nome": "Baby K",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2007,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Mr. Rain",
+        "gender": "M",
+        "genere": "Rap",
+        "debutto": 2011,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Gemitaiz",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2003,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Brunori Sas",
+        "gender": "M",
+        "genere": "Indie",
+        "debutto": 2009,
+        "regione": "Calabria",
+        "componenti": 1
+    },
+    {
+        "nome": "Fast Animals and Slow Kids",
+        "gender": "M",
+        "genere": "Rock",
+        "debutto": 2008,
+        "regione": "Umbria",
+        "componenti": 4
+    },
+    {
+        "nome": "Loredana Bertè",
+        "gender": "F",
+        "genere": "Rock",
+        "debutto": 1974,
+        "regione": "Calabria",
+        "componenti": 1
+    },
+    {
+        "nome": "Daniele Silvestri",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1994,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Massimo Pericolo",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2019,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Lucio Dalla",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1964,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Francesco De Gregori",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1972,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Antonello Venditti",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1972,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Edoardo Bennato",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1973,
+        "regione": "Campania",
+        "componenti": 1
+    },
+    {
+        "nome": "Rino Gaetano",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1973,
+        "regione": "Calabria",
+        "componenti": 1
+    },
+    {
+        "nome": "Mia Martini",
+        "gender": "F",
+        "genere": "Cantautore",
+        "debutto": 1963,
+        "regione": "Calabria",
+        "componenti": 1
+    },
+    {
+        "nome": "Lucio Battisti",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1966,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Fiorella Mannoia",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 1968,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Samuele Bersani",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1991,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Max Gazzè",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1996,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Vinicio Capossela",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1990,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Roberto Vecchioni",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1968,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Gino Paoli",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1959,
+        "regione": "Friuli Venezia Giulia",
+        "componenti": 1
+    },
+    {
+        "nome": "Francesco Guccini",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1967,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Morgan",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1991,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Ivano Fossati",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1971,
+        "regione": "Liguria",
+        "componenti": 1
+    },
+    {
+        "nome": "Mannarino",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 2009,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Calcutta",
+        "gender": "M",
+        "genere": "Indie",
+        "debutto": 2012,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Lucio Corsi",
+        "gender": "M",
+        "genere": "Indie",
+        "debutto": 2014,
+        "regione": "Toscana",
+        "componenti": 1
+    },
+    {
+        "nome": "Lorenzo Fragola",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2014,
+        "regione": "Sicilia",
+        "componenti": 1
+    },
+    {
+        "nome": "Baustelle",
+        "gender": "M/F",
+        "genere": "Indie",
+        "debutto": 2000,
+        "regione": "Toscana",
+        "componenti": 3
+    },
+    {
+        "nome": "Prozac+",
+        "gender": "M/F",
+        "genere": "Rock",
+        "debutto": 1995,
+        "regione": "Friuli Venezia Giulia",
+        "componenti": 3
+    },
+    {
+        "nome": "Club Dogo",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2003,
+        "regione": "Lombardia",
+        "componenti": 3
+    },
+    {
+        "nome": "Carl Brave",
+        "gender": "M",
+        "genere": "Indie",
+        "debutto": 2017,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Franco126",
+        "gender": "M",
+        "genere": "Indie",
+        "debutto": 2017,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Gianni Celeste",
+        "gender": "M",
+        "genere": "Neomelodico",
+        "debutto": 1985,
+        "regione": "Sicilia",
+        "componenti": 1
+    },
+    {
+        "nome": "Paky",
+        "gender": "M",
+        "genere": "Trap",
+        "debutto": 2019,
+        "regione": "Campania",
+        "componenti": 1
+    },
+    {
+        "nome": "Niko Pandetta",
+        "gender": "M",
+        "genere": "Neomelodico",
+        "debutto": 2016,
+        "regione": "Sicilia",
+        "componenti": 1
+    },
+    {
+        "nome": "Raf",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1983,
+        "regione": "Puglia",
+        "componenti": 1
+    },
+    {
+        "nome": "FSK Satellite",
+        "gender": "M",
+        "genere": "Trap",
+        "debutto": 2017,
+        "regione": "Basilicata",
+        "componenti": 3
+    },
+    {
+        "nome": "Dark Polo Gang",
+        "gender": "M",
+        "genere": "Trap",
+        "debutto": 2014,
+        "regione": "Lazio",
+        "componenti": 3
+    },
+    {
+        "nome": "Fedez",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2006,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Caparezza",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 1997,
+        "regione": "Puglia",
+        "componenti": 1
+    },
+    {
+        "nome": "Andrea Bocelli",
+        "gender": "M",
+        "genere": "Pop lirico",
+        "debutto": 1992,
+        "regione": "Toscana",
+        "componenti": 1
+    },
+    {
+        "nome": "Eros Ramazzotti",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1981,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Luciano Pavarotti",
+        "gender": "M",
+        "genere": "Pop lirico",
+        "debutto": 1961,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Gabry Ponte",
+        "gender": "M",
+        "genere": "Elettronica",
+        "debutto": 1993,
+        "regione": "Piemonte",
+        "componenti": 1
+    },
+    {
+        "nome": "Gigi D'Agostino",
+        "gender": "M",
+        "genere": "Elettronica",
+        "debutto": 1986,
+        "regione": "Piemonte",
+        "componenti": 1
+    },
+    {
+        "nome": "Raffaella Carrà",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 1970,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Donatella Rettore",
+        "gender": "F",
+        "genere": "Rock",
+        "debutto": 1973,
+        "regione": "Veneto",
+        "componenti": 1
+    },
+    {
+        "nome": "Giusy Ferreri",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2008,
+        "regione": "Sicilia",
+        "componenti": 1
+    },
+    {
+        "nome": "Caterina Caselli",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 1964,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Anna Tatangelo",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2002,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "MYSS KETA",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2013,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Serena Brancale",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 2011,
+        "regione": "Puglia",
+        "componenti": 1
+    },
+    {
+        "nome": "DJ Francesco",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2003,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Adriano Celentano",
+        "gender": "M",
+        "genere": "Rock",
+        "debutto": 1957,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Biagio Antonacci",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1988,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Stadio",
+        "gender": "M",
+        "genere": "Rock",
+        "debutto": 1977,
+        "regione": "Emilia Romagna",
+        "componenti": 4
+    },
+    {
+        "nome": "Al Bano",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1965,
+        "regione": "Puglia",
+        "componenti": 1
+    },
+    {
+        "nome": "Romina Power",
+        "gender": "F",
+        "genere": "Pop",
+        "debutto": 1969,
+        "regione": "Stati Uniti",
+        "componenti": 1
+    },
+    {
+        "nome": "Ricchi e Poveri",
+        "gender": "M/F",
+        "genere": "Pop",
+        "debutto": 1967,
+        "regione": "Liguria",
+        "componenti": 2
+    },
+    {
+        "nome": "Cugini di Campagna",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1970,
+        "regione": "Lazio",
+        "componenti": 4
+    },
+    {
+        "nome": "Nino D'Angelo",
+        "gender": "M",
+        "genere": "Neomelodico",
+        "debutto": 1976,
+        "regione": "Campania",
+        "componenti": 1
+    },
+    {
+        "nome": "Pupo",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1975,
+        "regione": "Toscana",
+        "componenti": 1
+    },
+    {
+        "nome": "I Nomadi",
+        "gender": "M",
+        "genere": "Pop Rock",
+        "debutto": 1963,
+        "regione": "Emilia Romagna",
+        "componenti": 6
+    },
+    {
+        "nome": "Massimo Ranieri",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1964,
+        "regione": "Campania",
+        "componenti": 1
+    },
+    {
+        "nome": "Luca Carboni",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 1983,
+        "regione": "Emilia Romagna",
+        "componenti": 1
+    },
+    {
+        "nome": "Giorgio Gaber",
+        "gender": "M",
+        "genere": "Cantautore",
+        "debutto": 1958,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Benji & Fede",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2010,
+        "regione": "Emilia Romagna",
+        "componenti": 2
+    },
+    {
+        "nome": "Emis Killa",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2007,
+        "regione": "Lombardia",
+        "componenti": 1
+    },
+    {
+        "nome": "Gazzelle",
+        "gender": "M",
+        "genere": "Indie",
+        "debutto": 2016,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Nitro",
+        "gender": "M",
+        "genere": "Hip Hop",
+        "debutto": 2010,
+        "regione": "Veneto",
+        "componenti": 1
+    },
+    {
+        "nome": "Izi",
+        "gender": "M",
+        "genere": "Trap",
+        "debutto": 2016,
+        "regione": "Liguria",
+        "componenti": 1
+    },
+    {
+        "nome": "thasup",
+        "gender": "M",
+        "genere": "Trap",
+        "debutto": 2017,
+        "regione": "Lazio",
+        "componenti": 1
+    },
+    {
+        "nome": "Michele Bravi",
+        "gender": "M",
+        "genere": "Pop",
+        "debutto": 2013,
+        "regione": "Umbria",
+        "componenti": 1
+    }
 ]
-
-
