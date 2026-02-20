@@ -8,9 +8,11 @@ app.secret_key = os.environ.get("SECRET_KEY", "ceciotle_2026_key")
 
 def carica_artisti():
     base_dir = os.path.dirname(os.path.abspath(__file__))
+    # Il file deve chiamarsi esattamente Artisti.json con la A maiuscola o minuscola a seconda del tuo file
     file_path = os.path.join(base_dir, "Artisti.json")
     try:
         if os.path.exists(file_path):
+            # Integrazione: Apertura con encoding utf-8 per gestire ' e lettere accentate
             with open(file_path, "r", encoding="utf-8") as f:
                 dati = json.load(f)
                 return dati if isinstance(dati, list) else []
@@ -25,7 +27,7 @@ ARTISTI_LISTA = carica_artisti()
 def feedback_artista(utente, corretto):
     res = {}
     
-    # Sesso (ex Gender) - Qui mappiamo i valori per la visualizzazione
+    # Sesso (ex Gender)
     res['gender'] = [
         "CORRETTO" if utente["gender"] == corretto["gender"] else "ERRATO", 
         "✅" if utente["gender"] == corretto["gender"] else "❌", 
@@ -64,6 +66,7 @@ def index():
         return "Errore: File Artisti.json non trovato o vuoto.", 500
 
     if "target_name" not in session:
+        # Sceglie un artista a caso dal database caricato in UTF-8
         session["target_name"] = random.choice(ARTISTI_LISTA)["nome"]
         session["tentativi"] = 0
         session["cronologia"] = []
@@ -74,6 +77,7 @@ def index():
 
     if request.method == "POST" and session["tentativi"] < 10:
         nome_input = request.form.get("nome", "").strip()
+        # Confronto case-insensitive sicuro per nomi con apostrofi o accenti
         u_cand = next((a for a in ARTISTI_LISTA if a["nome"].lower() == nome_input.lower()), None)
         
         if u_cand:
@@ -101,4 +105,5 @@ def restart():
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
+    # Avvio dell'app sulla porta corretta per il deploy
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
