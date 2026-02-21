@@ -130,7 +130,7 @@
     {
         "nome": "Sfera Ebbasta",
         "gender": "M",
-        "genere": "Hip Hop",
+        "genere": "Trap",
         "debutto": 2011,
         "regione": "Lombardia",
         "componenti": 1
@@ -168,11 +168,11 @@
         "componenti": 1
     },
     {
-        "nome": "Federica Carta",
-        "gender": "F",
-        "genere": "Pop",
-        "debutto": 2017,
-        "regione": "Lazio",
+        "nome": "Ghali",
+        "gender": "M",
+        "genere": "Trap",
+        "debutto": 2011,
+        "regione": "Lombardia",
         "componenti": 1
     },
     {
@@ -570,7 +570,7 @@
     {
         "nome": "Tedua",
         "gender": "M",
-        "genere": "Hip Hop",
+        "genere": "Trap",
         "debutto": 2015,
         "regione": "Liguria",
         "componenti": 1
@@ -602,7 +602,7 @@
     {
         "nome": "Rkomi",
         "gender": "M",
-        "genere": "Hip Hop",
+        "genere": "Trap",
         "debutto": 2014,
         "regione": "Lombardia",
         "componenti": 1
@@ -1117,7 +1117,7 @@
         "genere": "Trap",
         "debutto": 2014,
         "regione": "Lazio",
-        "componenti": 3
+        "componenti": 4
     },
     {
         "nome": "Fedez",
@@ -1400,3 +1400,4 @@
         "componenti": 1
     }
 ]
+
