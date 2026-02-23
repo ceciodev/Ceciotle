@@ -7,6 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <style>
         :root {
@@ -27,7 +28,6 @@
         .sidebar a i { margin-right: 12px; width: 20px; text-align: center; }
         .sidebar a:hover { transform: translateX(8px); color: var(--banner-yellow); }
 
-        /* Nuova Sezione Contattaci in Sidebar */
         .sidebar-divider { border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 30px 0 20px; }
         .sidebar-label { font-size: 10px; letter-spacing: 2px; opacity: 0.7; font-weight: 900; margin-bottom: 10px; }
 
@@ -39,7 +39,6 @@
         
         .game-container { width: 95%; max-width: 650px; text-align: center; padding-bottom: 50px; }
 
-        /* Stile Ultimo Tentativo Lampeggiante */
         .ultimo-tentativo-testo {
             color: #ff0000;
             text-align: center;
@@ -67,7 +66,7 @@
         .feedback-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; margin-top: 10px; }
         
         .stat-box { 
-            background: rgba(255,255,255,0.6); padding: 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 700;
+            background: rgba(255,255,255,0.6); padding: 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 700;
             display: flex; flex-direction: column; align-items: center; border: 1px solid rgba(26, 74, 142, 0.2);
         }
         .stat-box.correct { border-color: var(--correct); color: var(--correct); background: #e8f5e9; }
@@ -99,7 +98,7 @@
         <div class="rules-banner">
             <h3>🎵 BENVENUTI! 🎵</h3>
             <p>Indovina l'artista in 10 tentativi.</p>
-            <p>✅ Corretto | ❌ Sbagliato<br>⬆️ Anno più recente | ⬇️ Anno più vecchio</p>
+            <p>✅ Corretto | ❌ Sbagliato<br>⬆️ Popolarità/Anno maggiore | ⬇️ Minore</p>
             <button class="btn-main" onclick="closeRules()">HO CAPITO! :3</button>
         </div>
     </div>
@@ -157,6 +156,10 @@
                         <span>{{ t.feedback.componenti[1] }} MEMBRI</span>
                         <span class="stat-val">{{ t.feedback.componenti[2] }}</span>
                     </div>
+                    <div class="stat-box {{ 'correct' if t.feedback.popolarita[0] == 'CORRETTO' else 'wrong' }}">
+                        <span>{{ t.feedback.popolarita[1] }} POP.</span>
+                        <span class="stat-val">{{ t.feedback.popolarita[2] }}</span>
+                    </div>
                 </div>
             </div>
             {% endfor %}
@@ -166,6 +169,24 @@
     <footer class="footer-credits">Github: @ceciodev powered by render.com</footer>
 
     <script>
+        // Effetto Confetti alla Vittoria
+        {% if vittoria %}
+        var count = 200;
+        var defaults = { origin: { y: 0.7 } };
+
+        function fire(particleRatio, opts) {
+          confetti(Object.assign({}, defaults, opts, {
+            particleCount: Math.floor(count * particleRatio)
+          }));
+        }
+
+        fire(0.25, { spread: 26, startVelocity: 55, });
+        fire(0.2, { spread: 60, });
+        fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+        fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+        fire(0.1, { spread: 120, startVelocity: 45, });
+        {% endif %}
+
         function showRules() {
             document.getElementById('overlay').style.display = 'flex';
             document.getElementById('main-content').classList.add('blur-content');
