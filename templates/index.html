@@ -80,6 +80,32 @@
         
         <div class="counter">{{ tentativi }}/10</div>
 
+        {% if tentativi == 9 and not vittoria %}
+<div class="ultimo-tentativo-testo">
+    ULTIMO TENTATIVO!
+</div>
+
+<style>
+.ultimo-tentativo-testo {
+    color: #ff0000;           /* Rosso puro */
+    text-align: center;
+    font-weight: bold;        /* Come il testo dei bottoni */
+    text-transform: uppercase; /* Tutto maiuscolo come "VAI" */
+    font-size: 16px;          /* Dimensione standard dei pulsanti Flask/Bootstrap, aggiusta se necessario */
+    margin-bottom: 10px;
+    border: none;             /* Nessun bordo */
+    background: none;         /* Nessuno sfondo */
+    animation: lampeggio 0.8s infinite;
+}
+
+@keyframes lampeggio {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+</style>
+{% endif %}
+
         {% if fine_giochi %}
             <div class="feedback-card" style="background: white;">
                 <h3 style="font-size: 2rem; color: {{ 'var(--correct)' if vittoria else 'var(--wrong)' }};">
@@ -203,4 +229,5 @@
     </script>
 </body>
 </html>
+
 
