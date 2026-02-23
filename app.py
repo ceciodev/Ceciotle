@@ -43,15 +43,30 @@ ARTISTI_LISTA = carica_artisti()
 
 def feedback_artista(utente, corretto):
     res = {}
+    # Sesso
     res['gender'] = ["CORRETTO" if utente["gender"] == corretto["gender"] else "ERRATO", "✅" if utente["gender"] == corretto["gender"] else "❌", "Uomo" if utente["gender"] == 'M' else "Donna" if utente["gender"] == 'F' else "Misto"]
+    
+    # Genere Musicale
     res['genere'] = ["CORRETTO" if utente["genere"].lower() == corretto["genere"].lower() else "ERRATO", "✅" if utente["genere"].lower() == corretto["genere"].lower() else "❌", utente["genere"]]
+    
+    # Debutto
     u_a, c_a = int(utente.get("debutto", 0)), int(corretto.get("debutto", 0))
     segno_a = "✅" if u_a == c_a else ("⬆️" if u_a < c_a else "⬇️")
     res['debutto'] = ["CORRETTO" if u_a == c_a else "ERRATO", segno_a, utente["debutto"]]
+    
+    # Regione
     res['regione'] = ["CORRETTO" if utente["regione"].lower() == corretto["regione"].lower() else "ERRATO", "✅" if utente["regione"].lower() == corretto["regione"].lower() else "❌", utente["regione"]]
+    
+    # Componenti
     u_c, c_c = int(utente.get("componenti", 0)), int(corretto.get("componenti", 0))
     segno_c = "✅" if u_c == c_c else ("⬆️" if u_c < c_c else "⬇️")
     res['componenti'] = ["CORRETTO" if u_c == c_c else "ERRATO", segno_c, utente["componenti"]]
+
+    # --- NUOVO: Popolarità ---
+    u_p, c_p = int(utente.get("popolarita", 0)), int(corretto.get("popolarita", 0))
+    segno_p = "✅" if u_p == c_p else ("⬆️" if u_p < c_p else "⬇️")
+    res['popolarita'] = ["CORRETTO" if u_p == c_p else "ERRATO", segno_p, utente["popolarita"]]
+    
     return res
 
 @app.route("/", methods=["GET", "POST"])
@@ -93,4 +108,5 @@ def restart():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+
 
