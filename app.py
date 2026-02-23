@@ -1,18 +1,34 @@
 import os
 import json
 import random
+import threading
+import time
+import requests
 from flask import Flask, render_template, request, session, redirect, url_for
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "ceciotle_2026_key")
 
+# --- KEEP ALIVE START ---
+def keep_alive():
+    while True:
+        try:
+            # Pings your site every 14 minutes to prevent Render sleep
+            requests.get("https://ceciotle.onrender.com/")
+            print("Self-ping successful!")
+        except Exception as e:
+            print(f"Ping failed: {e}")
+        time.sleep(840) # 14 minutes
+
+# Start the background thread
+threading.Thread(target=keep_alive, daemon=True).start()
+# --- KEEP ALIVE END ---
+
 def carica_artisti():
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    # Il file deve chiamarsi esattamente Artisti.json con la A maiuscola o minuscola a seconda del tuo file
     file_path = os.path.join(base_dir, "Artisti.json")
     try:
         if os.path.exists(file_path):
-            # Integrazione: Apertura con encoding utf-8 per gestire ' e lettere accentate
             with open(file_path, "r", encoding="utf-8") as f:
                 dati = json.load(f)
                 return dati if isinstance(dati, list) else []
@@ -21,43 +37,19 @@ def carica_artisti():
         print(f"Errore caricamento JSON: {e}")
         return []
 
-# Carichiamo la lista una volta sola all'avvio
 ARTISTI_LISTA = carica_artisti()
 
 def feedback_artista(utente, corretto):
     res = {}
-    
-    # Sesso (ex Gender)
-    res['gender'] = [
-        "CORRETTO" if utente["gender"] == corretto["gender"] else "ERRATO", 
-        "✅" if utente["gender"] == corretto["gender"] else "❌", 
-        "Uomo" if utente["gender"] == 'M' else "Donna" if utente["gender"] == 'F' else "Misto"
-    ]
-    
-    # Genere Musicale
-    res['genere'] = [
-        "CORRETTO" if utente["genere"].lower() == corretto["genere"].lower() else "ERRATO",
-        "✅" if utente["genere"].lower() == corretto["genere"].lower() else "❌",
-        utente["genere"]
-    ]
-    
-    # Debutto (Anno)
+    res['gender'] = ["CORRETTO" if utente["gender"] == corretto["gender"] else "ERRATO", "✅" if utente["gender"] == corretto["gender"] else "❌", "Uomo" if utente["gender"] == 'M' else "Donna" if utente["gender"] == 'F' else "Misto"]
+    res['genere'] = ["CORRETTO" if utente["genere"].lower() == corretto["genere"].lower() else "ERRATO", "✅" if utente["genere"].lower() == corretto["genere"].lower() else "❌", utente["genere"]]
     u_a, c_a = int(utente.get("debutto", 0)), int(corretto.get("debutto", 0))
     segno_a = "✅" if u_a == c_a else ("⬆️" if u_a < c_a else "⬇️")
     res['debutto'] = ["CORRETTO" if u_a == c_a else "ERRATO", segno_a, utente["debutto"]]
-    
-    # Regione
-    res['regione'] = [
-        "CORRETTO" if utente["regione"].lower() == corretto["regione"].lower() else "ERRATO",
-        "✅" if utente["regione"].lower() == corretto["regione"].lower() else "❌",
-        utente["regione"]
-    ]
-    
-    # Membri (ex Componenti)
+    res['regione'] = ["CORRETTO" if utente["regione"].lower() == corretto["regione"].lower() else "ERRATO", "✅" if utente["regione"].lower() == corretto["regione"].lower() else "❌", utente["regione"]]
     u_c, c_c = int(utente.get("componenti", 0)), int(corretto.get("componenti", 0))
     segno_c = "✅" if u_c == c_c else ("⬆️" if u_c < c_c else "⬇️")
     res['componenti'] = ["CORRETTO" if u_c == c_c else "ERRATO", segno_c, utente["componenti"]]
-    
     return res
 
 @app.route("/", methods=["GET", "POST"])
@@ -66,7 +58,6 @@ def index():
         return "Errore: File Artisti.json non trovato o vuoto.", 500
 
     if "target_name" not in session:
-        # Sceglie un artista a caso dal database caricato in UTF-8
         session["target_name"] = random.choice(ARTISTI_LISTA)["nome"]
         session["tentativi"] = 0
         session["cronologia"] = []
@@ -75,18 +66,14 @@ def index():
     vittoria = False
     fine_giochi = False
 
-    if request.method == "POST" and session["tentativi"] < 10:
+    if request.method == "POST" and session.get("tentativi", 0) < 10:
         nome_input = request.form.get("nome", "").strip()
-        # Confronto case-insensitive sicuro per nomi con apostrofi o accenti
         u_cand = next((a for a in ARTISTI_LISTA if a["nome"].lower() == nome_input.lower()), None)
         
         if u_cand:
             session["tentativi"] += 1
             res = feedback_artista(u_cand, target)
-            session["cronologia"].insert(0, {
-                "nome": u_cand["nome"],
-                "feedback": res
-            })
+            session["cronologia"].insert(0, {"nome": u_cand["nome"], "feedback": res})
             session.modified = True
             
             if u_cand["nome"].lower() == target["nome"].lower():
@@ -95,9 +82,7 @@ def index():
             elif session["tentativi"] >= 10:
                 fine_giochi = True
 
-    return render_template("index.html", artisti=ARTISTI_LISTA, tentativi=session.get("tentativi", 0), 
-                           cronologia=session.get("cronologia", []), fine_giochi=fine_giochi, 
-                           vittoria=vittoria, target=target)
+    return render_template("index.html", artisti=ARTISTI_LISTA, tentativi=session.get("tentativi", 0), cronologia=session.get("cronologia", []), fine_giochi=fine_giochi, vittoria=vittoria, target=target)
 
 @app.route("/restart")
 def restart():
@@ -105,6 +90,4 @@ def restart():
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
-    # Avvio dell'app sulla porta corretta per il deploy
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
-
