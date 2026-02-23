@@ -6,6 +6,8 @@
     <title>CECIOTLE</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root {
             --primary-blue: #1a4a8e;
@@ -19,9 +21,15 @@
         .blur-content { filter: blur(8px); pointer-events: none; }
         
         .menu-btn { position: fixed; top: 20px; right: 20px; font-size: 30px; cursor: pointer; z-index: 1500; background: var(--primary-blue); color: white; padding: 10px; border-radius: 12px; line-height: 1; }
-        .sidebar { position: fixed; top: 0; right: -300px; width: 250px; height: 100%; background: var(--primary-blue); color: white; transition: 0.3s ease; z-index: 2001; padding: 60px 20px; box-shadow: -5px 0 25px rgba(0,0,0,0.3); }
+        .sidebar { position: fixed; top: 0; right: -300px; width: 260px; height: 100%; background: var(--primary-blue); color: white; transition: 0.3s ease; z-index: 2001; padding: 60px 20px; box-shadow: -5px 0 25px rgba(0,0,0,0.3); box-sizing: border-box; }
         .sidebar.open { right: 0; }
-        .sidebar a { color: white; text-decoration: none; display: block; margin: 20px 0; font-weight: bold; }
+        .sidebar a { color: white; text-decoration: none; display: flex; align-items: center; margin: 15px 0; font-weight: bold; transition: all 0.3s ease; }
+        .sidebar a i { margin-right: 12px; width: 20px; text-align: center; }
+        .sidebar a:hover { transform: translateX(8px); color: var(--banner-yellow); }
+
+        /* Nuova Sezione Contattaci in Sidebar */
+        .sidebar-divider { border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 30px 0 20px; }
+        .sidebar-label { font-size: 10px; letter-spacing: 2px; opacity: 0.7; font-weight: 900; margin-bottom: 10px; }
 
         #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; justify-content: center; align-items: center; z-index: 3000; }
         .rules-banner { background-color: var(--banner-yellow); padding: 40px; border-radius: 25px; text-align: center; max-width: 450px; border: 4px solid var(--primary-blue); box-shadow: 0 10px 30px rgba(26,74,142,0.2); }
@@ -30,6 +38,22 @@
         .counter { font-size: 1.5rem; font-weight: 900; background: var(--primary-blue); color: white; padding: 5px 20px; border-radius: 50px; margin-bottom: 10px; }
         
         .game-container { width: 95%; max-width: 650px; text-align: center; padding-bottom: 50px; }
+
+        /* Stile Ultimo Tentativo Lampeggiante */
+        .ultimo-tentativo-testo {
+            color: #ff0000;
+            text-align: center;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 22px; 
+            margin-bottom: 15px;
+            animation: lampeggio 0.8s infinite;
+        }
+        @keyframes lampeggio {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
 
         .search-wrapper { position: relative; width: 100%; }
         .autocomplete-results {
@@ -60,10 +84,15 @@
 
     <nav id="sidebar" class="sidebar">
         <h2>MENU</h2>
-        <hr>
-        <a href="/restart">🔄 Nuova Partita</a>
-        <a href="#" onclick="showRules(); toggleSidebar();">📖 Regolamento</a>
-        <p style="font-size: 10px; margin-top: 40px;">GitHub: @ceciodev</p>
+        <hr class="sidebar-divider">
+        <a href="/restart"><i class="fas fa-redo"></i> Nuova Partita</a>
+        <a href="#" onclick="showRules(); toggleSidebar();"><i class="fas fa-book"></i> Regolamento</a>
+        
+        <hr class="sidebar-divider">
+        <p class="sidebar-label">CONTATTACI</p>
+        <a href="https://github.com/ceciodev" target="_blank"><i class="fa-brands fa-github"></i> GITHUB</a>
+        <a href="https://t.me/TUO_TELEGRAM" target="_blank"><i class="fa-brands fa-telegram"></i> TELEGRAM</a>
+        <a href="https://ko-fi.com/TUO_KOFI" target="_blank"><i class="fa-solid fa-mug-hot"></i> KO-FI</a>
     </nav>
 
     <div id="overlay">
@@ -81,30 +110,8 @@
         <div class="counter">{{ tentativi }}/10</div>
 
         {% if tentativi == 9 and not vittoria %}
-<div class="ultimo-tentativo-testo">
-    ULTIMO TENTATIVO!
-</div>
-
-<style>
-.ultimo-tentativo-testo {
-    color: #ff0000;           /* Rosso puro */
-    text-align: center;
-    font-weight: bold;        /* Come il testo dei bottoni */
-    text-transform: uppercase; /* Tutto maiuscolo come "VAI" */
-    font-size: 22px;          /* Dimensione standard dei pulsanti Flask/Bootstrap, aggiusta se necessario */
-    margin-bottom: 10px;
-    border: none;             /* Nessun bordo */
-    background: none;         /* Nessuno sfondo */
-    animation: lampeggio 0.8s infinite;
-}
-
-@keyframes lampeggio {
-    0% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 1; }
-}
-</style>
-{% endif %}
+        <div class="ultimo-tentativo-testo">ULTIMO TENTATIVO!</div>
+        {% endif %}
 
         {% if fine_giochi %}
             <div class="feedback-card" style="background: white;">
@@ -159,7 +166,6 @@
     <footer class="footer-credits">Github: @ceciodev powered by render.com</footer>
 
     <script>
-        // Gestione Regolamento
         function showRules() {
             document.getElementById('overlay').style.display = 'flex';
             document.getElementById('main-content').classList.add('blur-content');
@@ -182,10 +188,7 @@
             sb.classList.toggle('open');
         }
 
-        // --- CORREZIONE CRUCIALE QUI ---
-        // Usiamo tojson per passare la lista in modo sicuro a JS
         const artisti = {{ artisti|map(attribute='nome')|list|tojson }};
-        
         const input = document.getElementById('scelta-artista');
         const resultsBox = document.getElementById('results-box');
 
@@ -194,9 +197,7 @@
                 const val = this.value.toLowerCase().trim();
                 resultsBox.innerHTML = '';
                 if (val.length < 2) { resultsBox.style.display = 'none'; return; }
-                
                 const matches = artisti.filter(nome => nome.toLowerCase().includes(val)).slice(0, 6);
-                
                 if (matches.length > 0) {
                     matches.forEach(nome => {
                         const div = document.createElement('div');
@@ -229,6 +230,3 @@
     </script>
 </body>
 </html>
-
-
-
