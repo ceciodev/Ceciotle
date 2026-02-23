@@ -13,12 +13,14 @@ app.secret_key = os.environ.get("SECRET_KEY", "ceciotle_2026_key")
 def keep_alive():
     while True:
         try:
-            # Pings your site every 14 minutes to prevent Render sleep
+            # Pings your site every 5 minutes to prevent Render sleep
             requests.get("https://ceciotle.onrender.com/")
             print("Self-ping successful!")
         except Exception as e:
             print(f"Ping failed: {e}")
-        time.sleep(840) # 14 minutes
+        
+        # 300 seconds = 5 minutes
+        time.sleep(300) 
 
 # Start the background thread
 threading.Thread(target=keep_alive, daemon=True).start()
@@ -91,3 +93,4 @@ def restart():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+
