@@ -2,23 +2,21 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CECIOTLE</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     
     <style>
         :root {
             --primary-blue: #1a4a8e;
-            --bg-light-blue: #f0f7ff; /* Più chiaro e pulito */
-            --accent-blue: #99cbff;
-            --banner-yellow: #f9e294;
-            --white-glass: rgba(255, 255, 255, 0.8);
-            --correct: #2ecc71;
-            --wrong: #e74c3c;
-            --text-dark: #2c3e50;
+            --bg-light-blue: #99cbff;
+            --banner-yellow: #ecd273;
+            --white-glass: rgba(255, 255, 255, 0.5);
+            --correct: #28a745;
+            --wrong: #dc3545;
         }
 
         body { 
@@ -29,68 +27,81 @@
             flex-direction: column; 
             align-items: center; 
             min-height: 100vh; 
-            color: var(--text-dark); 
+            color: var(--primary-blue); 
+            overflow-x: hidden; 
         }
 
-        /* Menu */
-        .menu-btn { position: fixed; top: 15px; right: 15px; font-size: 24px; cursor: pointer; z-index: 2500; background: var(--primary-blue); color: white; padding: 12px; border-radius: 50%; line-height: 1; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .blur-content { filter: blur(8px); pointer-events: none; }
         
-        .sidebar { position: fixed; top: 0; right: -300px; width: 260px; height: 100%; background: white; transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 2600; padding: 40px 20px; box-shadow: -5px 0 25px rgba(0,0,0,0.05); }
+        /* Menu & Sidebar */
+        .menu-btn { position: fixed; top: 20px; right: 20px; font-size: 30px; cursor: pointer; z-index: 2500; background: var(--primary-blue); color: white; padding: 10px; border-radius: 12px; line-height: 1; transition: 0.3s; }
+        .menu-btn:hover { transform: scale(1.1); }
+        
+        .sidebar { position: fixed; top: 0; right: -300px; width: 280px; height: 100%; background: var(--primary-blue); color: white; transition: 0.3s ease; z-index: 2600; padding: 60px 20px; box-shadow: -5px 0 25px rgba(0,0,0,0.3); box-sizing: border-box; }
         .sidebar.open { right: 0; }
-        .sidebar a { color: var(--text-dark); text-decoration: none; display: flex; align-items: center; margin: 10px 0; font-weight: 600; padding: 12px; border-radius: 10px; transition: 0.2s; }
-        .sidebar a:hover { background: var(--bg-light-blue); color: var(--primary-blue); }
+        .sidebar a { color: white; text-decoration: none; display: flex; align-items: center; margin: 15px 0; font-weight: 900; transition: all 0.3s ease; padding: 10px; border-radius: 8px; }
+        .sidebar a i { margin-right: 12px; width: 20px; text-align: center; }
+        .sidebar a:hover { transform: translateX(8px); color: var(--banner-yellow); }
 
-        /* Contenitore Gioco */
-        .game-container { width: 90%; max-width: 600px; text-align: center; padding: 40px 0; }
-        h1 { font-weight: 800; font-size: 2.5rem; letter-spacing: -1px; color: var(--primary-blue); margin-bottom: 5px; }
-        .counter { font-weight: 600; font-size: 1rem; color: #7f8c8d; margin-bottom: 25px; }
+        .sidebar-divider { border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 30px 0 20px; }
+        .sidebar-label { font-size: 10px; letter-spacing: 2px; opacity: 0.7; font-weight: 900; margin-bottom: 10px; padding-left: 10px; }
 
-        /* Input e Search */
-        .search-wrapper { position: relative; margin-bottom: 20px; }
-        input[type="text"] { 
-            width: 100%; padding: 18px 25px; border-radius: 15px; border: 2px solid #dce6f2; 
-            font-size: 1rem; box-sizing: border-box; font-family: inherit; font-weight: 500;
-            transition: 0.3s; background: white;
+        /* Overlay & Rules */
+        #overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 3000; padding: 20px; }
+        .rules-banner { background-color: var(--banner-yellow); padding: 30px; border-radius: 25px; text-align: center; max-width: 450px; border: 4px solid var(--primary-blue); box-shadow: 0 10px 30px rgba(26,74,142,0.3); }
+
+        /* Typography & Main UI */
+        h1 { font-size: clamp(2.5rem, 10vw, 3.5rem); margin: 20px 0 5px; font-weight: 900; text-transform: uppercase; letter-spacing: -2px; }
+        .counter { font-size: 1.5rem; font-weight: 900; background: var(--primary-blue); color: white; padding: 5px 25px; border-radius: 50px; margin-bottom: 20px; display: inline-block; }
+        .game-container { width: 95%; max-width: 700px; text-align: center; padding-bottom: 50px; }
+
+        .ultimo-tentativo-testo {
+            color: #d63031;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 1.2rem; 
+            margin-bottom: 15px;
+            animation: lampeggio 1s infinite;
         }
-        input:focus { outline: none; border-color: var(--primary-blue); box-shadow: 0 0 0 4px rgba(26, 74, 142, 0.1); }
 
+        @keyframes lampeggio { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Search & Autocomplete */
+        .search-wrapper { position: relative; width: 100%; }
         .autocomplete-results {
-            position: absolute; top: calc(100% + 5px); left: 0; right: 0; background: white; 
-            border-radius: 12px; z-index: 2000; max-height: 220px; overflow-y: auto; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: none; border: 1px solid #eee;
+            position: absolute; top: 100%; left: 0; right: 0; background: white; border: 3px solid var(--primary-blue); border-top: none;
+            border-radius: 0 0 18px 18px; z-index: 2000; max-height: 250px; overflow-y: auto; display: none;
         }
-        .autocomplete-entry { padding: 12px 20px; cursor: pointer; text-align: left; font-size: 0.95rem; border-bottom: 1px solid #f9f9f9; }
+        .autocomplete-entry { padding: 15px; cursor: pointer; text-align: left; font-weight: 900; border-bottom: 1px solid #eee; color: #333; }
         .autocomplete-entry:hover { background: var(--bg-light-blue); }
 
         /* Feedback Cards */
-        .feedback-card { 
-            background: white; padding: 15px; border-radius: 18px; margin-bottom: 12px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid #edf2f7;
-            animation: fadeIn 0.4s ease-out;
+        .feedback-card { background: var(--white-glass); padding: 20px; border-radius: 22px; margin-bottom: 15px; border: 2px solid var(--primary-blue); }
+        .feedback-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px; 
+            margin-top: 15px; 
         }
-        .feedback-card strong { display: block; margin-bottom: 10px; color: var(--primary-blue); font-weight: 700; }
         
-        .feedback-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        @media (min-width: 480px) { .feedback-grid { grid-template-columns: repeat(6, 1fr); } }
+        /* Tablet/Desktop: 6 colonne per far stare tutto su una riga */
+        @media (min-width: 600px) {
+            .feedback-grid { grid-template-columns: repeat(6, 1fr); }
+        }
 
         .stat-box { 
-            padding: 8px 4px; border-radius: 10px; font-size: 0.65rem; font-weight: 700;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0;
+            background: rgba(255,255,255,0.7); padding: 10px 5px; border-radius: 12px; font-size: 0.7rem; font-weight: 900;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(26, 74, 142, 0.1);
         }
-        .stat-box.correct { background: var(--correct); color: white; border-color: var(--correct); }
-        .stat-box.wrong { background: var(--wrong); color: white; border-color: var(--wrong); }
-        .stat-val { font-size: 0.7rem; margin-top: 3px; font-weight: 800; opacity: 0.9; }
+        .stat-box.correct { border-color: var(--correct); color: var(--correct); background: #e8f5e9; }
+        .stat-box.wrong { border-color: var(--wrong); color: var(--wrong); background: #ffebee; }
+        .stat-val { font-size: 0.65rem; opacity: 0.8; margin-top: 4px; text-transform: uppercase; color: #444; word-break: break-all; }
 
-        /* Bottoni */
-        .btn-main { 
-            background: var(--primary-blue); color: white; padding: 16px; border-radius: 12px; 
-            width: 100%; font-size: 1rem; cursor: pointer; border: none; font-weight: 600; 
-            transition: 0.2s;
-        }
-        .btn-main:hover { opacity: 0.9; transform: translateY(-1px); }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .btn-main { background: var(--primary-blue); color: white; padding: 18px; border-radius: 18px; width: 100%; font-size: 1.2rem; cursor: pointer; border: none; font-weight: 900; transition: 0.2s; }
+        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(26,74,142,0.3); }
+        
+        .footer-credits { padding: 20px; font-size: 10px; color: var(--primary-blue); opacity: 0.6; font-weight: 900; }
     </style>
 </head>
 <body>
@@ -98,63 +109,90 @@
     <div class="menu-btn" onclick="toggleSidebar()">☰</div>
 
     <nav id="sidebar" class="sidebar">
-        <h3 style="margin-top:0">Opzioni</h3>
+        <h2 style="margin-top:0">MENU</h2>
+        <hr class="sidebar-divider">
         <a href="/restart"><i class="fas fa-redo"></i> Nuova Partita</a>
-        <a href="#" onclick="showRules(); toggleSidebar(); return false;"><i class="fas fa-book"></i> Regole</a>
-        <hr style="border:0; border-top:1px solid #eee; margin: 20px 0;">
-        <a href="https://github.com/ceciodev" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="#" onclick="showRules(); toggleSidebar();"><i class="fas fa-book"></i> Regolamento</a>
+        
+        <hr class="sidebar-divider">
+        <p class="sidebar-label">CONTATTACI</p>
+        <a href="https://github.com/ceciodev" target="_blank"><i class="fa-brands fa-github"></i> GITHUB</a>
+        <a href="https://t.me/TUO_TELEGRAM" target="_blank"><i class="fa-brands fa-telegram"></i> TELEGRAM</a>
+        <a href="https://ko-fi.com/TUO_KOFI" target="_blank"><i class="fa-solid fa-mug-hot"></i> KO-FI</a>
     </nav>
 
-    <main class="game-container" id="main-content">
+    <div id="overlay" onclick="if(event.target == this) closeRules()">
+        <div class="rules-banner" onclick="event.stopPropagation()">
+            <h3 style="margin-top:0">🎵 BENVENUTI! 🎵</h3>
+            <p>Indovina l'artista misterioso in 10 tentativi.</p>
+            <p style="text-align: left; font-size: 0.85rem;">
+                ✅ <b>Verde:</b> Proprietà corretta<br>
+                ❌ <b>Rosso:</b> Proprietà errata<br>
+                ⬆️ <b>Su:</b> Il valore dell'artista cercato è più alto<br>
+                ⬇️ <b>Giù:</b> Il valore dell'artista cercato è più basso
+            </p>
+            <button class="btn-main" onclick="closeRules()">HO CAPITO! :3</button>
+        </div>
+    </div>
+
+    <main id="main-content" class="game-container">
         <h1>CECIOTLE</h1>
-        <div class="counter">Tentativo {{ tentativi }} di 10</div>
+        
+        <div class="counter">{{ tentativi }}/10</div>
+
+        {% if tentativi == 9 and not vittoria and not fine_giochi %}
+        <div class="ultimo-tentativo-testo">⚠️ Ultimo tentativo! ⚠️</div>
+        {% endif %}
 
         {% if fine_giochi %}
-            <div class="feedback-card" style="padding: 30px; border: 2px solid var(--primary-blue);">
-                <h2 style="color: {{ 'var(--correct)' if vittoria else 'var(--wrong)' }}; margin-top:0;">
-                    {{ 'OTTIMO LAVORO! 🏆' if vittoria else 'PECCATO... 💀' }}
-                </h2>
-                <p>L'artista era: <br><strong style="font-size: 1.5rem;">{{ target.nome }}</strong></p>
-                <button class="btn-main" onclick="window.location.href='/restart'">GIOCA ANCORA</button>
+            <div class="feedback-card" style="background: white; border-width: 4px; animation: fadeIn 0.5s ease-out;">
+                <h3 style="font-size: 2rem; margin: 10px 0; color: {{ 'var(--correct)' if vittoria else 'var(--wrong)' }};">
+                    {{ 'HAI VINTO! 🏆' if vittoria else 'GAME OVER 💀' }}
+                </h3>
+                <p>L'artista era: <strong style="font-size: 1.5rem; display: block;">{{ target.nome }}</strong></p>
+                <button class="btn-main" onclick="window.location.href='/restart'" style="margin-top:10px;">GIOCA ANCORA</button>
             </div>
         {% else %}
             <form method="POST" id="game-form">
                 <div class="search-wrapper">
-                    <input type="text" name="nome" id="scelta-artista" placeholder="Chi è l'artista di oggi?" autocomplete="off">
+                    <input type="text" name="nome" id="scelta-artista" 
+                           placeholder="Inserisci un artista..." 
+                           autocomplete="off" required
+                           style="width:100%; padding:20px; border-radius:20px; border:3px solid var(--primary-blue); font-size:1.1rem; box-sizing: border-box; font-family: 'Montserrat', sans-serif; font-weight: 900;">
                     <div id="results-box" class="autocomplete-results"></div>
                 </div>
-                <button type="submit" class="btn-main">CONFERMA</button>
+                <button type="submit" class="btn-main" style="margin-top:15px;">CONFERMA</button>
             </form>
         {% endif %}
 
         <div style="margin-top: 30px;">
             {% for t in cronologia %}
-            <div class="feedback-card">
-                <strong>{{ t.nome }}</strong>
+            <div class="feedback-card" style="animation: fadeIn 0.4s ease-in forwards;">
+                <strong style="font-size: 1.2rem;">{{ t.nome }}</strong>
                 <div class="feedback-grid">
                     <div class="stat-box {{ 'correct' if t.feedback.gender[0] == 'CORRETTO' else 'wrong' }}">
-                        <span>SESSO</span>
-                        <span class="stat-val">{{ t.feedback.gender[1] }} {{ t.feedback.gender[2] }}</span>
+                        <span>{{ t.feedback.gender[1] }} SESSO</span>
+                        <span class="stat-val">{{ t.feedback.gender[2] }}</span>
                     </div>
                     <div class="stat-box {{ 'correct' if t.feedback.genere[0] == 'CORRETTO' else 'wrong' }}">
-                        <span>GENERE</span>
-                        <span class="stat-val">{{ t.feedback.genere[1] }}</span>
+                        <span>{{ t.feedback.genere[1] }} GENERE</span>
+                        <span class="stat-val">{{ t.feedback.genere[2] }}</span>
                     </div>
                     <div class="stat-box {{ 'correct' if t.feedback.debutto[0] == 'CORRETTO' else 'wrong' }}">
-                        <span>ANNO</span>
-                        <span class="stat-val">{{ t.feedback.debutto[1] }} {{ t.feedback.debutto[2] }}</span>
+                        <span>{{ t.feedback.debutto[1] }} ANNO</span>
+                        <span class="stat-val">{{ t.feedback.debutto[2] }}</span>
                     </div>
                     <div class="stat-box {{ 'correct' if t.feedback.regione[0] == 'CORRETTO' else 'wrong' }}">
-                        <span>REGIONE</span>
-                        <span class="stat-val">{{ t.feedback.regione[1] }}</span>
+                        <span>{{ t.feedback.regione[1] }} REGIONE</span>
+                        <span class="stat-val">{{ t.feedback.regione[2] }}</span>
                     </div>
                     <div class="stat-box {{ 'correct' if t.feedback.componenti[0] == 'CORRETTO' else 'wrong' }}">
-                        <span>MEMBRI</span>
-                        <span class="stat-val">{{ t.feedback.componenti[1] }} {{ t.feedback.componenti[2] }}</span>
+                        <span>{{ t.feedback.componenti[1] }} MEMBRI</span>
+                        <span class="stat-val">{{ t.feedback.componenti[2] }}</span>
                     </div>
                     <div class="stat-box {{ 'correct' if t.feedback.popolarita[0] == 'CORRETTO' else 'wrong' }}">
-                        <span>POP.</span>
-                        <span class="stat-val">{{ t.feedback.popolarita[1] }}</span>
+                        <span>{{ t.feedback.popolarita[1] }} POP.</span>
+                        <span class="stat-val">{{ t.feedback.popolarita[2] }}</span>
                     </div>
                 </div>
             </div>
@@ -162,8 +200,47 @@
         </div>
     </main>
 
+    <footer class="footer-credits">Ceciotle © 2026 - Github: @ceciodev</footer>
+
     <script>
-        const artisti = {{ artisti_nomi|tojson|safe }};
+        // Effetto Coriandoli alla Vittoria
+        {% if vittoria %}
+        var duration = 5 * 1000;
+        var animationEnd = Date.now() + duration;
+        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 4000 };
+
+        function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+
+        var interval = setInterval(function() {
+            var timeLeft = animationEnd - Date.now();
+            if (timeLeft <= 0) return clearInterval(interval);
+            var particleCount = 50 * (timeLeft / duration);
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+            confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+        }, 250);
+        {% endif %}
+
+        function showRules() {
+            document.getElementById('overlay').style.display = 'flex';
+            document.getElementById('main-content').classList.add('blur-content');
+        }
+
+        function closeRules() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('main-content').classList.remove('blur-content');
+            localStorage.setItem('ceciotle_rules_v1', 'true');
+        }
+
+        window.onload = function() {
+            if (!localStorage.getItem('ceciotle_rules_v1')) { showRules(); }
+        };
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        // Autocomplete Logic
+        const artisti = {{ artisti_nomi|tojson|safe if artisti_nomi else '[]' }};
         const input = document.getElementById('scelta-artista');
         const resultsBox = document.getElementById('results-box');
 
@@ -173,26 +250,23 @@
                 resultsBox.innerHTML = '';
                 if (val.length < 2) { resultsBox.style.display = 'none'; return; }
                 
-                const matches = artisti.filter(n => n.toLowerCase().includes(val)).slice(0, 5);
+                const matches = artisti.filter(n => n.toLowerCase().includes(val)).slice(0, 6);
                 if (matches.length > 0) {
-                    matches.forEach(m => {
-                        const d = document.createElement('div');
-                        d.className = 'autocomplete-entry';
-                        d.textContent = m;
-                        d.onmousedown = () => { input.value = m; document.getElementById('game-form').submit(); };
-                        resultsBox.appendChild(d);
+                    matches.forEach(nome => {
+                        const div = document.createElement('div');
+                        div.className = 'autocomplete-entry';
+                        div.textContent = nome;
+                        div.onclick = () => {
+                            input.value = nome;
+                            resultsBox.style.display = 'none';
+                            document.getElementById('game-form').submit();
+                        };
+                        resultsBox.appendChild(div);
                     });
                     resultsBox.style.display = 'block';
                 } else { resultsBox.style.display = 'none'; }
             });
-            input.onblur = () => setTimeout(() => resultsBox.style.display = 'none', 200);
         }
-
-        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
-        
-        {% if vittoria %}
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#1a4a8e', '#2ecc71', '#ffffff'] });
-        {% endif %}
     </script>
 </body>
 </html>
