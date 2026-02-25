@@ -109,7 +109,7 @@
   { "nome": "Renato Zero", "gender": "M", "genere": "Pop", "debutto": 1967, "regione": "Lazio", "componenti": 1, "Popolarita": 108 },
   { "nome": "Fulminacci", "gender": "M", "genere": "Indie", "debutto": 2019, "regione": "Lazio", "componenti": 1, "Popolarita": 109 },
   { "nome": "Elettra Lamborghini", "gender": "F", "genere": "Pop", "debutto": 2017, "regione": "Emilia Romagna", "componenti": 1, "Popolarita": 110 },
-  { "nome": "Coma_Cose", "gender": "M", "genere": "Indie", "debutto": 2017, "regione": "Lombardia", "componenti": 2, "Popolarita": 111 },
+  { "nome": "Coma_Cose", "gender": "M/F", "genere": "Indie", "debutto": 2017, "regione": "Lombardia", "componenti": 2, "Popolarita": 111 },
   { "nome": "Serena Brancale", "gender": "F", "genere": "Pop", "debutto": 2011, "regione": "Puglia", "componenti": 1, "Popolarita": 112 },
   { "nome": "Mango", "gender": "M", "genere": "Pop", "debutto": 1976, "regione": "Basilicata", "componenti": 1, "Popolarita": 113 },
   { "nome": "Caparezza", "gender": "M", "genere": "Hip Hop", "debutto": 1997, "regione": "Puglia", "componenti": 1, "Popolarita": 114 },
@@ -184,3 +184,4 @@
   { "nome": "DJ Francesco", "gender": "M", "genere": "Pop", "debutto": 2003, "regione": "Lombardia", "componenti": 1, "Popolarita": 183 },
   { "nome": "Rovere", "gender": "M", "genere": "Indie", "debutto": 2016, "regione": "Emilia Romagna", "componenti": 3, "Popolarita": 184 }
 ]
+
